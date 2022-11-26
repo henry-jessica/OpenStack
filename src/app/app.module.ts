@@ -12,6 +12,8 @@ import { EventDetailsComponent } from './components/event-details/event-details.
 import { HeroComponent } from './components/hero/hero.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EventListComponent,
     EventDetailsComponent,
     HeroComponent,
+    MessagesComponent,
+
 
   ],
   imports: [
@@ -32,9 +36,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule, 
     HttpClientModule, 
     BrowserAnimationsModule,
-
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent], 
+  entryComponents:[EventFormComponent], 
+
 })
 export class AppModule { }

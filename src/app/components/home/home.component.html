@@ -10,17 +10,16 @@
             <label for="keyword"></label>
             <div class="input-group justify-content-center">
               <input
-                #keyword
                 type="text"
                 class="form-control"
                 id="location"
                 placeholder="Search for city or event name"
-                (keyup)="getEventByLocationOrName(keyword.value)"/>
+                #search (keyup)="getEventByLocationOrName(search?.value)"/>
               <button
                 type="submit"
                 class="btn btn-primary"
                 id="search"
-                (click)="getEventByLocationOrName(keyword.value)" >
+                (click)="getEventByLocationOrName(search?.value)" >
                 Search
               </button>
             </div>
@@ -32,23 +31,7 @@
  </div>
 
 <div class="container pt-4" [class.border]="isShow">
-    <div class="row">
-        <div class="col-6">
-
-        </div>
-        <div class="col-6  d-flex justify-content-end">
-            <div *ngIf="!isShow">
-                <button
-                  class="btn btn-primary text-center d-flex justify-content-end"
-                  (click)="isShow = true">
-                  Place Event
-                </button>
-              </div>
-        </div>
-       
-    </div>
-    
-    <div class="row">
+    <!-- <div class="row">
       <app-event-form
         [isShow]="isShow"
         [event]="null"
@@ -57,7 +40,7 @@
         (cancel)="cancel()"
         (confirm)="confirm()">
     </app-event-form>
-    </div>
+    </div> -->
 
     <app-event-list [eventList]="events"></app-event-list>
 

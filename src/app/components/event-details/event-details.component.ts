@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
 import { IEvent } from '../../Interfaces/event-interface';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { EventFormComponent } from '../event-form/event-form.component';
+import { MessagesComponent } from '../messages/messages.component';
+import { IMessages } from 'app/Interfaces/message-interface';
 
 
 @Component({
@@ -11,27 +15,26 @@ import { IEvent } from '../../Interfaces/event-interface';
 })
 export class EventDetailsComponent implements OnInit {
 
-  event?:IEvent; 
+  event:IEvent | undefined; 
   id?:string;
+  message?:IMessages; 
   displaySucessMessage: boolean=false;
   isShow:boolean = false; 
   private sub: any;
-  constructor(private _httpEvent: EventService, private route:ActivatedRoute) {
+  private dialogRef?: MatDialogRef<EventFormComponent>
+  private dialogRef2?: MatDialogRef<MessagesComponent>
+  constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router) {
     this.route.params
     .subscribe(params=>console.log(params)); 
    }
 
-  ngOnInit(): void {
-  
-
+  ngOnInit(): void {   
     console.log(this.id, 'this id')
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
-
     // this.sub = this.route.params.subscribe(params => {
     //   this.id = params['id']; // (+) converts string 'id' to a number
     // });
-
   }
   getEvent():boolean{
     this._httpEvent.getEventById(this.id).subscribe(
@@ -53,4 +56,61 @@ export class EventDetailsComponent implements OnInit {
       this.displaySucessMessage=true; 
       
     }
-}
+    // onCreateEvent(){
+    //   const dialogConfig = new MatDialogConfig(); 
+    //   dialogConfig.disableClose = false; 
+    //   dialogConfig.autoFocus = false; 
+    //   dialogConfig.width = "80%";
+    //    dialogConfig.height = "80%";
+    //   this.dialog.open(EventFormComponent, dialogConfig)
+    // }
+    onEditEvent(){
+
+      const dialogConfig = new MatDialogConfig(); 
+      dialogConfig.disableClose = false; 
+      dialogConfig.autoFocus = false; 
+      dialogConfig.width = "80%";
+      dialogConfig.height = "80%";
+      // this.dialog.open(EventFormComponent, dialogConfig)
+      this.dialogRef = this.dialog.open(EventFormComponent, {data: { event: this.event}
+      });
+    }
+    onDelete(){
+      this.message={
+        taskName:'Delete',
+        title:'Delete Event?', 
+        subtitle:'If you delete it now, this event will be permanently deleted.', 
+        btntext1:'Yes, delete', 
+        btntext2:'No, dont delete',
+    }
+
+      const dialogConfig = new MatDialogConfig(); 
+      dialogConfig.disableClose = false; 
+      dialogConfig.autoFocus = false; 
+      dialogConfig.width = "80%";
+      dialogConfig.height = "80%";
+      // this.dialog.open(EventFormComponent, dialogConfig)
+      this.dialogRef2 = this.dialog.open(MessagesComponent, {data: { message: this.message}
+      });
+
+      this.dialogRef2.afterClosed().subscribe(result=>{
+        if(result.option=='deleteConfirmed'){
+          if (this.event) {
+            this._httpEvent.deleteEvent(this.event._id)
+              .subscribe({
+                next: event => {
+                  console.log(JSON.stringify(event) + ' has been delettted');
+                  
+                  this._router.navigate(['home'])
+                },
+                error: (err) => console.log(err)
+              });
+          } 
+        }
+        else{
+          this.dialogRef2?.close(); 
+        }
+      })
+    }
+  }
+

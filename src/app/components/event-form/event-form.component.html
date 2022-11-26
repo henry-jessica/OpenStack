@@ -1,11 +1,11 @@
-<div *ngIf="isShow">
+<!-- <div *ngIf="isShow"> -->
 <div class="tab-content">
   <div class="tab-pane fade show active" id="account" role="tabpanel">
     <div class="card mb-3">
       <div class="card-header">
         <div class="card-actions float-end">
           <div class="dropdown position-relative">
-            <a (click)="Cancel()"> 
+            <a (click)="onCancel()"> 
               <i class="bi bi-x-lg"></i>
             </a>
           </div>
@@ -95,7 +95,7 @@
         <div class="col-6 text-center d-flex justify-content-start">
           <button class="btn btn-outline-secondary"
                   type="button"
-                  (click)="Cancel()">Cancel</button>
+                  (click)="onCancel()">Cancel</button>
       </div>
       <div class="col-6 d-flex justify-content-end">
         <button type="submit" [disabled] = "!eventForm.valid">Submit</button>
@@ -110,4 +110,5 @@
         </form>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
+
