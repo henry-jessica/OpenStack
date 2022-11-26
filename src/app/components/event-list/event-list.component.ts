@@ -14,12 +14,14 @@ export class EventListComponent implements OnInit {
   message:string = ""; 
 
   ngOnInit(): void {
-    // if(!this.eventList){
       this._eventService.getEvents().subscribe({
         next: (value: IEvent[] )=> this.eventList = value,
         complete: () => console.log('event service finished'),
         error: (mess) => this.message = mess
       })
-    // }
   }
+  dismissAlert() {
+    this.message = "";
+  }
+
 }

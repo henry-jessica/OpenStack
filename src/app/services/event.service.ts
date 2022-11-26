@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, take, throwError, catchError, tap} from 'rxjs';
+import { Observable, take, throwError, catchError, tap, retry} from 'rxjs';
 import { environment } from '../../environments/environment';
 import {IEvent} from '../Interfaces/event-interface'
 @Injectable({
@@ -12,11 +12,15 @@ export class EventService {
   
   constructor(private _http: HttpClient) { }
   
-  
   getEvents(): Observable<IEvent[]> {
     console.log("get events called" );
     return this._http.get<IEvent[]>(`${this.dataUri}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
   }
+
 //Adding a event 
 addEvent(event: IEvent): Observable<IEvent> {
   return this._http.post<IEvent>(this.dataUri, event)
