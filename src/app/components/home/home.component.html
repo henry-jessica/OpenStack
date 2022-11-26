@@ -1,1 +1,65 @@
-<p>home works!</p>
+<div class="main-banner">
+  <div class="container">
+    <form id="search-form">
+      <h3 class="mt-5" style="text-align: center; margin-top: 0.4rem">
+        Welcome to <br> Event Management Portal
+      </h3>
+      <div class="align-items-center">
+        <div class="row justify-content-center">
+          <div class="ml-6 col-sm-6 col-lg-6 mb-5">
+            <label for="keyword"></label>
+            <div class="input-group justify-content-center">
+              <input
+                #keyword
+                type="text"
+                class="form-control"
+                id="location"
+                placeholder="Search for city or event name"
+                (keyup)="getEventByLocationOrName(keyword.value)"/>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="search"
+                (click)="getEventByLocationOrName(keyword.value)" >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+ </div>
+
+<div class="container pt-4" [class.border]="isShow">
+    <div class="row">
+        <div class="col-6">
+
+        </div>
+        <div class="col-6  d-flex justify-content-end">
+            <div *ngIf="!isShow">
+                <button
+                  class="btn btn-primary text-center d-flex justify-content-end"
+                  (click)="isShow = true">
+                  Place Event
+                </button>
+              </div>
+        </div>
+       
+    </div>
+    
+    <div class="row">
+      <app-event-form
+        [isShow]="isShow"
+        [event]="null"
+        [formTitle]="'Add Event'"
+        [BtnName]="'Add new event'"
+        (cancel)="cancel()"
+        (confirm)="confirm()">
+    </app-event-form>
+    </div>
+
+    <app-event-list [eventList]="events"></app-event-list>
+
+
+  </div>
