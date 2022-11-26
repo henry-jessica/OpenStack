@@ -1,0 +1,51 @@
+<div class="wrapper">
+      <app-hero [title]="event?.name"></app-hero>  
+
+    <div class="container p-2 mt-4">
+      <div class="row bg-light pt-2">
+        <div class="col-4">
+          <img
+            class="card-img-top p-2"
+            src={{event?.urlImg}}
+            alt="Card image cap"/>
+
+          <p class="mt-3 pl-3 pl-md-2">
+            <span>Refund Policy : {{event?.refundpolicy | titlecase}} </span>
+          </p>
+    
+        </div>
+        <div class="col-8">
+          <h1>{{ event?.name }}</h1>
+          <p>{{event?.description}}</p>
+
+          <h5>When and where</h5>
+          <div class="row">
+          <div class="col-2">
+            <p>Date and time</p>
+            <h6>{{event?.eventDateStarts | date }}</h6>
+            <p>{{event?.eventDateStarts |date:'shortTime'}}</p>
+          </div>
+          <div class="col-6">
+            <ul> 
+              <p>Location</p>
+              <li class="list-group-item">Town: {{event?.address?.city}},{{event?.address?.line1}} </li>
+              <li class="list-group-item">{{event?.address?.county}}</li>
+          </ul>
+          </div>
+          <div class="col-4">
+            <div class="card" style="width: 16rem;">
+              <div class="card-body">
+                <h5 class="card-title">Price</h5>
+                <p class="card-subtitle mb-2 text-muted">This price might change </p>
+                <h4 class="card-text">{{event?.startsPrice | currency:'EUR':true}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>    
+        <button class="btn btn-primary" (click)="onEditEvent()">Edit element</button>
+        <button class="btn btn-danger" (click)="onDelete()">Delete element</button>
+          <!-- <span class="base-color">{{eventData?.dates?.start?.localDate|date : 'fullDate'}}</span> -->
+        </div>
+      </div>
+      </div>
+    </div>

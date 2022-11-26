@@ -1,0 +1,13 @@
+<div class="container">
+  <div *ngIf="message" class="alert alert-warning alert-dismissible show" role="alert">
+    <strong>Opps</strong> {{message}}
+    <button type="button" class="btn-close" (click)="dismissAlert()" aria-label="Close"></button>
+  </div>
+    <div class="row text-center">
+        <div class="col-md-6 col-lg-3 p-2 col-sm-12" *ngFor="let event of eventList">
+          <div class="card" style="width: 18rem">
+            <app-event [event]="event"></app-event>
+          </div>
+        </div>
+      </div>
+</div>
