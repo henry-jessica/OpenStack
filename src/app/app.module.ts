@@ -14,6 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MessagesComponent } from './components/messages/messages.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { MessagesComponent } from './components/messages/messages.component';
     HttpClientModule, 
     BrowserAnimationsModule,
     MatDialogModule,
+    MatDatepickerModule, 
+    MatInputModule, 
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent], 
