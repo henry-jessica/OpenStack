@@ -19,8 +19,8 @@ export class NavComponent implements OnInit {
     const dialogConfig = new MatDialogConfig(); 
     dialogConfig.disableClose = false; 
     dialogConfig.autoFocus = false; 
-    dialogConfig.width = "80%";
-     dialogConfig.height = "80%";
+    dialogConfig.width = "97%";
+     dialogConfig.height = "97%";
     this.dialog.open(EventFormComponent, dialogConfig)
   }
 
