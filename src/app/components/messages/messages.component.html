@@ -3,14 +3,14 @@
         <div><i class="bi bi-x-lg" (click)="doNotCancel()"></i></div>
     </div>
   <div class="text-center align-middle pt-4 pb-3">
-    <h3>{{message?.message?.title}}</h3>
-    <p>{{message?.message?.subtitle}}</p>
+    <h3>{{data?.message?.title}} {{this.data?.event?.name}}</h3>
+    <p>{{data?.message?.subtitle}}</p>
     <div class="row pt-4 align-middle">
         <div class="col-6  d-flex justify-content-end">
-            <button type="button" class="btn btn-secondary w-75" (click)="onCancel()">{{message?.message?.btntext1}}</button>
+            <button type="button" class="btn btn-secondary w-75" (click)="onCancel()">{{data?.message?.btntext1}}</button>
         </div>
         <div class="col-6  d-flex justify-content-start">
-            <button type="button" class="btn btn-primary w-75"(click)="doNotCancel()">{{message?.message?.btntext2}}</button>
+            <button type="button" class="btn btn-primary w-75"(click)="doNotCancel()">{{data?.message?.btntext2}}</button>
         </div>
     </div>
 </div>
