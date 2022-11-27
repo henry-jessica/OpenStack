@@ -1,11 +1,10 @@
-<!-- <div *ngIf="isShow"> -->
 <div class="tab-content">
   <div class="tab-pane fade show active" id="account" role="tabpanel">
     <div class="card mb-3">
       <div class="card-header">
         <div class="card-actions float-end">
           <div class="dropdown position-relative">
-            <a (click)="onCancel()"> 
+            <a (click)="onCancel()">
               <i class="bi bi-x-lg"></i>
             </a>
           </div>
@@ -13,14 +12,14 @@
         <h5 class="card-title mb-0">{{formTitle}}</h5>
       </div>
       <div class="card-body">
-        <form [formGroup]="eventForm" (ngSubmit) = "onSubmit()" class="form-group">
+        <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="form-group">
           <div class="row">
             <div class="mb-3 col-12">
               <div class="row">
                 <div class="col-md-12">
                   <div class="text-center">
-                      <img alt=""  src="https://cdn.iconscout.com/icon/free/png-256/gallery-187-902099.png"
-                      width="128" height="128">
+                    <img alt="" src="https://cdn.iconscout.com/icon/free/png-256/gallery-187-902099.png" width="128"
+                      height="128">
                     <div class="mt-2">
                       <span class="btn btn-primary"><i class="fas fa-upload"></i> Upload</span>
                     </div>
@@ -30,14 +29,13 @@
               </div>
             </div>
             <div class="col-3">
-
             </div>
             <div class="mb-3 col-6">
               <div class="row">
                 <div class="col-12  mb-3">
-                <label for="name">Event Title</label>
-                <input id="name" type="text" formControlName="name" class="form-control">
-              </div>
+                  <label for="name">Event Title</label>
+                  <input id="name" type="text" formControlName="name" class="form-control">
+                </div>
                 <div class="col-12 mb-3">
                   <label for="contactNumber">Contact Number</label>
                   <input id="contactNumber" type="text" formControlName="contactNumber" class="form-control">
@@ -46,92 +44,73 @@
                   <label for="contact_email"> contact_email</label>
                   <input id="contact_email" type="email" formControlName="contact_email" class="form-control">
                 </div>
-              <div class="mt-3"> 
-                <!-- <label for="eventDateStarts">eventDateStarts</label>
-                <input id="eventDateStarts" type="text" formControlName="eventDateStarts" class="form-control"> -->
-              <div class="row">
-                <div class="col-6">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Event Date Starts</mat-label>
-                    <input matInput [matDatepicker]="eventDateStarts" formControlName="eventDateStarts">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="eventDateStarts"></mat-datepicker-toggle>
-                    <mat-datepicker #eventDateStarts></mat-datepicker>
-                  </mat-form-field>
-                 </div>
-                 <div class="col-6">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Event Date Ends</mat-label>
-                    <input matInput [matDatepicker]="eventDateEnds"  formControlName="eventDateEnds">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="eventDateEnds"></mat-datepicker-toggle>
-                    <mat-datepicker #eventDateEnds></mat-datepicker>
-                  </mat-form-field>
+                <div class="mt-3">
+                  <div class="row">
+                    <div class="col-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Event Date Starts</mat-label>
+                        <input matInput [matDatepicker]="eventDateStarts" formControlName="eventDateStarts">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="eventDateStarts"></mat-datepicker-toggle>
+                        <mat-datepicker #eventDateStarts></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Event Date Ends</mat-label>
+                        <input matInput [matDatepicker]="eventDateEnds" formControlName="eventDateEnds">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="eventDateEnds"></mat-datepicker-toggle>
+                        <mat-datepicker #eventDateEnds></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 mb-3">
+                  <label for="startsPrice">Price</label>
+                  <input id="startsPrice" type="number" formControlName="startsPrice" class="form-control">
+                </div>
+                <div class="col-12">
+                  <label for="description"> Description</label>
+                  <textarea id="description" type="text" formControlName="description" class="form-control"></textarea>
+                </div>
               </div>
-               </div>
-              </div>
-             
-            <!-- <div class="col-lg-12 col-12">
-              <label for="eventDateEnds">eventDateEnds</label>
-              <input id="eventDateEnds" type="text" formControlName="eventDateEnds" class="form-control">
-          </div> -->
-          <div class="col-12 mb-3">
-            <label for="startsPrice">Price</label>
-            <input id="startsPrice" type="number" formControlName="startsPrice" class="form-control">
-        </div>
-        <div class="col-12">
-          <label for="description"> Description</label>
-          <textarea id="description" type="text" formControlName="description" class="form-control"></textarea>
-      </div>
-     </div>
-       </div>
-
+            </div>
           </div>
-          
-    <div formGroupName="address" class="row">
-        <legend>Address</legend>
-           <div class="col-12">
-            <label for="city">city</label>
-            <input id="city" type="text" formControlName="city" class="form-control">
-        </div>
-        <div class="col-12">
-            <label for="county">county</label>
-            <input id="county" type="text" formControlName="county" class="form-control">
-        </div>
-        <div class="col-12">
-            <label for="line1">line1</label>
-            <input id="line1" type="text" formControlName="line1" class="form-control">
-        </div>
-        <div class="col-12">
-            <label for="eircode">eircode</label>
-            <input id="eircode" type="text" formControlName="eircode" class="form-control">
-        </div>
-    </div>
-
-  <div class="mb-12">
-      <label for="urlImg">urlImg</label>
-      <input id="urlImg" type="text" formControlName="urlImg" class="form-control">
-  </div>   
-
- 
-      <div class="row">
-        <div class="col-6 text-center d-flex justify-content-start">
-          <button class="btn btn-outline-secondary"
-                  type="button"
-                  (click)="onCancel()">Cancel</button>
-      </div>
-      <div class="col-6 d-flex justify-content-end">
-        <button type="submit" [disabled] = "!eventForm.valid">Submit</button>
-      </div>
-      
-      </div>
-     
-    
-        <div *ngIf="name?.invalid && name?.touched"  class="alert alert-danger" >
+          <div formGroupName="address" class="row">
+            <legend>Address</legend>
+            <div class="col-12">
+              <label for="city">city</label>
+              <input id="city" type="text" formControlName="city" class="form-control">
+            </div>
+            <div class="col-12">
+              <label for="county">county</label>
+              <input id="county" type="text" formControlName="county" class="form-control">
+            </div>
+            <div class="col-12">
+              <label for="line1">line1</label>
+              <input id="line1" type="text" formControlName="line1" class="form-control">
+            </div>
+            <div class="col-12">
+              <label for="eircode">eircode</label>
+              <input id="eircode" type="text" formControlName="eircode" class="form-control">
+            </div>
+          </div>
+          <div class="mb-12">
+            <label for="urlImg">urlImg</label>
+            <input id="urlImg" type="text" formControlName="urlImg" class="form-control">
+          </div>
+          <div class="row">
+            <div class="col-6 text-center d-flex justify-content-start">
+              <button class="btn btn-outline-secondary" type="button" (click)="onCancel()">Cancel</button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+              <button type="submit" [disabled]="!eventForm.valid">Submit</button>
+            </div>
+          </div>
+          <div *ngIf="name?.invalid && name?.touched" class="alert alert-danger">
             Title is required and must be at least 4 letters
-        </div>
+          </div>
         </form>
       </div>
     </div>
-  <!-- </div> -->
-

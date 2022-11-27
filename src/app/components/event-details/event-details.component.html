@@ -20,8 +20,8 @@
           <div class="row">
           <div class="col-2">
             <p>Date and time</p>
-            <h6>{{event?.eventDateStarts | date }}</h6>
-            <p>{{event?.eventDateStarts |date:'shortTime'}}</p>
+            <h6>{{event?.eventDateStarts | date : 'fullDate' }}</h6>
+            <p>{{event?.eventDateStarts | date:'shortTime'}}</p>
           </div>
           <div class="col-6">
             <ul> 
@@ -42,7 +42,6 @@
         </div>    
         <button class="btn btn-primary" (click)="onEditEvent()">Edit element</button>
         <button class="btn btn-danger" (click)="onDelete()">Delete element</button>
-          <!-- <span class="base-color">{{eventData?.dates?.start?.localDate|date : 'fullDate'}}</span> -->
         </div>
       </div>
       </div>

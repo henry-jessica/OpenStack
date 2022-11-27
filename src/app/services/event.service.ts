@@ -1,36 +1,36 @@
-import { HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, take, throwError, catchError, tap, retry} from 'rxjs';
+import { Observable, take, throwError, catchError, tap, retry } from 'rxjs';
 import { environment } from '../../environments/environment';
-import {IEvent} from '../Interfaces/event-interface'
+import { IEvent } from '../Interfaces/event-interface'
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
   private dataUri = `${environment.apiUri}/api/events`;
-  
+
   constructor(private _http: HttpClient) { }
-  
+
   getEvents(): Observable<IEvent[]> {
     return this._http.get<IEvent[]>(`${this.dataUri}`)
-    .pipe(
-      retry(3),
-      catchError(this.handleError)
-    );
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      );
   }
 
-//Adding a event 
-addEvent(event: IEvent): Observable<IEvent> {
-  return this._http.post<IEvent>(this.dataUri, event)
-    .pipe(take(1))
-}
+  //Adding a event 
+  addEvent(event: IEvent): Observable<IEvent> {
+    return this._http.post<IEvent>(this.dataUri, event)
+      .pipe(take(1))
+  }
 
-//Get event by name or city
-getEventsDataFiltering(keyword: string): Observable<IEvent[]> {
-  return this._http.get<IEvent[]>(this.dataUri+'?city='+keyword+'&&name='+keyword)
-  .pipe(tap(), catchError(this.handleError))
-}
+  //Get event by name or city
+  getEventsDataFiltering(keyword: string): Observable<IEvent[]> {
+    return this._http.get<IEvent[]>(this.dataUri + '?city=' + keyword + '&&name=' + keyword)
+      .pipe(tap(), catchError(this.handleError))
+  }
 
   //Deleting a event 
   deleteEvent(id: string): Observable<unknown> {
@@ -49,12 +49,12 @@ getEventsDataFiltering(keyword: string): Observable<IEvent[]> {
         catchError(this.handleError)
       )
   }
-   // Get Event By ID 
-    getEventById(id: string | undefined): Observable<IEvent> {
-      return this._http.get<IEvent>(`${this.dataUri}/${id}`)
-        .pipe(tap(), catchError(this.handleError))
-    }
-  
+  // Get Event By ID 
+  getEventById(id: string | undefined): Observable<IEvent> {
+    return this._http.get<IEvent>(`${this.dataUri}/${id}`)
+      .pipe(tap(), catchError(this.handleError))
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

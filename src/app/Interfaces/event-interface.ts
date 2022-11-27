@@ -6,7 +6,6 @@
         line1: string;
         eircode: string;
     }
-
     export interface IEvent {
         _id: string, 
         name: string;

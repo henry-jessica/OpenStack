@@ -12,7 +12,6 @@ export class EventListComponent implements OnInit {
   constructor(private _eventService:EventService) { }
   @Input() eventList?: IEvent[];
   message:string = ""; 
-
   ngOnInit(): void {
       this._eventService.getEvents().subscribe({
         next: (value: IEvent[] )=> this.eventList = value,
@@ -23,5 +22,4 @@ export class EventListComponent implements OnInit {
   dismissAlert() {
     this.message = "";
   }
-
 }
