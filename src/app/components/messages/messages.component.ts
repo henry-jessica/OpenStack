@@ -11,8 +11,8 @@ export class MessagesComponent implements OnInit {
   
   @Output()deleteConfirmed = new EventEmitter<boolean>();
 
-  constructor(public dialogRef: MatDialogRef<MessagesComponent>, private dialog:MatDialog, public dialogRef2: MatDialogRef<EventDetailsComponent>, @Inject(MAT_DIALOG_DATA) public message: any) {
-    console.log('message', this.message);
+  constructor(public dialogRef: MatDialogRef<MessagesComponent>, private dialog:MatDialog, public dialogRef2: MatDialogRef<EventDetailsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log('message', this.data);
   }
 
   ngOnInit(): void {
@@ -20,13 +20,13 @@ export class MessagesComponent implements OnInit {
   }
 
 doNotCancel(){
-  this.dialog.closeAll();  
+  this.dialogRef.close();  
 
 }
 onCancel(){
   this.dialog.closeAll();  
 
-  if(this.message.message.taskName='Delete'){
+  if(this.data.message.taskName='Delete'){
     this.dialogRef.close({option:'deleteConfirmed'}); 
   }
 }
