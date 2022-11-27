@@ -31,18 +31,5 @@
  </div>
 
 <div class="container pt-4" [class.border]="isShow">
-    <!-- <div class="row">
-      <app-event-form
-        [isShow]="isShow"
-        [event]="null"
-        [formTitle]="'Add Event'"
-        [BtnName]="'Add new event'"
-        (cancel)="cancel()"
-        (confirm)="confirm()">
-    </app-event-form>
-    </div> -->
-
     <app-event-list [eventList]="events"></app-event-list>
-
-
   </div>
