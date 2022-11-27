@@ -13,7 +13,6 @@ export class EventService {
   constructor(private _http: HttpClient) { }
   
   getEvents(): Observable<IEvent[]> {
-    console.log("get events called" );
     return this._http.get<IEvent[]>(`${this.dataUri}`)
     .pipe(
       retry(3),
@@ -29,7 +28,6 @@ addEvent(event: IEvent): Observable<IEvent> {
 
 //Get event by name or city
 getEventsDataFiltering(keyword: string): Observable<IEvent[]> {
-  console.log("get events city",keyword );
   return this._http.get<IEvent[]>(this.dataUri+'?city='+keyword+'&&name='+keyword)
   .pipe(tap(), catchError(this.handleError))
 }
@@ -45,21 +43,18 @@ getEventsDataFiltering(keyword: string): Observable<IEvent[]> {
 
   //Update Event
   updateEvent(id: string, event: IEvent): Observable<IEvent> {
-    console.log('subscribing to update' + id);
     let dataUri: string = this.dataUri + '/' + id;
     return this._http.put<IEvent>(dataUri, event)
       .pipe(
         catchError(this.handleError)
       )
   }
-
-    // Get Event By ID 
+   // Get Event By ID 
     getEventById(id: string | undefined): Observable<IEvent> {
       return this._http.get<IEvent>(`${this.dataUri}/${id}`)
         .pipe(tap(), catchError(this.handleError))
     }
   
-
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -73,5 +68,4 @@ getEventsDataFiltering(keyword: string): Observable<IEvent[]> {
     // Return an observable with a user-facing error message.
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
-
 }

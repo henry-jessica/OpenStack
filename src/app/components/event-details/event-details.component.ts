@@ -27,7 +27,6 @@ export class EventDetailsComponent implements OnInit {
    }
 
   ngOnInit(): void {   
-    console.log(this.id, 'this id')
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
   }
@@ -87,7 +86,7 @@ export class EventDetailsComponent implements OnInit {
                   //TODO - Message with timer informing about event deleted 
                   this._router.navigate(['home'])
                 },
-                error: (err) => console.log(err)
+                error: (err) => console.log(err) //TODO ERROR MESSAGE
               });
           } 
         }

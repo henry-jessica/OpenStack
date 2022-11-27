@@ -16,7 +16,7 @@ export class EventListComponent implements OnInit {
   ngOnInit(): void {
       this._eventService.getEvents().subscribe({
         next: (value: IEvent[] )=> this.eventList = value,
-        complete: () => console.log('event service finished'),
+        complete: () => console.log('event service finished'), //TODO:COMPLETE EVENT - IF EMPTY DISPLAY SOME MESSAGE TO USER 
         error: (mess) => this.message = mess
       })
   }

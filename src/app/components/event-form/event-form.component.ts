@@ -32,7 +32,6 @@ export class EventFormComponent implements OnInit {
     public dialogRef: MatDialogRef<EventDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(this.data);
     this.event = data;
   }
 
@@ -66,9 +65,9 @@ export class EventFormComponent implements OnInit {
     } else {
       console.table(this.eventForm.value);
       this._httpEventService.addEvent(this.eventForm?.value).subscribe(
-        (sucess) => this.sucessMessage(),
+        (sucess) => this.sucessMessage(), //TODO:SUCESS MESSAGE METHOD 
         (error) => console.log(error),
-        () => console.log('complete')
+        () => console.log('complete') //TODO: ERROR MESSAGES 
       );
     }
   }
@@ -98,7 +97,7 @@ export class EventFormComponent implements OnInit {
         console.log(JSON.stringify(event) + ' has been updated');
         console.log(' event has been updated');
       },
-      error: (err) => console.log(err),
+      error: (err) => console.log(err), //TODO: ERROR MESSAGE 
     });
   }
   get name() {
