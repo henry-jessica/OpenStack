@@ -20,12 +20,11 @@ export class EventComponent implements OnInit {
   }
 
   deleteEvent(){
-    console.log('deleting a event '); 
         if (this.event) { 
           this._eventService.deleteEvent(this.event._id) 
             .subscribe({ 
               next: event => { 
-                console.log(JSON.stringify(event) + ' has been delettted'); 
+                console.log(JSON.stringify(event) + ' has been delettted');
                 this.message = "event has been deleted"; 
               }, 
               error: (err) => this.message = err 
