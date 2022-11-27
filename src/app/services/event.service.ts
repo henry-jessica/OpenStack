@@ -21,8 +21,8 @@ export class EventService {
   }
 
   //Adding a event 
-  addEvent(event: IEvent): Observable<IEvent> {
-    return this._http.post<IEvent>(this.dataUri, event)
+  addEvent(event: any): Observable<IEvent> {
+    return this._http.post<any>(this.dataUri, event)
       .pipe(take(1))
   }
 
@@ -42,7 +42,7 @@ export class EventService {
   }
 
   //Update Event
-  updateEvent(id: string, event: IEvent): Observable<IEvent> {
+  updateEvent(id: string, event: any): Observable<IEvent> {
     let dataUri: string = this.dataUri + '/' + id;
     return this._http.put<IEvent>(dataUri, event)
       .pipe(
