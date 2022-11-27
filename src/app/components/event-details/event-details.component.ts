@@ -6,8 +6,6 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { EventFormComponent } from '../event-form/event-form.component';
 import { MessagesComponent } from '../messages/messages.component';
 import { IMessages } from 'app/Interfaces/message-interface';
-
-
 @Component({
   selector: 'app-event-details',
   templateUrl: './event-details.component.html',
@@ -32,9 +30,6 @@ export class EventDetailsComponent implements OnInit {
     console.log(this.id, 'this id')
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
-    // this.sub = this.route.params.subscribe(params => {
-    //   this.id = params['id']; // (+) converts string 'id' to a number
-    // });
   }
   getEvent():boolean{
     this._httpEvent.getEventById(this.id).subscribe(
@@ -42,7 +37,7 @@ export class EventDetailsComponent implements OnInit {
         this.event=event; 
         this.event = this.event;   
       }, 
-      // error=> this.errorMessage = <any>error 
+      // error=> this.errorMessage = <any>error TODO  error Message
     ); 
     return false; 
     }
@@ -56,14 +51,6 @@ export class EventDetailsComponent implements OnInit {
       this.displaySucessMessage=true; 
       
     }
-    // onCreateEvent(){
-    //   const dialogConfig = new MatDialogConfig(); 
-    //   dialogConfig.disableClose = false; 
-    //   dialogConfig.autoFocus = false; 
-    //   dialogConfig.width = "80%";
-    //    dialogConfig.height = "80%";
-    //   this.dialog.open(EventFormComponent, dialogConfig)
-    // }
     onEditEvent(){
       const dialogConfig = new MatDialogConfig(); 
       dialogConfig.disableClose = false; 
@@ -87,7 +74,6 @@ export class EventDetailsComponent implements OnInit {
       dialogConfig.autoFocus = false; 
       dialogConfig.width = "80%";
       dialogConfig.height = "80%";
-      // this.dialog.open(EventFormComponent, dialogConfig)
       this.dialogRef2 = this.dialog.open(MessagesComponent, {data:{ event: this.event, message: this.message}
       });
 
@@ -98,9 +84,7 @@ export class EventDetailsComponent implements OnInit {
               .subscribe({
                 next: event => {
                   console.log(JSON.stringify(event) + ' has been delettted');
-                  
                   //TODO - Message with timer informing about event deleted 
-                  
                   this._router.navigate(['home'])
                 },
                 error: (err) => console.log(err)
