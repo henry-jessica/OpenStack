@@ -11,7 +11,7 @@ import { IMessages } from 'app/Interfaces/message-interface';
 @Component({
   selector: 'app-event-details',
   templateUrl: './event-details.component.html',
-  // styleUrls: ['./event-details.component.scss']
+  styleUrls: ['./event-details.component.scss']
 })
 export class EventDetailsComponent implements OnInit {
 
@@ -65,21 +65,19 @@ export class EventDetailsComponent implements OnInit {
     //   this.dialog.open(EventFormComponent, dialogConfig)
     // }
     onEditEvent(){
-
       const dialogConfig = new MatDialogConfig(); 
       dialogConfig.disableClose = false; 
       dialogConfig.autoFocus = false; 
-      dialogConfig.width = "80%";
-      dialogConfig.height = "80%";
-      // this.dialog.open(EventFormComponent, dialogConfig)
-      this.dialogRef = this.dialog.open(EventFormComponent, {data: { event: this.event}
-      });
+      dialogConfig.width ='97%',
+      dialogConfig.height = '97%',
+      dialogConfig.data= this.event,
+      this.dialogRef= this.dialog.open(EventFormComponent,dialogConfig);
     }
     onDelete(){
       this.message={
         taskName:'Delete',
-        title:'Delete Event?', 
-        subtitle:'If you delete it now, this event will be permanently deleted.', 
+        title:'Are you sure to delete? ', 
+        subtitle:'If you delete this event,it will be permanently deleted.', 
         btntext1:'Yes, delete', 
         btntext2:'No, dont delete',
     }
@@ -90,7 +88,7 @@ export class EventDetailsComponent implements OnInit {
       dialogConfig.width = "80%";
       dialogConfig.height = "80%";
       // this.dialog.open(EventFormComponent, dialogConfig)
-      this.dialogRef2 = this.dialog.open(MessagesComponent, {data: { message: this.message}
+      this.dialogRef2 = this.dialog.open(MessagesComponent, {data:{ event: this.event, message: this.message}
       });
 
       this.dialogRef2.afterClosed().subscribe(result=>{
@@ -100,6 +98,8 @@ export class EventDetailsComponent implements OnInit {
               .subscribe({
                 next: event => {
                   console.log(JSON.stringify(event) + ' has been delettted');
+                  
+                  //TODO - Message with timer informing about event deleted 
                   
                   this._router.navigate(['home'])
                 },
