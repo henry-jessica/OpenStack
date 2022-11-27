@@ -4,18 +4,15 @@
       <div class="row bg-light pt-2">
         <div class="col-4">
           <img class="card-img-top p-2"
-            src={{event?.urlImg}}
+            src="https://s3-images-web-ca2.s3.eu-west-1.amazonaws.com/{{event?.urlImg}}"
             alt="Card image cap"/>
-
           <p class="mt-3 pl-3 pl-md-2">
             <span>Refund Policy : {{event?.refundpolicy | titlecase}} </span>
           </p>
-    
         </div>
         <div class="col-8">
           <h1>{{ event?.name }}</h1>
           <p>{{event?.description}}</p>
-
           <h5>When and where</h5>
           <div class="row">
           <div class="col-2">
@@ -39,9 +36,15 @@
               </div>
             </div>
           </div>
-        </div>    
-        <button class="btn btn-primary" (click)="onEditEvent()">Edit element</button>
-        <button class="btn btn-danger" (click)="onDelete()">Delete element</button>
+        </div> 
+        <div class="row">
+          <div class="col-3">
+            <button class="btn btn-info w-100" (click)="onEditEvent()">Edit Event</button>
+          </div>
+          <div class="col-3">
+            <button class="btn btn-outline-danger w-100" (click)="onDelete()">Delete Event</button>
+          </div>
+        </div>
         </div>
       </div>
       </div>
