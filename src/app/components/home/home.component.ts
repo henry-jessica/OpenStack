@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   events?:IEvent[]; 
   errorMessage:any; 
 
-  constructor(private _httpEventService:EventService, private dialog:MatDialog) { }
+  constructor(private _httpEventService:EventService, public dialog:MatDialog) { }
 
   ngOnInit(): void {
   }
