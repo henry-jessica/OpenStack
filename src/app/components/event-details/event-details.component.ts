@@ -18,9 +18,11 @@ export class EventDetailsComponent implements OnInit {
   message?:IMessages; 
   displaySucessMessage: boolean=false;
   isShow:boolean = false; 
+  
   private sub: any;
   private dialogRef?: MatDialogRef<EventFormComponent>
   private dialogRef2?: MatDialogRef<MessagesComponent>
+  
   constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router) {
     this.route.params
     .subscribe(params=>console.log(params)); 
@@ -65,8 +67,7 @@ export class EventDetailsComponent implements OnInit {
         title:'Are you sure to delete? ', 
         subtitle:'If you delete this event,it will be permanently deleted.', 
         btntext1:'Yes, delete', 
-        btntext2:'No, dont delete',
-    }
+        btntext2:'No, dont delete'}
 
       const dialogConfig = new MatDialogConfig(); 
       dialogConfig.disableClose = false; 

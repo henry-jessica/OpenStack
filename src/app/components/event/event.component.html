@@ -1,6 +1,6 @@
 <div class="card-deck">
     <div class="card">
-      <img class="card-img-top" style=" height: 160px;" src={{event?.urlImg}} alt="Card image cap">
+      <img class="card-img-top" style=" height: 160px;" src="https://s3-images-web-ca2.s3.eu-west-1.amazonaws.com/{{event?.urlImg}}" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{ event?.name }}</h5>
         <p class="card-text"> {{event?.eventDateStarts | date }} at {{event?.eventDateStarts |date:'shortTime'}}</p>
@@ -11,11 +11,11 @@
        <div class="row">
           
           <div class="col-3">
-            <i class="bi bi-pencil-square"></i>
+         
           </div>
           <a class="btn btn-secondary d-flex justify-content-center col-6"  [routerLink]="['/events', event?._id]">See Event</a>
           <div class="col-3">
-            <i class="bi bi-trash" (click)="deleteEvent()"></i>
+         
           </div>
           <!-- <a class="btn d-flex justify-content-end col-2 text-center" (click)="AddOrRemove(event)" ><fa-icon [icon]="star"></fa-icon></a> -->
        </div>

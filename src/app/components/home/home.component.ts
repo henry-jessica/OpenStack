@@ -12,7 +12,7 @@ import { EventFormComponent } from '../event-form/event-form.component';
 export class HomeComponent implements OnInit {
 
   isShow?: boolean = false;
-  displaySucessMessage: boolean=false;
+  // displaySucessMessage: boolean=false;
   event?: any; 
   events?:IEvent[]; 
   errorMessage:any; 
@@ -37,15 +37,15 @@ export class HomeComponent implements OnInit {
     return false; 
     }
 
-  cancel(){
-    this.isShow = false; 
-    this.displaySucessMessage=false; 
-  }
-  confirm(){
-    this.isShow=false; 
-    this.displaySucessMessage=true; 
+  // cancel(){
+  //   this.isShow = false; 
+  //   this.displaySucessMessage=false; 
+  // }
+  // confirm(){
+  //   this.isShow=false; 
+  //   this.displaySucessMessage=true; 
     
-  }
+  // }
 
 
 
