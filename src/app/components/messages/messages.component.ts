@@ -16,7 +16,6 @@ export class MessagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.dialogRef); 
   }
 
 doNotCancel(){

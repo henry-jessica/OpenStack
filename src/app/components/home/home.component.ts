@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
         this.event=event; 
         this.events= this.event;   
         this.events?.forEach(element => {
-          console.log('element',element); 
+          console.log('element',element);  //TODO: IF DONT FIND THE ELEMENT NEED INFORM TO USER - CREATE MESSAGE 
         });
       }, 
       error=> this.errorMessage = <any>error 

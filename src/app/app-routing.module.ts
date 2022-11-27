@@ -9,12 +9,7 @@ const routes: Routes = [
   { path: '#', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'home/evens/:id', component: EventDetailsComponent },
-
 ];
-
-
-
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
