@@ -80,7 +80,6 @@ export class EventFormComponent implements OnInit {
       const formObj = { ...this.eventForm.value };
       for (const p in formObj) {
         if (p && p !== null && formObj[p] && formObj[p] !== null) {
-          // console.log(`${p}: ${formObj[p]}`);
           if (p === "address") {
             formData.delete(p);
             formData.append(p, JSON.stringify(formObj[p]));
@@ -88,7 +87,6 @@ export class EventFormComponent implements OnInit {
             formData.delete(p);
             formData.append(p, formObj[p]);
           }
-          // console.log(p);
         }
       }
 
@@ -152,8 +150,9 @@ export class EventFormComponent implements OnInit {
       .subscribe({
         next: book => {
           console.log(JSON.stringify(book) + ' has been updated');
-          console.log(" book has been updated");
+          this.sucessMessage('update')
         },
+        
         error: (err) => console.log(err)
       });
   }
