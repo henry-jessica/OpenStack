@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -17,6 +17,11 @@ import { MessagesComponent } from './components/messages/messages.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
+import { BeginComponent } from './components/begin/begin.component';
+// Import the module from the SDK
+import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +34,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     EventDetailsComponent,
     HeroComponent,
     MessagesComponent,
+    BeginComponent,
 
 
   ],
@@ -42,9 +48,19 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatDialogModule,
     MatDatepickerModule, 
     MatInputModule, 
-    MatNativeDateModule
+    MatNativeDateModule, 
+    MatMenuModule,
+
+    AuthModule.forRoot({
+      domain: 'dev-zxkcix0u0cipypz8.eu.auth0.com',
+      clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E'
+    }),
   ],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthHttpInterceptor,
+    multi: true,
+  },],
   bootstrap: [AppComponent], 
   entryComponents:[EventFormComponent], 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AuthService } from '@auth0/auth0-angular';
 import { IEvent } from '../../Interfaces/event-interface';
 import { EventService } from '../../services/event.service';
 import { EventFormComponent } from '../event-form/event-form.component';
@@ -16,10 +17,22 @@ export class HomeComponent implements OnInit {
   event?: any; 
   events?:IEvent[]; 
   errorMessage:any; 
+  showNav: boolean = false; 
 
-  constructor(private _httpEventService:EventService, public dialog:MatDialog) { }
+  constructor(private _httpEventService:EventService, public dialog:MatDialog, public auth: AuthService) { }
+
+  isAuthenticated$ = this.auth.isAuthenticated$
 
   ngOnInit(): void {
+    this.auth.isAuthenticated$.subscribe(isAuthenticated =>{
+      if(isAuthenticated){
+        this.showNav = true;
+      }
+
+      console.log('test',this.isAuthenticated$ )
+
+    })
+
   }
 
   getEventByLocationOrName(event:any):boolean{
@@ -48,5 +61,6 @@ export class HomeComponent implements OnInit {
   // }
 
 
+  }
 
-}
+  
