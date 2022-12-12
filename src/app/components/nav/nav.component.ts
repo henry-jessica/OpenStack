@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EventService } from 'app/services/event.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-nav',
@@ -10,10 +11,11 @@ import { EventService } from 'app/services/event.service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private _httpEventService:EventService, private dialog:MatDialog) { }
+  constructor(private _httpEventService:EventService, private dialog:MatDialog, public auth:AuthService) { }
 
   ngOnInit(): void {
   }
+  isAuthenticated$ = this.auth.isAuthenticated$
 
   onCreateEvent(){
     const dialogConfig = new MatDialogConfig(); 
@@ -22,6 +24,10 @@ export class NavComponent implements OnInit {
     dialogConfig.width = "97%";
      dialogConfig.height = "97%";
     this.dialog.open(EventFormComponent, dialogConfig)
+  }
+
+  logout(){
+this.auth.logout(); 
   }
 
 }
