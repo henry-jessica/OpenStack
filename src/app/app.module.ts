@@ -21,6 +21,7 @@ import { BeginComponent } from './components/begin/begin.component';
 // Import the module from the SDK
 import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import {MatMenuModule} from '@angular/material/menu';
+import { environment } from 'environments/environment';
 
 
 @NgModule({
@@ -53,8 +54,12 @@ import {MatMenuModule} from '@angular/material/menu';
 
     AuthModule.forRoot({
       domain: 'dev-zxkcix0u0cipypz8.eu.auth0.com',
-      clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E'
-    }),
+      clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E',
+      httpInterceptor: {
+        allowedList: [`${environment.apiUri}/api/events`],
+      }
+
+    }), 
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,
