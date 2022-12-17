@@ -22,7 +22,49 @@
         <button class="btn btn-primary text-center d-flex justify-content-end" (click)="onCreateEvent()">
           Create Event
         </button>
+  
       </li>
+      <li class="nav-item d-flex justify-content-end">
+        <button class="btn btn-primary text-center d-flex justify-content-end" (click)="logout()">
+          LogOut
+        </button>
+      </li>
+      <li class="nav-item d-flex justify-content-end">
+        <button class="btn btn-primary profileBtn text-center d-flex justify-content-end">
+          <a mat-button data-toggle="dropdown"
+          class="nav-item nav-link dropdown-toggle user-action">
+            <img  src="" class="avatar" alt="Avatar" src="{{user.picture}}"
+            *ngIf="auth.user$ | async as user">    <span *ngIf="auth.user$ | async as user">{{ user.given_name }}</span><b class="caret"></b></a>
+<!--         
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <a  routerLink="/profile" class="dropdown-item" ><i class="bi bi-person pr-3 pt-2"></i>Profile</a>
+          <a href="#" class="dropdown-item"><i class="bi bi-receipt-cutoff pr-3 pt-2"></i> Billing</a>
+          <a href="#" class="dropdown-item"><i class="bi bi-sliders2 pr-3 pt-2"></i>Settings</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item"><i class="bi bi-box-arrow-left pr-3"></i> Logout</a>
+        </mat-menu>
+     -->
+        </button>
+      </li>
+
+
+
+
+       <!-- <a mat-button [matMenuTriggerFor]="beforeMenu" data-toggle="dropdown"
+        class="nav-item nav-link dropdown-toggle user-action pt-4">
+          <img  src="{{user.picture}}" class="avatar" alt="Avatar" />
+          *ngIf="auth.user$ | async as user" {{ user.given_name }}<b class="caret"></b></a>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <a  routerLink="/profile" class="dropdown-item" ><i class="bi bi-person pr-3 pt-2"></i>Profile</a>
+        <a href="#" class="dropdown-item"><i class="bi bi-receipt-cutoff pr-3 pt-2"></i> Billing</a>
+        <a href="#" class="dropdown-item"><i class="bi bi-sliders2 pr-3 pt-2"></i>Settings</a>
+        <div class="divider dropdown-divider"></div>
+        <a class="dropdown-item"><i class="bi bi-box-arrow-left pr-3"></i> Logout</a>
+      </mat-menu> -->
+
+
+
+    
     </div>
   </div>
 </nav>

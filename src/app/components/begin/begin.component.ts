@@ -1,46 +1,36 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { EventFormComponent } from '../event-form/event-form.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { EventService } from 'app/services/event.service';
-import { AuthService } from '@auth0/auth0-angular';
-import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 // Import the AuthService type from the SDK
+import { AuthService } from '@auth0/auth0-angular';
 import { AuthService as AuthAPIService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss'],
+  selector: 'app-begin',
+  templateUrl: './begin.component.html',
+  styleUrls: ['./begin.component.scss'],
 })
-export class NavComponent implements OnInit {
-
-  userRole: string = ""; 
+export class BeginComponent implements OnInit {
   constructor(
-    private dialog: MatDialog,
     @Inject(DOCUMENT) public document: Document,
     public auth: AuthService,
     private router: Router,
     private _httpAuthService: AuthAPIService, 
+
   ) {}
 
-  ngOnInit(): void {
-    this.getUserRole(); 
-  }
   isAuthenticated$ = this.auth.isAuthenticated$;
 
-  onCreateEvent() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '97%';
-    dialogConfig.height = '97%';
-    this.dialog.open(EventFormComponent, dialogConfig);
+  ngOnInit(): void {
+    // this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
+    //   if (isAuthenticated) {
+    //     this.router.navigate(['/home']);
+    //   }
+    // })
+
+    this.getUserRole();
   }
 
-  logout() {
-    this.auth.logout();
-  }
   getUserRole() {
     console.log('CALLED  ');
 
@@ -51,11 +41,13 @@ export class NavComponent implements OnInit {
         user?.sub &&
         this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
           console.log('USER ROLE: ', res[0].name);
-          this.userRole = res[0].name; 
           // navigate to home screen
           this.router.navigate(['/home']);
         });
     });
   }
 
+  login() {
+    this.auth.loginWithRedirect();
+  }
 }

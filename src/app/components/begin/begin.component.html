@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container">
+    <a class="navbar-brand" routerlink="" href="/home">
+      <img src="/assets/images/logo.png" width="160" height="160" alt="CloneBrite" class="img-fluid" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </ul>
+    </div>
+  </div>
+</nav>
+  <ul *ngIf="auth.user$ | async as user">
+    <li>{{ user.name }}</li>
+    <li>{{ user.email }}</li>
+  </ul>
+  <div class="row">
+    <div class="main-banner">
+      <div class="container">
+        <form id="search-form">
+          <h3 class="mt-5" style="text-align: center; margin-top: 0.4rem">
+            Welcome <span *ngIf="auth.user$ | async as user">{{ user.given_name }}</span> to <br> Event Management <br>Please make your login or create a new account
+          </h3>
+          <div class="align-items-center">
+            <div class="row justify-content-center">
+              <div class="ml-6 col-sm-6 col-lg-6 mb-5">
+                <label for="keyword"></label>
+                <div class="input-group justify-content-center">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-4">
+      </div>
+      <div class="col-12 justify-content-end">
+        <div class="row">
+          <div class="col-4">
+          </div>
+              <div class="col-4">
+                <div class="row mt-4">
+                    <button class="btn btn-primary w-100 mb-4" (click)="login()">Log in</button>
+                    <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+                        <button (click)="auth.logout({ returnTo: document.location.origin })">
+                          Log out
+                        </button>
+                      </ng-container>
+                  </div>
+                  <div class="row mt-4">
+                      <ng-template #loggedOut>
+                        <button class="btn btn-primary w-100" (click)="auth.loginWithRedirect()">Create Account</button>
+                      </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

@@ -1,8 +1,10 @@
+
+<app-nav *ngIf="showNav"></app-nav>
 <div class="main-banner">
   <div class="container">
     <form id="search-form">
       <h3 class="mt-5" style="text-align: center; margin-top: 0.4rem">
-        Welcome to <br> Event Management Portal
+        Welcome <span *ngIf="auth.user$ | async as user">{{ user.given_name }}</span> to <br> Event Management Portal
       </h3>
       <div class="align-items-center">
         <div class="row justify-content-center">
@@ -33,3 +35,6 @@
 <div class="container pt-4" [class.border]="isShow">
     <app-event-list [eventList]="events"></app-event-list>
   </div>
+
+
+ 
