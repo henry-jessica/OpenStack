@@ -23,7 +23,7 @@ export class EventDetailsComponent implements OnInit {
   message?:IMessages; 
   displaySucessMessage: boolean=false;
   isShow:boolean = false; 
-  
+
   
   private sub: any;
   private dialogRef?: MatDialogRef<EventFormComponent>
