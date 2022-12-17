@@ -56,7 +56,7 @@ import { environment } from 'environments/environment';
       domain: 'dev-zxkcix0u0cipypz8.eu.auth0.com',
       clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E',
       httpInterceptor: {
-        allowedList: [`${environment.apiUri}/api/events`],
+        allowedList: [ `${environment.apiUri}/api/events/*`,`${environment.apiUri}/api/events`],
       }
 
     }), 
