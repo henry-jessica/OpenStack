@@ -1,12 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EventService } from 'app/services/event.service';
 import { AuthService } from '@auth0/auth0-angular';
-import { Router } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
-// Import the AuthService type from the SDK
-import { AuthService as AuthAPIService } from '../../services/auth.service';
+import { Select, Store } from '@ngxs/store';
+import { AuthState } from 'app/store/auth.state';
+import { IAuth } from 'app/Interfaces/auth-interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -14,18 +14,21 @@ import { AuthService as AuthAPIService } from '../../services/auth.service';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
+  @Select(AuthState.getAuth) auth$!: Observable<IAuth>;
 
-  userRole: string = ""; 
   constructor(
+    private _httpEventService: EventService,
     private dialog: MatDialog,
-    @Inject(DOCUMENT) public document: Document,
-    public auth: AuthService,
-    private router: Router,
-    private _httpAuthService: AuthAPIService, 
+    public auth: AuthService
   ) {}
 
+  public userRole = '';
+
   ngOnInit(): void {
-    this.getUserRole(); 
+    this.auth$.subscribe((auth) => {
+      console.log('AUTH ', auth);
+      this.userRole = auth.name;
+    });
   }
   isAuthenticated$ = this.auth.isAuthenticated$;
 
@@ -41,21 +44,4 @@ export class NavComponent implements OnInit {
   logout() {
     this.auth.logout();
   }
-  getUserRole() {
-    console.log('CALLED  ');
-
-    this.auth.user$.subscribe((user) => {
-      console.log('USER ==> ', user?.sub);
-      console.log('this.userId', user?.sub);
-      const res =
-        user?.sub &&
-        this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
-          console.log('USER ROLE: ', res[0].name);
-          this.userRole = res[0].name; 
-          // navigate to home screen
-          this.router.navigate(['/home']);
-        });
-    });
-  }
-
 }
