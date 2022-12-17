@@ -42,13 +42,13 @@ export class BeginComponent implements OnInit {
       const res =
         user?.sub &&
         this._httpEventService.getUserRole(user?.sub).subscribe((res) => {
-          console.log('USER ROLE: ', res[0].name);
+          console.log('USER ROLE: ', res[0]?.name);
           // dispatch an action
           this.store.dispatch(
             new AddAuth({
-              id: res[0].id,
-              name: res[0].name,
-              description: res[0].description,
+              id: res[0]?.id,
+              name: res[0]?.name,
+              description: res[0]?.description,
             })
           );
           // navigate to home screen
