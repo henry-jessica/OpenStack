@@ -1,5 +1,5 @@
 export interface IAuth {
-  is: string;
+  id: string;
   name: string;
-  descriptoin: string;
+  description: string;
 }
