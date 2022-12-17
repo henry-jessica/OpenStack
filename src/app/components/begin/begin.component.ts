@@ -3,6 +3,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // Import the AuthService type from the SDK
 import { AuthService } from '@auth0/auth0-angular';
+import { Store } from '@ngxs/store';
+import { AddAuth } from 'app/store/auth.actions';
 import { AuthService as AuthAPIService } from '../../services/auth.service';
 
 @Component({
@@ -15,8 +17,8 @@ export class BeginComponent implements OnInit {
     @Inject(DOCUMENT) public document: Document,
     public auth: AuthService,
     private router: Router,
-    private _httpAuthService: AuthAPIService, 
-
+    private _httpEventService: AuthAPIService,
+    private store: Store
   ) {}
 
   isAuthenticated$ = this.auth.isAuthenticated$;
@@ -39,8 +41,16 @@ export class BeginComponent implements OnInit {
       console.log('this.userId', user?.sub);
       const res =
         user?.sub &&
-        this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
+        this._httpEventService.getUserRole(user?.sub).subscribe((res) => {
           console.log('USER ROLE: ', res[0].name);
+          // dispatch an action
+          this.store.dispatch(
+            new AddAuth({
+              id: res[0].id,
+              name: res[0].name,
+              description: res[0].description,
+            })
+          );
           // navigate to home screen
           this.router.navigate(['/home']);
         });
