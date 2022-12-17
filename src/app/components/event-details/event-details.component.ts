@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
 import { IEvent } from '../../Interfaces/event-interface';
@@ -6,6 +6,10 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { EventFormComponent } from '../event-form/event-form.component';
 import { MessagesComponent } from '../messages/messages.component';
 import { IMessages } from 'app/Interfaces/message-interface';
+import { AuthService as AuthAPIService } from '../../services/auth.service';
+import { DOCUMENT } from '@angular/common';
+import { AuthService } from '@auth0/auth0-angular';
+
 @Component({
   selector: 'app-event-details',
   templateUrl: './event-details.component.html',
@@ -13,24 +17,35 @@ import { IMessages } from 'app/Interfaces/message-interface';
 })
 export class EventDetailsComponent implements OnInit {
 
+  userRole:string="user"; 
   event:IEvent | undefined; 
   id?:string;
   message?:IMessages; 
   displaySucessMessage: boolean=false;
   isShow:boolean = false; 
   
+  
   private sub: any;
   private dialogRef?: MatDialogRef<EventFormComponent>
   private dialogRef2?: MatDialogRef<MessagesComponent>
   
-  constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router) {
+  constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router,
+    @Inject(DOCUMENT) public document: Document,
+    public auth: AuthService,
+    private router: Router,
+    private _httpAuthService: AuthAPIService
+    ) {
     this.route.params
     .subscribe(params=>console.log(params)); 
    }
 
+   isAuthenticated$ = this.auth.isAuthenticated$;
+
   ngOnInit(): void {   
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
+    this.getUserRole();
+
   }
   getEvent():boolean{
     this._httpEvent.getEventById(this.id).subscribe(
@@ -42,6 +57,22 @@ export class EventDetailsComponent implements OnInit {
     ); 
     return false; 
     }
+
+
+  getUserRole() {
+    console.log('CALLED  ');
+
+    this.auth.user$.subscribe((user) => {
+      console.log('USER ==> ', user?.sub);
+      console.log('this.userId', user?.sub);
+      const res =
+        user?.sub &&
+        this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
+          console.log('USER ROLE: ', res[0].name);
+          this.userRole = res[0].name; 
+        });
+    });
+  }
 
     cancel(){
       this.isShow = false; 
