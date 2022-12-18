@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AuthService } from '@auth0/auth0-angular';
 import { IEvent } from '../../Interfaces/event-interface';
 import { EventService } from '../../services/event.service';
 import { EventFormComponent } from '../event-form/event-form.component';
-
+import { Router } from '@angular/router';
+// Import the AuthService type from the SDK
+import { Store } from '@ngxs/store';
+import { AddAuth } from 'app/store/auth.actions';
+import { AuthService as AuthAPIService } from '../../services/auth.service';
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,13 +18,19 @@ import { EventFormComponent } from '../event-form/event-form.component';
 export class HomeComponent implements OnInit {
 
   isShow?: boolean = false;
-  // displaySucessMessage: boolean=false;
   event?: any; 
   events?:IEvent[]; 
   errorMessage:any; 
   showNav: boolean = false; 
 
-  constructor(private _httpEventService:EventService, public dialog:MatDialog, public auth: AuthService) { }
+  constructor(private _httpEventService:EventService, public dialog:MatDialog, public auth: AuthService,
+    @Inject(DOCUMENT) public document: Document,
+    public auth2: AuthService,
+    private router: Router,
+    private _httpAuthService: AuthAPIService,
+    private store: Store
+    ) { }
+
 
   isAuthenticated$ = this.auth.isAuthenticated$
 
@@ -32,7 +43,7 @@ export class HomeComponent implements OnInit {
       console.log('test',this.isAuthenticated$ )
 
     })
-
+    this.getUserRole()
   }
 
   getEventByLocationOrName(event:any):boolean{
@@ -60,6 +71,30 @@ export class HomeComponent implements OnInit {
     
   // }
 
+  getUserRole() {
+    console.log('CALLED  ');
+
+    this.auth2.user$.subscribe((user) => {
+      console.log('USER ==> ', user?.sub);
+      console.log('this.userId', user?.sub);
+      if(user?.sub){
+      }
+      const res =
+        user?.sub &&
+        this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
+          console.log('USER ROLE: ', res[0]?.name);
+          // dispatch an action
+          this.store.dispatch(
+            new AddAuth({
+              id: res[0]?.id,
+              name: res[0]?.name,
+              description: res[0]?.description,
+            })
+          );
+          
+        });
+    });
+  }
 
   }
 
