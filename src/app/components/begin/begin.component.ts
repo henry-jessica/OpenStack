@@ -39,6 +39,9 @@ export class BeginComponent implements OnInit {
     this.auth.user$.subscribe((user) => {
       console.log('USER ==> ', user?.sub);
       console.log('this.userId', user?.sub);
+      if(user?.sub){
+        this.router.navigate(['/home']);
+      }
       const res =
         user?.sub &&
         this._httpEventService.getUserRole(user?.sub).subscribe((res) => {
@@ -52,7 +55,7 @@ export class BeginComponent implements OnInit {
             })
           );
           // navigate to home screen
-          this.router.navigate(['/home']);
+//          this.router.navigate(['/home']);
         });
     });
   }
