@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUri: 'https://henrysolutions.ie/',
+  apiUri: 'https://henrysolutions.ie',
   auth0: {
     domain: 'dev-zxkcix0u0cipypz8.eu.auth0.com',
     clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E',
