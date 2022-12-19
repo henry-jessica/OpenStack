@@ -39,6 +39,9 @@ export class HomeComponent implements OnInit {
       if(isAuthenticated){
         this.showNav = true;
       }
+      else{
+             this.router.navigate(['']);
+      }
 
       console.log('test',this.isAuthenticated$ )
 

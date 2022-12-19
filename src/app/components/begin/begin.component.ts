@@ -46,7 +46,6 @@ export class BeginComponent implements OnInit {
         user?.sub &&
         this._httpEventService.getUserRole(user?.sub).subscribe((res) => {
           console.log('USER ROLE: ', res[0]?.name);
-          // dispatch an action
           this.store.dispatch(
             new AddAuth({
               id: res[0]?.id,
@@ -54,8 +53,7 @@ export class BeginComponent implements OnInit {
               description: res[0]?.description,
             })
           );
-          // navigate to home screen
-//          this.router.navigate(['/home']);
+
         });
     });
   }
