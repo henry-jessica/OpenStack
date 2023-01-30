@@ -139,12 +139,9 @@ export class EventFormComponent implements OnInit {
           formData.delete(p);
           formData.append(p, formObj[p]);
         }
-        // console.log(p); 
       }
     }
 
-    // console.log("This is the file ",this.imageFile);
-    
 
     this._httpEventService.updateEvent(id, formData)
       .subscribe({

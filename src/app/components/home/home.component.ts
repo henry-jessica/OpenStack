@@ -5,7 +5,6 @@ import { IEvent } from '../../Interfaces/event-interface';
 import { EventService } from '../../services/event.service';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { Router } from '@angular/router';
-// Import the AuthService type from the SDK
 import { Store } from '@ngxs/store';
 import { AddAuth } from 'app/store/auth.actions';
 import { AuthService as AuthAPIService } from '../../services/auth.service';
@@ -30,7 +29,6 @@ export class HomeComponent implements OnInit {
     private _httpAuthService: AuthAPIService,
     private store: Store
     ) { }
-
 
   isAuthenticated$ = this.auth.isAuthenticated$
 
@@ -64,16 +62,6 @@ export class HomeComponent implements OnInit {
     return false; 
     }
 
-  // cancel(){
-  //   this.isShow = false; 
-  //   this.displaySucessMessage=false; 
-  // }
-  // confirm(){
-  //   this.isShow=false; 
-  //   this.displaySucessMessage=true; 
-    
-  // }
-
   getUserRole() {
     console.log('CALLED  ');
 
@@ -86,7 +74,6 @@ export class HomeComponent implements OnInit {
         user?.sub &&
         this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
           console.log('USER ROLE: ', res[0]?.name);
-          // dispatch an action
           this.store.dispatch(
             new AddAuth({
               id: res[0]?.id,
