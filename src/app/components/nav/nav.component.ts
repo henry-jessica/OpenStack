@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EventService } from 'app/services/event.service';
-import { AuthService } from '@auth0/auth0-angular';
+// import { AuthService } from '@auth0/auth0-angular';
 import { Select, Store } from '@ngxs/store';
 import { AuthState } from 'app/store/auth.state';
 import { IAuth } from 'app/Interfaces/auth-interface';
@@ -19,7 +19,7 @@ export class NavComponent implements OnInit {
   constructor(
     private _httpEventService: EventService,
     private dialog: MatDialog,
-    public auth: AuthService
+    // public auth: AuthService
   ) {}
 
   public userRole = '';
@@ -30,7 +30,7 @@ export class NavComponent implements OnInit {
       this.userRole = auth.name;
     });
   }
-  isAuthenticated$ = this.auth.isAuthenticated$;
+  // isAuthenticated$ = this.auth.isAuthenticated$;
 
   onCreateEvent() {
     const dialogConfig = new MatDialogConfig();
@@ -41,7 +41,7 @@ export class NavComponent implements OnInit {
     this.dialog.open(EventFormComponent, dialogConfig);
   }
 
-  logout() {
-    this.auth.logout();
-  }
+  // logout() {
+  //   this.auth.logout();
+  // }
 }

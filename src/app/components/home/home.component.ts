@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { AuthService } from '@auth0/auth0-angular';
+// import { AuthService } from '@auth0/auth0-angular';
 import { IEvent } from '../../Interfaces/event-interface';
 import { EventService } from '../../services/event.service';
 import { EventFormComponent } from '../event-form/event-form.component';
@@ -22,28 +22,28 @@ export class HomeComponent implements OnInit {
   errorMessage:any; 
   showNav: boolean = false; 
 
-  constructor(private _httpEventService:EventService, public dialog:MatDialog, public auth: AuthService,
+  constructor(private _httpEventService:EventService, public dialog:MatDialog,
     @Inject(DOCUMENT) public document: Document,
-    public auth2: AuthService,
+    // public auth2: AuthService,
     private router: Router,
     private _httpAuthService: AuthAPIService,
     private store: Store
     ) { }
 
-  isAuthenticated$ = this.auth.isAuthenticated$
+  // isAuthenticated$ = this.auth.isAuthenticated$
 
   ngOnInit(): void {
-    this.auth.isAuthenticated$.subscribe(isAuthenticated =>{
-      if(isAuthenticated){
-        this.showNav = true;
-      }
-      else{
-             this.router.navigate(['']);
-      }
+    // this.auth.isAuthenticated$.subscribe(isAuthenticated =>{
+    //   if(isAuthenticated){
+    //     this.showNav = true;
+    //   }
+    //   else{
+    //          this.router.navigate(['']);
+    //   }
 
-      console.log('test',this.isAuthenticated$ )
+    //   console.log('test',this.isAuthenticated$ )
 
-    })
+    // })
     // this.getUserRole()
   }
 

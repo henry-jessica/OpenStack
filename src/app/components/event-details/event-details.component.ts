@@ -8,7 +8,7 @@ import { MessagesComponent } from '../messages/messages.component';
 import { IMessages } from 'app/Interfaces/message-interface';
 import { AuthService as AuthAPIService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
-import { AuthService } from '@auth0/auth0-angular';
+// import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-event-details',
@@ -31,7 +31,7 @@ export class EventDetailsComponent implements OnInit {
   
   constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router,
     @Inject(DOCUMENT) public document: Document,
-    public auth: AuthService,
+    // public auth: AuthService,
     private router: Router,
     private _httpAuthService: AuthAPIService
     ) {
@@ -39,7 +39,7 @@ export class EventDetailsComponent implements OnInit {
     .subscribe(params=>console.log(params)); 
    }
 
-   isAuthenticated$ = this.auth.isAuthenticated$;
+  //  isAuthenticated$ = this.auth.isAuthenticated$;
 
   ngOnInit(): void {   
     this.id = this.route.snapshot.params['id'];
@@ -59,20 +59,20 @@ export class EventDetailsComponent implements OnInit {
     }
 
 
-  getUserRole() {
-    console.log('CALLED  ');
+  // getUserRole() {
+  //   console.log('CALLED  ');
 
-    this.auth.user$.subscribe((user) => {
-      console.log('USER ==> ', user?.sub);
-      console.log('this.userId', user?.sub);
-      const res =
-        user?.sub &&
-        this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
-          console.log('USER ROLE: ', res[0].name);
-          this.userRole = res[0].name; 
-        });
-    });
-  }
+  //   this.auth.user$.subscribe((user) => {
+  //     console.log('USER ==> ', user?.sub);
+  //     console.log('this.userId', user?.sub);
+  //     const res =
+  //       user?.sub &&
+  //       this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
+  //         console.log('USER ROLE: ', res[0].name);
+  //         this.userRole = res[0].name; 
+  //       });
+  //   });
+  // }
 
     cancel(){
       this.isShow = false; 

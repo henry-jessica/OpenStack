@@ -11,22 +11,22 @@ import { IAuth } from '../Interfaces/auth-interface';
   providedIn: 'root',
 })
 export class AuthService {
-  private dataUri = (userId: string) =>
-    `https://${environment.auth0.domain}/api/v2/users/${userId}/roles`;
+  // private dataUri = (userId: string) =>
+  //   // `https://${environment.auth0.domain}/api/v2/users/${userId}/roles`;
 
-  private headers = new HttpHeaders().set(
-    'Authorization',
-    `Bearer ${environment.MGMT_API_ACCESS_TOKEN}`
-  );
+  // private headers = new HttpHeaders().set(
+  //   'Authorization',
+  //   `Bearer ${environment.MGMT_API_ACCESS_TOKEN}`
+  // );
 
   constructor(private _http: HttpClient) {}
 
-  getUserRole(userId: string): Observable<IAuth[]> {
-    console.log(this.dataUri(userId));
-    return this._http
-      .get<IAuth[]>(`${this.dataUri(userId)}`, { headers: this.headers })
-      .pipe(tap(), catchError(this.handleError));
-  }
+  // getUserRole(userId: string): Observable<IAuth[]> {
+  //   console.log(this.dataUri(userId));
+  //   return this._http
+  //     .get<IAuth[]>(`${this.dataUri(userId)}`, { headers: this.headers })
+  //     .pipe(tap(), catchError(this.handleError));
+  // }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
