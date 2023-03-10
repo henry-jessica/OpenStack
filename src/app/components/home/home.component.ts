@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
       console.log('test',this.isAuthenticated$ )
 
     })
-    this.getUserRole()
+    // this.getUserRole()
   }
 
   getEventByLocationOrName(event:any):boolean{
@@ -62,29 +62,29 @@ export class HomeComponent implements OnInit {
     return false; 
     }
 
-  getUserRole() {
-    console.log('CALLED  ');
+  // getUserRole() {
+  //   console.log('CALLED  ');
 
-    this.auth2.user$.subscribe((user) => {
-      console.log('USER ==> ', user?.sub);
-      console.log('this.userId', user?.sub);
-      if(user?.sub){
-      }
-      const res =
-        user?.sub &&
-        this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
-          console.log('USER ROLE: ', res[0]?.name);
-          this.store.dispatch(
-            new AddAuth({
-              id: res[0]?.id,
-              name: res[0]?.name,
-              description: res[0]?.description,
-            })
-          );
+  //   this.auth2.user$.subscribe((user) => {
+  //     console.log('USER ==> ', user?.sub);
+  //     console.log('this.userId', user?.sub);
+  //     if(user?.sub){
+  //     }
+  //     const res =
+  //       user?.sub &&
+  //       this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
+  //         console.log('USER ROLE: ', res[0]?.name);
+  //         this.store.dispatch(
+  //           new AddAuth({
+  //             id: res[0]?.id,
+  //             name: res[0]?.name,
+  //             description: res[0]?.description,
+  //           })
+  //         );
           
-        });
-    });
-  }
+  //       });
+  //   });
+  // }
 
   }
 

@@ -30,7 +30,7 @@ export class BeginComponent implements OnInit {
     //   }
     // })
 
-    this.getUserRole();
+    // this.getUserRole();
   }
 
   getUserRole() {
