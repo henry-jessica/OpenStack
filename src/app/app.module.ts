@@ -25,9 +25,9 @@ import { environment } from 'environments/environment';
 import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './store/auth.state';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
-import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { Amplify, Auth } from 'aws-amplify';
-import awsconfig from '../aws-exports'
+import awsconfig from '../aws-exports';
+import { LoginComponent } from './login/login.component'
 Amplify.configure(awsconfig); 
 
 Amplify.configure(awsconfig);
@@ -47,9 +47,7 @@ Auth.configure(awsconfig);
     HeroComponent,
     MessagesComponent,
     BeginComponent,
-    RestaurantsComponent,
-
-
+    LoginComponent,
   ],
   imports: [
     FormsModule,
