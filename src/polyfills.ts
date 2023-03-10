@@ -46,7 +46,16 @@
  * Zone JS is required by default for Angular itself.
  */
 import 'zone.js';  // Included with Angular CLI.
+import 'core-js/es/typed-array';
+import 'core-js/es/object';
+import 'zone.js/dist/zone'; // Included with Angular CLI.
 
+(window as any).Zone['__zone_symbol__ignoreConsoleErrorUncaughtError'] = true;
+
+(window as any).global = window;
+(window as any).process = {
+  env: { DEBUG: undefined },
+};
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

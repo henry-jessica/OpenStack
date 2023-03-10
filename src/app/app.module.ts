@@ -19,12 +19,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BeginComponent } from './components/begin/begin.component';
 // Import the module from the SDK
-import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
+// import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { MatMenuModule } from '@angular/material/menu';
 import { environment } from 'environments/environment';
 import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './store/auth.state';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { RestaurantsComponent } from './restaurants/restaurants.component';
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from '../aws-exports'
+Amplify.configure(awsconfig); 
 
+Amplify.configure(awsconfig);
+
+// >>New - Configuring Auth Module
+Auth.configure(awsconfig);
 
 @NgModule({
   declarations: [
@@ -38,6 +47,7 @@ import { AuthState } from './store/auth.state';
     HeroComponent,
     MessagesComponent,
     BeginComponent,
+    RestaurantsComponent,
 
 
   ],
@@ -53,23 +63,19 @@ import { AuthState } from './store/auth.state';
     MatInputModule,
     MatNativeDateModule,
     MatMenuModule,
-
-    AuthModule.forRoot({
-      domain: 'dev-zxkcix0u0cipypz8.eu.auth0.com',
-      clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E',
-      httpInterceptor: {
-        allowedList: [`${environment.apiUri}/api/events`, `${environment.apiUri}/api/events/*`],
-      },
-    }),
+    AmplifyAuthenticatorModule,
+    // AuthModule.forRoot({
+    //   domain: 'dev-zxkcix0u0cipypz8.eu.auth0.com',
+    //   clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E',
+    //   httpInterceptor: {
+    //     allowedList: [`${environment.apiUri}/api/events`, `${environment.apiUri}/api/events/*`],
+    //   },
+    // }),
 
     // state management
     NgxsModule.forRoot([AuthState]),
   ],
-  providers: [ {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthHttpInterceptor,
-    multi: true,
-  },],
+  providers: [],
   bootstrap: [AppComponent], 
   entryComponents:[EventFormComponent], 
 
