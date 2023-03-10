@@ -1,4 +1,18 @@
-<amplify-authenticator>
+<div class="container pt-5 mt-5 cognitoform">
+  <amplify-authenticator [loginMechanisms]="['email']"
+  [signUpAttributes]="[  'name',  'email',  'family_name' ]"
+  [socialProviders]="['google']">
+    <ng-template
+      amplifySlot="authenticated"
+      let-user="user"
+      let-signOut="signOut">
+    </ng-template>
+  </amplify-authenticator>
+</div>
+ 
+<!-- https://docs.amplify.aws/lib/auth/social/q/platform/js/#configure-auth-category -->
+
+<!-- <amplify-authenticator>
     <ng-template
       amplifySlot="authenticated"
       let-user="user"
@@ -6,4 +20,6 @@
       <app-home></app-home>
       <button (click)="signOut()">Sign Out</button>
     </ng-template>
-  </amplify-authenticator>
+  </amplify-authenticator> -->
+
+  
