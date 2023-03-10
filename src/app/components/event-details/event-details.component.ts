@@ -44,7 +44,7 @@ export class EventDetailsComponent implements OnInit {
   ngOnInit(): void {   
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
-    this.getUserRole();
+    // this.getUserRole();
 
   }
   getEvent():boolean{
