@@ -8,14 +8,14 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'events/:id', component: EventDetailsComponent },
-  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: '#', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'home/evens/:id', component: EventDetailsComponent },
   // { path: 'begin', component: BeginComponent },
   { path: '**', component: HomeComponent },
   // { path: 'home', component: BeginComponent, canActivate:[AuthGuard] },
-  { path:'login', component:LoginComponent},
+  { path:'', component:HomeComponent},
 
 
 ];
