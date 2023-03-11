@@ -7,6 +7,8 @@ import { Select, Store } from '@ngxs/store';
 import { AuthState } from 'app/store/auth.state';
 import { IAuth } from 'app/Interfaces/auth-interface';
 import { Observable } from 'rxjs';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -17,6 +19,7 @@ export class NavComponent implements OnInit {
   @Select(AuthState.getAuth) auth$!: Observable<IAuth>;
 
   constructor(
+    public authenticator: AuthenticatorService, private readonly  _router: Router, 
     private _httpEventService: EventService,
     private dialog: MatDialog,
     // public auth: AuthService
@@ -31,6 +34,11 @@ export class NavComponent implements OnInit {
     });
   }
   // isAuthenticated$ = this.auth.isAuthenticated$;
+  async Logout() {
+    this.authenticator?.signOut()
+    this._router.navigate(['/login'])
+
+}
 
   onCreateEvent() {
     const dialogConfig = new MatDialogConfig();
