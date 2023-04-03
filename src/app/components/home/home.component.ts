@@ -9,6 +9,8 @@ import { Store } from '@ngxs/store';
 import { AddAuth } from 'app/store/auth.actions';
 import { AuthService as AuthAPIService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Auth } from 'aws-amplify';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,18 +23,28 @@ export class HomeComponent implements OnInit {
   events?:IEvent[]; 
   errorMessage:any; 
   showNav: boolean = false; 
+  userGroup?: string;
 
-  constructor(private _httpEventService:EventService, public dialog:MatDialog,
+
+  constructor(private _httpEventService:EventService, public dialog:MatDialog,public authenticator: AuthenticatorService,
     @Inject(DOCUMENT) public document: Document,
     // public auth2: AuthService,
     private router: Router,
     private _httpAuthService: AuthAPIService,
     private store: Store
-    ) { }
+    ) { 
+      Auth.currentAuthenticatedUser()
+    .then(user => {
+      this.userGroup = user.signInUserSession.accessToken.payload["cognito:groups"][0];
+    })
+    .catch(err => console.log(err));
+    }
 
   // isAuthenticated$ = this.auth.isAuthenticated$
 
   ngOnInit(): void {
+
+    console.log(this.userGroup); 
     // this.auth.isAuthenticated$.subscribe(isAuthenticated =>{
     //   if(isAuthenticated){
     //     this.showNav = true;
