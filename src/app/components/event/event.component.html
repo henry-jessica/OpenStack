@@ -1,4 +1,4 @@
-<div class="card-deck">
+<!-- <div class="card-deck">
     <div class="card">
       <img class="card-img-top" style=" height: 160px;" src="https://s3-images-web-ca2.s3.eu-west-1.amazonaws.com/{{event?.urlImg}}" alt="Card image cap">
       <div class="card-body">
@@ -12,9 +12,29 @@
           <div class="col-3">
           </div>
           <a class="btn btn-secondary d-flex justify-content-center col-6"  [routerLink]="['/events', event?._id]">See Event</a>
+          <button mat-raised-button color="primary">Primary</button>
           <div class="col-3">
           </div>
        </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://s3-images-web-ca2.s3.eu-west-1.amazonaws.com/{{event?.urlImg}}" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p class="card-title">{{ event?.name }}</p>
+        <p class="card-text"> {{event?.eventDateStarts | date }} at {{event?.eventDateStarts |date:'shortTime'}}</p>
+        <p class="card-text text-muted"> {{event?.address?.line1}},{{event?.address?.city}}</p>    
+        <p class="card-text text-muted">Starts at {{event?.startsPrice | currency:'EUR':true}}</p>    
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>Favourite</button>
+      <button mat-button [routerLink]="['/events', event?._id]">See event</button>
+    </mat-card-actions>
+  </mat-card>

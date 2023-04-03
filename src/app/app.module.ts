@@ -28,6 +28,10 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { Amplify, Auth } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 import { LoginComponent } from './login/login.component'
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+
+
 Amplify.configure(awsconfig); 
 
 Amplify.configure(awsconfig);
@@ -51,6 +55,7 @@ Auth.configure(awsconfig);
   ],
   imports: [
     FormsModule,
+    MatCardModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -58,6 +63,7 @@ Auth.configure(awsconfig);
     BrowserAnimationsModule,
     MatDialogModule,
     MatDatepickerModule,
+    MatButtonModule,
     MatInputModule,
     MatNativeDateModule,
     MatMenuModule,
