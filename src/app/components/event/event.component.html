@@ -34,7 +34,7 @@
         <p class="card-text text-muted">Starts at {{event?.startsPrice | currency:'EUR':true}}</p>    
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Favourite</button>
       <button mat-button [routerLink]="['/events', event?._id]">See event</button>
+      <!-- <button mat-button (click)="onCreateEvent(event?._id)">See event</button> -->
     </mat-card-actions>
   </mat-card>

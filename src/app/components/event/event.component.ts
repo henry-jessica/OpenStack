@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IEvent } from '../../Interfaces/event-interface';
 import { EventService } from '../..//services/event.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EventDetailsComponent } from '../event-details/event-details.component';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EventComponent implements OnInit {
 
-  constructor(private _eventService:EventService) { }
+  constructor(private _eventService:EventService,  private dialog: MatDialog) { }
   
   message: string = "";
   @Input() event?: IEvent; 
@@ -31,4 +33,14 @@ export class EventComponent implements OnInit {
             }); 
         } 
   }
+  // onCreateEvent(eventID?:string) {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.width = '97%';
+  //   dialogConfig.height = '97%';
+  //   this.dialog.open(EventDetailsComponent, {data:{id:eventID}}); 
+
+  // }
+  
 }
