@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
     <a class="navbar-brand" routerlink="" href="/home">
       <img src="/assets/images/easyeventlogo.png" width="160" height="160" alt="CloneBrite" class="img-fluid" /></a>
@@ -6,8 +6,8 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent ">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-item d-flex justify-content-end">
         <li class="nav-item">
           <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
         </li>
@@ -41,3 +41,149 @@
     </div>
   </div>
 </nav>
+
+
+
+<nav  class="navbar navbar-expand-lg navbar-light bg-primary p-3">
+  <div class="container">
+    <a class="navbar-brand" routerlink="" href="/home">
+      <img src="/assets/images/easyeventlogo.png" width="160" height="160" alt="CloneBrite" class="img-fluid" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse  justify-content-end" id="navbarNavAltMarkup">
+    <div class="navbar-nav" >
+      <a class="nav-item nav-link active" routerLink="initial">Home <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" routerLink="login">Login</a>
+      <a class="nav-item nav-link" routerLink="Register">Register</a>
+      <a class="nav-item nav-link" routerLink="forum">Forum</a>
+    </div>
+  </div>
+</div>
+</nav> -->
+
+
+<nav  *ngIf="!authenticator.user" class="navbar navbar-expand-lg navbar-light bg-primary p-3">
+  <div class="container">
+    <a class="navbar-brand" routerlink="" href="/home">
+      <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <form class="navbar-form form-inline">
+    <div class="input-group search-box">
+      <input type="text" id="search" class="form-control" placeholder="Search here..." />
+      <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+    </div>
+  </form>
+  <div class="collapse navbar-collapse  justify-content-end" id="navbarNavAltMarkup">
+    <div class="navbar-nav" >
+      <a class="nav-item nav-link" routerLink="/initial" routerLinkActive="active">Home <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active">Became a Promoter</a>
+      <a class="nav-item nav-link" routerLink="/Register" routerLinkActive="active">Login</a>    
+        <a class="nav-item nav-link" routerLink="/Register" routerLinkActive="active">Sign in</a>
+
+    </div>
+  </div>
+</div>
+</nav>
+
+<nav *ngIf="authenticator.user" class="navbar navbar-expand-xl navbar-dark bg-dark">
+<div class="container">
+  <a class="navbar-brand" routerlink="" href="/home">
+    <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid" /></a>
+<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<form class="navbar-form form-inline">
+  <div class="input-group search-box">
+    <input type="text" id="search" class="form-control" placeholder="Search here..." />
+    <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+  </div>
+</form>
+<div id="navbarCollapse" class="collapse navbar-collapse justify-content-end">
+  <div class="navbar-nav ml-auto">
+    <a routerLink="/initial" class="nav-item nav-link icons" routerLinkActive="active"><i class="bi bi-house-heart-fill"></i><span>Home</span></a>
+    <a routerLink="/orders" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-item nav-link"><i class="bi bi-receipt"></i><span>Orders</span></a>
+    <a routerLink="/chat" routerLinkActive="active" class="nav-item nav-link" ><i class="bi bi-chat-text-fill"></i><span>Messages</span></a>
+
+    <mat-menu #messageBox="matMenu" xPosition="before">
+      <h6 class="dropdown-header">Message Center</h6>
+      <a class="dropdown-item d-flex align-items-center" href="#">
+        <div class="dropdown-list-image mr-3">
+          <img class="rounded-circle profile"
+            src="https://ucarecdn.com/2ffd0337-37d0-429d-a1a5-485165bb3006/-/crop/333x333/107,32/-/preview/-/progressive/yes/-/format/auto/"
+            alt="..." />
+          <div class="status-indicator bg-success"></div>
+        </div>
+        <div class="font-weight-bold">
+          <div class="text-truncate">
+            Hi there! I am wondering if you can help me with a problem I've
+            been having.
+          </div>
+          <div class="small text-gray-500">Fred · 58m</div>
+        </div>
+      </a>
+      <a class="dropdown-item d-flex align-items-center" href="#">
+        <div class="dropdown-list-image mr-3">
+          <img class="rounded-circle"
+            src="data:image/jpeg;base64,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"
+            alt="..." />
+          <div class="status-indicator"></div>
+        </div>
+        <div>
+          <div class="text-truncate">
+            I have the photos that you ordered last month, how would you like
+            them sent to you?
+          </div>
+          <div class="small text-gray-500">Amy · 1d</div>
+        </div>
+      </a>
+      <a class="dropdown-item d-flex align-items-center" href="#">
+        <div class="dropdown-list-image mr-3">
+          <img class="rounded-circle"
+            src="https://imgs.smoothradio.com/images/224840?width=2480&crop=1_1&signature=coh17sFPwlsyi0gj9FdZWvlLMFQ="
+            alt="..." />
+          <div class="status-indicator bg-warning"></div>
+        </div>
+        <div>
+          <div class="text-truncate">
+            Last month's report looks great, I am very happy with the progress
+            so far, keep up the good work!
+          </div>
+          <div class="small text-gray-500">Michael Jackson · 2d</div>
+        </div>
+      </a>
+      <a class="dropdown-item d-flex align-items-center" href="#">
+        <div class="dropdown-list-image mr-3">
+          <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="..." />
+          <div class="status-indicator bg-success"></div>
+        </div>
+        <div>
+          <div class="text-truncate">
+            Am I a good boy? The reason I ask is because someone told me that
+            people say this to all dogs, even if they aren't good...
+          </div>
+          <div class="small text-gray-500">Chicken the Dog · 2w</div>
+        </div>
+      </a>
+      <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+    </mat-menu>
+    <a mat-button [matMenuTriggerFor]="beforeMenu" data-toggle="dropdown"
+      class="nav-item nav-link dropdown-toggle user-action pt-4">
+        <img src="">
+      <b class="caret"></b></a>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <a  routerLink="/profile" class="dropdown-item" ><i class="bi bi-person pr-3 pt-2"></i>Profile</a>
+      <a href="#" class="dropdown-item"><i class="bi bi-receipt-cutoff pr-3 pt-2"></i> Billing</a>
+      <a href="#" class="dropdown-item"><i class="bi bi-sliders2 pr-3 pt-2"></i>Settings</a>
+      <div class="divider dropdown-divider"></div>
+      <a class="dropdown-item" (click)="Logout()"><i class="bi bi-box-arrow-left pr-3"></i> Logout</a>
+    </mat-menu>
+
+  </div>
+</div>
+</div>
+</nav>
+
+
