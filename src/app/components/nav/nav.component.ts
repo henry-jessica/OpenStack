@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EventService } from 'app/services/event.service';
@@ -17,26 +17,34 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
   @Select(AuthState.getAuth) auth$!: Observable<IAuth>;
+  userInfor?:any; 
+  isLogout:boolean =false; 
+  @Input() user: any; 
 
+  
   constructor(
-    public authenticator: AuthenticatorService, private readonly  _router: Router, 
+    public authenticator: AuthenticatorService, private readonly  router: Router,
     private _httpEventService: EventService,
     private dialog: MatDialog,
+
     // public auth: AuthService
   ) {}
 
   public userRole = '';
 
   ngOnInit(): void {
-    this.auth$.subscribe((auth) => {
-      console.log('AUTH ', auth);
-      this.userRole = auth.name;
-    });
+    console.log(this.authenticator.user); 
+    this.userInfor =this.authenticator.user;  
+    // this.auth$.subscribe((auth) => {
+    //   console.log('AUTH ', auth);
+    //   this.userRole = auth.name;
+    // });
   }
   // isAuthenticated$ = this.auth.isAuthenticated$;
   async Logout() {
+    this.isLogout = true; 
     this.authenticator?.signOut()
-    this._router.navigate(['/login'])
+    this.router.navigate(['/login'])
 
 }
 
@@ -48,6 +56,7 @@ export class NavComponent implements OnInit {
     dialogConfig.height = '97%';
     this.dialog.open(EventFormComponent, dialogConfig);
   }
+  
 
   // logout() {
   //   this.auth.logout();
