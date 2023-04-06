@@ -1,0 +1,83 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-openstack-dev-194427-authRole",
+      "UnauthRoleArn": "arn:aws:iam::839739980002:role/amplify-openstack-dev-194427-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::839739980002:role/amplify-openstack-dev-194427-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-openstack-dev-194427-deployment",
+      "UnauthRoleName": "amplify-openstack-dev-194427-unauthRole",
+      "StackName": "amplify-openstack-dev-194427",
+      "StackId": "arn:aws:cloudformation:eu-west-1:839739980002:stack/amplify-openstack-dev-194427/f90684b0-bf7b-11ed-8e42-021b9dba280b",
+      "AmplifyAppId": "d3k4j9ajfs0izc"
+    }
+  },
+  "api": {
+    "openstack": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "yhngw46e7vcjbabdinyx7qphlm",
+        "GraphQLAPIEndpointOutput": "https://zwoj43jrqjal3obn2badkxrmoe.appsync-api.eu-west-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-7cqti5hhvndpxdebktj6xkhudy"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-openstack-dev-194427-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiopenstack"
+      },
+      "lastPushTimeStamp": "2023-03-10T20:19:00.358Z",
+      "lastPushDirHash": "Jt2yODkxBflJpRD8OL+goIviQ7U="
+    }
+  },
+  "auth": {
+    "openstack7d8e55a7": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-openstack-dev-194427-deployment/amplify-cfn-templates/auth/openstack7d8e55a7-cloudformation-template.json",
+        "logicalId": "authopenstack7d8e55a7"
+      },
+      "lastPushTimeStamp": "2023-03-10T20:19:00.358Z",
+      "output": {
+        "UserPoolId": "eu-west-1_we3M5a5Ur",
+        "AppClientIDWeb": "6rig9r1hfotjp5dj3lan3sh05j",
+        "AppClientID": "4f3jbtkucbir6q0j579468u20f",
+        "IdentityPoolId": "eu-west-1:9a2843bf-e959-4839-8db6-46d5985cfe55",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-west-1:839739980002:userpool/eu-west-1_we3M5a5Ur",
+        "IdentityPoolName": "openstack7d8e55a7_identitypool_7d8e55a7__dev",
+        "UserPoolName": "openstack7d8e55a7_userpool_7d8e55a7"
+      },
+      "lastPushDirHash": "ix6X5TcsJxooULPAJpLRx1WtUl0="
+    }
+  }
+}
