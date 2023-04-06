@@ -1,8 +1,41 @@
 .example-card {
     max-width: 400px;
+    text-align: start;
   }
   
   .example-header-image {
     background-image: url('https://c1.thejournal.ie/media/2020/06/kin-3-752x501.png');
     background-size: cover;
   }
+
+
+.time-stamp{
+  font-size: 14px;
+  letter-spacing: 0.18px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  color: rgb(0, 151, 255);
+  font-weight: 700;
+}
+.card-title{
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: rgb(25, 31, 40);
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+}
+.card-sub-information{
+  font-size: 14px;
+  line-height: 1.33;
+  color: rgb(76, 87, 108);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+}

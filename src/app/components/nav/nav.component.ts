@@ -9,6 +9,8 @@ import { IAuth } from 'app/Interfaces/auth-interface';
 import { Observable } from 'rxjs';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { Router } from '@angular/router';
+import { EventFilterService } from './navService';
+import { IEvent } from 'app/Interfaces/event-interface';
 
 @Component({
   selector: 'app-nav',
@@ -20,11 +22,14 @@ export class NavComponent implements OnInit {
   userInfor?:any; 
   isLogout:boolean =false; 
   @Input() user: any; 
-
+  isShow?: boolean = false;
+  event?: any; 
+  events?:IEvent[]; 
+  errorMessage:any; 
   
   constructor(
     public authenticator: AuthenticatorService, private readonly  router: Router,
-    private _httpEventService: EventService,
+    private _httpEventService: EventFilterService,
     private dialog: MatDialog,
 
     // public auth: AuthService
@@ -57,7 +62,21 @@ export class NavComponent implements OnInit {
     this.dialog.open(EventFormComponent, dialogConfig);
   }
   
-
+  getEventByLocationOrName(event: any): boolean {
+    console.log(`value=${event}`);
+    this._httpEventService.getEventsDataFiltering(event).subscribe(
+      events => {
+        this.events = events;
+        this.events.forEach(element => {
+          console.log('element', element);
+        });
+      },
+      error => this.errorMessage = error
+    );
+    return true; // Return true to allow the default behavior of the input element
+  }
+  
+    
   // logout() {
   //   this.auth.logout();
   // }

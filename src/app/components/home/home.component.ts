@@ -1,6 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-// import { AuthService } from '@auth0/auth0-angular';
 import { IEvent } from '../../Interfaces/event-interface';
 import { EventService } from '../../services/event.service';
 import { EventFormComponent } from '../event-form/event-form.component';
@@ -11,6 +9,9 @@ import { AuthService as AuthAPIService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { Auth } from 'aws-amplify';
+import { EventFilterService } from '../nav/navService';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,15 +19,16 @@ import { Auth } from 'aws-amplify';
 })
 export class HomeComponent implements OnInit {
 
+  events: IEvent[] = [];
   isShow?: boolean = false;
   event?: any; 
-  events?:IEvent[]; 
   errorMessage:any; 
   showNav: boolean = false; 
   userGroup?: string;
+  
 
 
-  constructor(private _httpEventService:EventService, public dialog:MatDialog,public authenticator: AuthenticatorService,
+  constructor(private _httpEventService:EventService, public dialog:MatDialog,private eventFilterService: EventFilterService,public authenticator: AuthenticatorService,
     @Inject(DOCUMENT) public document: Document,
     // public auth2: AuthService,
     private router: Router,
@@ -57,6 +59,9 @@ export class HomeComponent implements OnInit {
 
     // })
     // this.getUserRole()
+    this.eventFilterService.getEvents().subscribe(events => {
+      this.events = events;
+    });
   }
 
   getEventByLocationOrName(event:any):boolean{
@@ -100,4 +105,3 @@ export class HomeComponent implements OnInit {
 
   }
 
-  
