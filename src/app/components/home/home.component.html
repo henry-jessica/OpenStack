@@ -1,5 +1,49 @@
 
-<app-nav *ngIf="showNav"></app-nav>
+
+          <div  class="container pt-4">
+
+            <mat-tab-group animationDuration="0ms" mat-stretch-tabs>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon mr-1">rocket</mat-icon>
+                  <span>Concert</span>
+                </ng-template>
+                <div>
+                  <div class="pt-3"></div>
+                </div>
+              </mat-tab>
+  
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon mr-1">local_fire_department</mat-icon>
+                  <span>Sports</span>
+                </ng-template>
+                <!-- <div style="padding: 0 6%">
+                  <div class="">
+                  </div>
+                </div> -->
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon mr-1">arrow_upward</mat-icon>
+                  <span>Art & Theater</span>
+                </ng-template>
+                <div style="padding: 0 6%">
+                  <div class="">
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon mr-1">today</mat-icon>
+                  <span class="btn-tab">More</span>
+                </ng-template>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+  
+          
+
 <div class="main-banner">
   <div class="container">
     <form id="search-form">
@@ -11,19 +55,19 @@
           <div class="ml-6 col-sm-6 col-lg-6 mb-5">
             <label for="keyword"></label>
             <div class="input-group justify-content-center">
-              <input
+              <!-- <input
                 type="text"
                 class="form-control"
                 id="location"
                 placeholder="Search for city or event name"
-                #search (keyup)="getEventByLocationOrName(search?.value)"/>
-              <button
+                #search (keyup)="getEventByLocationOrName(search?.value)"/> -->
+              <!-- <button
                 type="submit"
                 class="btn btn-primary"
                 id="search"
-                (click)="getEventByLocationOrName(search?.value)" >
-                Search
-              </button>
+                (click)="getEventByLocationOrName(search?.value)" > -->
+                <!-- Search -->
+              <!-- </button> -->
             </div>
           </div>
         </div>
@@ -38,3 +82,5 @@
 
 
  
+
+

@@ -30,6 +30,8 @@ import awsconfig from '../aws-exports';
 import { LoginComponent } from './login/login.component'
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 Amplify.configure(awsconfig); 
@@ -58,6 +60,7 @@ Auth.configure(awsconfig);
     MatCardModule,
     ReactiveFormsModule,
     BrowserModule,
+    MatTabsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -68,15 +71,7 @@ Auth.configure(awsconfig);
     MatNativeDateModule,
     MatMenuModule,
     AmplifyAuthenticatorModule,
-    // AuthModule.forRoot({
-    //   domain: 'dev-zxkcix0u0cipypz8.eu.auth0.com',
-    //   clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E',
-    //   httpInterceptor: {
-    //     allowedList: [`${environment.apiUri}/api/events`, `${environment.apiUri}/api/events/*`],
-    //   },
-    // }),
-
-    // state management
+    MatIconModule,
     NgxsModule.forRoot([AuthState]),
   ],
   providers: [],
