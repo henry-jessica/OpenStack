@@ -29,6 +29,12 @@ export class EventService {
       .pipe(tap(), catchError(this.handleError));
   }
 
+  getEventsCategory(keyword: string): Observable<IEvent[]> {
+    return this._http
+      .get<IEvent[]>(this.dataUri + '?category=' + keyword)
+      .pipe(tap(), catchError(this.handleError));
+  }
+
   //Deleting a event
   deleteEvent(id: string): Observable<unknown> {
     const url = `${this.dataUri}/${id}`; // DELETE

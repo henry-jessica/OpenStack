@@ -33,10 +33,10 @@
         <p class="card-text text-muted card-sub-information"> {{event?.address?.line1}},{{event?.address?.city}}</p>    
         <p class="card-text text-muted">Starts at {{event?.startsPrice | currency:'EUR':true}}</p>    
     </mat-card-content>
-    <!-- <mat-card-actions>
+    <mat-card-actions>
       <button mat-button [routerLink]="['/events', event?._id]">SEE EVENT</button>
       <button mat-button >SAVE TO FAVOURITE</button>
-    </mat-card-actions> -->
+    </mat-card-actions>
   </mat-card>
 
 

@@ -32,6 +32,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 Amplify.configure(awsconfig); 
@@ -56,9 +60,12 @@ Auth.configure(awsconfig);
     LoginComponent,
   ],
   imports: [
+    MatAutocompleteModule,
     FormsModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatChipsModule,
     BrowserModule,
     MatTabsModule,
     AppRoutingModule,
@@ -68,6 +75,7 @@ Auth.configure(awsconfig);
     MatDatepickerModule,
     MatButtonModule,
     MatInputModule,
+    MatStepperModule,
     MatNativeDateModule,
     MatMenuModule,
     AmplifyAuthenticatorModule,

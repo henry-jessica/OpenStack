@@ -2,7 +2,7 @@
 
           <div  class="container pt-4">
 
-            <mat-tab-group animationDuration="0ms" mat-stretch-tabs>
+            <mat-tab-group animationDuration="0ms" mat-stretch-tabs (selectedTabChange)="SetTabIndex($event)">
               <mat-tab>
                 <ng-template mat-tab-label>
                   <mat-icon class="example-tab-icon mr-1">rocket</mat-icon>
@@ -18,19 +18,17 @@
                   <mat-icon class="example-tab-icon mr-1">local_fire_department</mat-icon>
                   <span>Sports</span>
                 </ng-template>
-                <!-- <div style="padding: 0 6%">
-                  <div class="">
-                  </div>
-                </div> -->
+                <div>
+                  <div class="pt-3"></div>
+                </div>
               </mat-tab>
               <mat-tab>
                 <ng-template mat-tab-label>
                   <mat-icon class="example-tab-icon mr-1">arrow_upward</mat-icon>
                   <span>Art & Theater</span>
                 </ng-template>
-                <div style="padding: 0 6%">
-                  <div class="">
-                  </div>
+                <div>
+                  <div class="pt-3"></div>
                 </div>
               </mat-tab>
               <mat-tab>
@@ -38,6 +36,9 @@
                   <mat-icon class="example-tab-icon mr-1">today</mat-icon>
                   <span class="btn-tab">More</span>
                 </ng-template>
+                <div>
+                  <div class="pt-3"></div>
+                </div>
               </mat-tab>
             </mat-tab-group>
           </div>

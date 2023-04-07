@@ -12,6 +12,7 @@
         description: string;
         contactNumber: string;
         contact_email: string;
+        category: string;
         eventDateStarts: Date;
         eventDateEnds: Date;
         createdDate: Date;

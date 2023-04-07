@@ -1,4 +1,4 @@
-<div class="tab-content">
+<!-- <div class="tab-content">
   <div class="tab-pane fade show active" id="account" role="tabpanel">
     <div class="card mb-3">
       <div class="card-header">
@@ -108,4 +108,320 @@
           </div>
         </form>
       </div>
+    </div> -->
+
+
+
+
+
+  <div class="row">
+    <div class="col-6 d-flex justify-content-start">
+    <button *ngIf="this.stepper.selectedIndex!=0" class="btn btn-outline-secondary" (click)="onBack(stepper)">&#60; Back</button>
     </div>
+    <div class="col-6 d-flex justify-content-end">
+      <i class="bi bi-x-lg" (click)="onCancel()"></i>
+    </div>
+  </div>
+
+<mat-stepper linear #stepper>
+  <mat-step [stepControl]="eventForm">
+    <form [formGroup]="eventForm" >
+      <ng-template matStepLabel>Event Overview</ng-template>
+      <div class="container pt-4">
+        <div class="row">
+          <div class="col-12">
+            <h3>Event title</h3>
+          </div>
+          <div class="col-8">
+            <div class="row">
+             
+              <mat-form-field hintLabel="Max 70 characters" appearance="outline">
+                <mat-label>Insert service title</mat-label>
+                <textarea matInput maxlength="70" 
+                placeholder="I will..."
+                id="name" type="text" formControlName="name"
+                placeholder="service title" #name  required></textarea>
+                <mat-hint align="end">{{name.value.length}}/70</mat-hint>
+              </mat-form-field>
+              
+              <div class="row">
+                <mat-form-field class="example-full-width" appearance="outline">
+                 <mat-label>Contact Number </mat-label>
+                 <input matInput id="contactNumber" type="text" formControlName="contactNumber">
+               </mat-form-field>
+              </div>
+
+              <div class="row">
+                <mat-form-field class="example-full-width" appearance="outline">
+                 <mat-label>Contact Email</mat-label>
+                 <input matInput id="contact_email" type="email" formControlName="contact_email">
+               </mat-form-field>
+              </div>
+              
+              <div class="row">
+                <mat-form-field class="example-full-width" appearance="outline">
+                 <mat-label>Price Charged - € EUR </mat-label>
+                 <input matInput id="startsPrice" type="number" formControlName="startsPrice">
+               </mat-form-field>
+              </div>
+
+              <mat-form-field hintLabel="Max 70 characters" appearance="outline">
+                <mat-label>Insert service description</mat-label>
+                <textarea matInput #description  maxlength="70" 
+                id="description" type="text" formControlName="description" ></textarea>
+                <mat-hint align="end">{{description.value.length}}/70</mat-hint>
+              </mat-form-field>
+              
+
+            </div>
+          </div>
+        </div>
+        <div class="row pt-2">
+          <div class="col-12">
+            <h3>Category</h3>
+            <p>
+              Choose the category and sub-category most suitable for your Event.</p>
+          </div>
+          <div class="col-8">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1"></label>
+                  <select class="form-control"formControlName="category"  #category>
+                    <option>select a service category</option>
+                    <option>Concert</option>
+                    <option>Sports</option>
+                    <option>Art & Theater</option>
+                    <option>Others </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-4">
+          <div class="col-12">
+            <h3>
+              Search tags
+            </h3>
+            <p>
+              Tag your Event with buzz words that are relevant to the services you offer. Use all 5 tags to get found.</p>
+          </div>
+          <div class="col-8">
+            <h3>Positive keywords</h3>
+            <p>Enter search terms you feel the pet owners will use when looking for your service.</p>
+            <mat-form-field class="example-chip-list" appearance="outline">
+              <mat-label>Positive keywords</mat-label>
+              <mat-chip-list #chipList aria-label="positivekeywords selection">
+                <mat-chip
+                  *ngFor="let positivekeywords of positivekeywordss"
+                  (removed)="remove(positivekeywords)">
+                  {{positivekeywords}}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+                <input
+                  placeholder="New positive keyword..."
+                  #positivekeywordsInput
+                  [formControl]="positivekeywordsCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let positivekeywords of filteredpositivekeywordss | async" [value]="positivekeywords">
+                  {{positivekeywords}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row pt-4">
+          <div class="col-6">
+            <button class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+            <button type="button" class="btn btn-outline-info ml-2">Save Draft</button>
+      
+          </div>
+          <div class="col-6 d-flex justify-content-end">
+            <button mat-button class="btn btn-primary" mat-button matStepperNext>Save & Continue</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="eventForm" [optional]="isOptional" >
+    <form [formGroup]="eventForm">
+      <ng-template matStepLabel>Pricing and Description</ng-template>
+        <div class="container pt-4">
+          <div class="row">
+            <div class="col-4">
+              <h6>Description</h6>
+              <p>Briefly describe your service, here the pet owner can see more details of what you're offering</p>
+               </div>
+            <div class="col-8">
+              <div class="row">
+                <mat-form-field class="example-full-width" hintLabel="Max 300 characters"  appearance="outline">
+                  <mat-label>Insert service description</mat-label>
+                  <textarea #description  maxlength="300"  matInput placeholder="more details" formControlName="description" required #des></textarea>
+                  <mat-hint align="end">{{description.value.length}}/300</mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-4">
+              <h6>Starting Pricing</h6>
+              <p>
+                Insert the start price of the service, for extra service you might change the price charged, you can negociate with Pet Owner through chat.</p>
+            </div>
+            <div class="col-4">
+              <div class="row">
+                   <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Price - € EUR </mat-label>
+                    <input matInput placeholder="" #price>
+                  </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="mb-3">
+            <label for="image">Image file</label>
+            <input id="image" type="file" id="image" (change)="onFileUpload($event)" formControlName="image" class="form-control">
+          </div> -->
+
+          <div class="row pt-4">
+            <div class="col-6">
+              <button class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+              <button type="button" class="btn btn-outline-info ml-2">Save Draft</button>
+        
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+              <button mat-button class="btn btn-primary" mat-button matStepperNext>Save & Continue</button>
+            </div>
+          </div>
+        </div>
+      <div>
+      
+      </div>
+      
+    </form>
+
+  </mat-step>
+
+    <mat-step [stepControl]="eventForm">
+      <form [formGroup]="eventForm" >
+
+        <div formGroupName="address">
+          <div class="mb-3 col-12 mt-3">
+            <legend>Address</legend>
+            <div class="col-12">
+              <label for="city">city</label>
+              <input id="city" type="text" formControlName="city" class="form-control">
+            </div>
+            <div class="col-12">
+              <label for="county">county</label>
+              <input id="county" type="text" formControlName="county" class="form-control">
+            </div>
+            <div class="col-12">
+              <label for="line1">line1</label>
+              <input id="line1" type="text" formControlName="line1" class="form-control">
+            </div>
+            <div class="col-12">
+              <label for="eircode">eircode</label>
+              <input id="eircode" type="text" formControlName="eircode" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label for="image">Image file</label>
+              <input id="image" type="file" id="image" (change)="onFileUpload($event)" class="form-control">
+            </div>
+
+          </div>
+          </div>
+          <div class="col-6 d-flex justify-content-end">
+            <button mat-button class="btn btn-primary" mat-button matStepperNext (click)="onSubmit()">Save & Continue</button>
+          </div>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Event Date Starts</mat-label>
+            <input matInput [matDatepicker]="eventDateStarts" formControlName="eventDateStarts">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="eventDateStarts"></mat-datepicker-toggle>
+            <mat-datepicker #eventDateStarts></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Event Date Ends</mat-label>
+            <input matInput [matDatepicker]="eventDateEnds" formControlName="eventDateEnds">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="eventDateEnds"></mat-datepicker-toggle>
+            <mat-datepicker #eventDateEnds></mat-datepicker>
+          </mat-form-field>
+          
+          
+    <ng-template matStepLabel>Gallery</ng-template>
+          <div class="container pt-2">
+<div class="row">
+  <h5>Showcase Your Events In a Event Gallery</h5> 
+  <p>Encourage Pet Owners to choose your service by featuring a variety of your work.</p>
+</div>
+   <div class="row pt-3">
+    <h6>Images (up to 3)</h6>
+    <p>Get noticed by the right buyers with visual examples of your services.</p>
+
+    <div class="col-3">
+      <div class="dragBox">
+        <div *ngIf="isShow">
+          <p>Drag and Drop image here</p>
+          <i class="bi bi-image"></i></div>
+    <div [innerHtml]='msg' *ngIf="msg"  style="color: red;">
+      </div>
+
+    <div><img  class="dragBox" [src]="url" *ngIf="url"></div>
+    <p>
+      <input id="image" type="file" id="image" (change)="onFileUpload($event)" class="form-control">
+    </p>
+     </div>
+      </div>
+
+      <!-- <div class="col-3">
+        <div class="dragBox">
+          <div *ngIf="!isShow">
+            <p>Drag and Drop image here</p>
+            <i class="bi bi-image"></i>
+          </div>
+      <p>
+        <input type="file" (change)="selectFile($event)">
+      </p>
+       </div>
+      </div> -->
+<!-- 
+      <div class="col-3">
+        <div class="dragBox">
+          <div *ngIf="!isShow">
+          </div>
+      <p>
+        <input type="file" (change)="selectFile($event)">
+      </p>
+       </div>
+      </div> -->
+
+      <div class="row pt-4">
+        <div class="col-6">
+          <button class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+          <button type="button" class="btn btn-outline-info ml-2">Save Draft</button>
+    
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+          <button mat-button class="btn btn-primary" mat-button matStepperNext (click)="onSubmit()">Save & Continue</button>
+        </div>
+      </div>
+    </div>
+</div>
+</form>
+  </mat-step>
+</mat-stepper>
+
+
+
+
