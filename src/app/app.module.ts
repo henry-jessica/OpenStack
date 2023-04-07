@@ -38,7 +38,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { TicketComponent } from './components/ticket/ticket.component';
-
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { MatRadioModule } from '@angular/material/radio';
+import { PaymentComponent } from './components/payment/payment.component';
 
 Amplify.configure(awsconfig); 
 
@@ -62,6 +65,8 @@ Auth.configure(awsconfig);
     LoginComponent,
     BuyTicketComponent,
     TicketComponent,
+    CheckoutComponent,
+    PaymentComponent,
   ],
   imports: [
     MatAutocompleteModule,
@@ -82,8 +87,10 @@ Auth.configure(awsconfig);
     MatStepperModule,
     MatNativeDateModule,
     MatMenuModule,
+    MatRadioModule,
     AmplifyAuthenticatorModule,
     MatIconModule,
+    NgxStripeModule.forRoot('pk_test_51MWB7YAoSiviOVuvgwBp0jfYUIN2ype1syfcNPSMq6jIxJeCAnMCfwB1ddbez4r5zo4sSOStblgpJ2gWJmbjG6bO00oC3DWa5K'),
     NgxsModule.forRoot([AuthState]),
   ],
   providers: [],

@@ -31,3 +31,18 @@
         availableSeats: number
       }
       
+      export interface IOrder{
+        tickets: ITicket[];
+        eventID: string; 
+        seatRef:string; 
+        user:IUser
+      }
+      export interface IUser{
+        userId:string; 
+        username: string; 
+        surname:string; 
+        DOB: Date; 
+        address:IAddress; 
+        email: string; 
+        contact:number; 
+      }
