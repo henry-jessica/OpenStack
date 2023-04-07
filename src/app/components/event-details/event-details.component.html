@@ -28,13 +28,7 @@
           </ul>
           </div>
           <div class="col-4">
-            <div class="card" style="width: 16rem;">
-              <div class="card-body">
-                <h5 class="card-title">Price</h5>
-                <p class="card-subtitle mb-2 text-muted">This price might change </p>
-                <h4 class="card-text">{{event?.startsPrice | currency:'EUR':true}}</h4>
-              </div>
-            </div>
+        <app-buy-ticket [event]="event"></app-buy-ticket> 
           </div>
         </div> 
         <div *ngIf="userGroup=='manager'" class="row">

@@ -36,6 +36,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
+import { TicketComponent } from './components/ticket/ticket.component';
 
 
 Amplify.configure(awsconfig); 
@@ -58,6 +60,8 @@ Auth.configure(awsconfig);
     MessagesComponent,
     BeginComponent,
     LoginComponent,
+    BuyTicketComponent,
+    TicketComponent,
   ],
   imports: [
     MatAutocompleteModule,

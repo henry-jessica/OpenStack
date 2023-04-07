@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
         this.getEventsByCategory('Concert');
       }
       if(event.index==2){
-        this.getEventsByCategory('Sports');
+        this.getEventsByCategory('Sport');
       }
       if(event.index==3){
         this.getEventsByCategory('Art');
