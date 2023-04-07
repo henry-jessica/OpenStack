@@ -1,26 +1,15 @@
-import { Component } from '@angular/core';
-import { StripeService } from 'ngx-stripe';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  selector: 'app-payment',
+  templateUrl: './payment.component.html',
+  styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent {
+export class PaymentComponent implements OnInit {
 
-  constructor(private stripeService: StripeService) {}
+  constructor() { }
 
-  async checkout() {
-    const stripe = await this.stripeService.loadStripe('pk_test_...');
-    const result = await stripe.redirectToCheckout({
-      lineItems: [{ price: 'price_...', quantity: 1 }],
-      mode: 'payment',
-      successUrl: 'https://yourwebsite.com/success',
-      cancelUrl: 'https://yourwebsite.com/cancel',
-    });
-    if (result.error) {
-      console.error(result.error);
-    }
+  ngOnInit(): void {
   }
 
 }

@@ -42,6 +42,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { MatRadioModule } from '@angular/material/radio';
 import { PaymentComponent } from './components/payment/payment.component';
+import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 Amplify.configure(awsconfig); 
 
@@ -70,7 +71,9 @@ Auth.configure(awsconfig);
   ],
   imports: [
     MatAutocompleteModule,
+    MatDatepickerInput,
     FormsModule,
+    MatDatepickerInputEvent,
     MatCardModule,
     ReactiveFormsModule,
     MatSelectModule,
