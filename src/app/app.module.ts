@@ -32,12 +32,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
-
-
-Amplify.configure(awsconfig); 
-
-Amplify.configure(awsconfig);
-
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { MatRadioModule } from '@angular/material/radio';
+// import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
 // >>New - Configuring Auth Module
 Auth.configure(awsconfig);
 
@@ -54,11 +57,19 @@ Auth.configure(awsconfig);
     MessagesComponent,
     BeginComponent,
     LoginComponent,
+    BuyTicketComponent,
+    TicketComponent,
+    CheckoutComponent,
   ],
   imports: [
+    MatAutocompleteModule,
+    // MatDatepickerInput,
     FormsModule,
+    // MatDatepickerInputEvent,
     MatCardModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatChipsModule,
     BrowserModule,
     MatTabsModule,
     AppRoutingModule,
@@ -68,8 +79,10 @@ Auth.configure(awsconfig);
     MatDatepickerModule,
     MatButtonModule,
     MatInputModule,
+    MatStepperModule,
     MatNativeDateModule,
     MatMenuModule,
+    MatRadioModule,
     AmplifyAuthenticatorModule,
     MatIconModule,
     NgxsModule.forRoot([AuthState]),

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BeginComponent } from './components/begin/begin.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import {HomeComponent} from './components/home/home.component'; 
 import { LoginComponent } from './login/login.component';
@@ -12,6 +13,8 @@ const routes: Routes = [
   { path: '#', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'home/evens/:id', component: EventDetailsComponent },
+  { path: 'checkout', component: CheckoutComponent },
+
   // { path: 'begin', component: BeginComponent },
   { path: '**', component: HomeComponent },
   // { path: 'home', component: BeginComponent, canActivate:[AuthGuard] },
