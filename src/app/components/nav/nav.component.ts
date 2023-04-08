@@ -11,6 +11,7 @@ import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { Router } from '@angular/router';
 import { EventFilterService } from './navService';
 import { IEvent } from 'app/Interfaces/event-interface';
+import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-nav',
@@ -26,6 +27,7 @@ export class NavComponent implements OnInit {
   event?: any; 
   events?:IEvent[]; 
   errorMessage:any; 
+  userGroup: any;
   
   constructor(
     public authenticator: AuthenticatorService, private readonly  router: Router,
@@ -33,7 +35,17 @@ export class NavComponent implements OnInit {
     private dialog: MatDialog,
 
     // public auth: AuthService
-  ) {}
+  ){ 
+    Auth.currentAuthenticatedUser()
+  .then(user => {
+    this.userGroup = user.signInUserSession.accessToken.payload["cognito:groups"][0];
+    localStorage.setItem('manager', JSON.stringify(this.userGroup)); 
+    console.log(this.userGroup); 
+
+  })
+  .catch(err => console.log(err));
+  }
+
 
   public userRole = '';
 
@@ -44,6 +56,8 @@ export class NavComponent implements OnInit {
     //   console.log('AUTH ', auth);
     //   this.userRole = auth.name;
     // });
+
+    console.log( this.userInfor ); 
   }
   // isAuthenticated$ = this.auth.isAuthenticated$;
   async Logout() {
