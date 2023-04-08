@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { EventService } from 'app/services/event.service';
+import { Auth } from 'aws-amplify';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -11,12 +14,17 @@ import { EventService } from 'app/services/event.service';
 export class CheckoutComponent implements OnInit {
   counties?: string[];
   countyFile='./county.json'; 
-  constructor(private http: EventService) { }
+  constructor(private http: EventService, public authenticator: AuthenticatorService, private route: ActivatedRoute) { 
+  }
   selectedGender?: string;
   newOrder: FormGroup = new FormGroup({});
 
   ngOnInit(): void {
     this.counties = this.http.counties; 
+    
+    const queryParams = this.route.snapshot.queryParams;
+    const tickets = queryParams['tickets'];
+    console.log('tickets 22', tickets); // do whatever you want with the selected ticket
 
     this.newOrder = new FormGroup({
       username: new FormControl(),
@@ -33,6 +41,9 @@ export class CheckoutComponent implements OnInit {
       // }),
 
     });
+
+
+    console.log('test', this.authenticator.user); 
   }
 
   onSubmit() {

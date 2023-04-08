@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
-import { IEvent } from '../../Interfaces/event-interface';
+import { IEvent, ITicket } from '../../Interfaces/event-interface';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { MessagesComponent } from '../messages/messages.component';
@@ -95,6 +95,7 @@ export class EventDetailsComponent implements OnInit {
       dialogConfig.data= this.event,
       this.dialogRef= this.dialog.open(EventFormComponent,dialogConfig);
     }
+
     onDelete(){
       this.message={
         taskName:'Delete',

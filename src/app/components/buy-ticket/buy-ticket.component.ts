@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { IEvent, ITicket } from 'app/Interfaces/event-interface';
 
@@ -17,6 +17,7 @@ interface SelectedTicket {
 export class BuyTicketComponent implements OnInit {
 
   @Input() event?:IEvent;
+
   totalPrice:number=0;
   selectedTickets: SelectedTicket[] = [];
 
@@ -70,9 +71,15 @@ export class BuyTicketComponent implements OnInit {
    console.log('selected tickets',this.selectedTickets); 
    this.totalPrice = this.selectedTickets.reduce((total, st) => total + (st.quantity * st.ticket.price), 0);
    console.log(this.totalPrice); // move console.log statement here
-  }
 
-  onCheckout(){
-    this.router.navigate(['checkout'])
   }
+  getSelectedTickets(): SelectedTicket[] {
+    return this.selectedTickets;
+  }
+  
+  onCheckout() {
+    const selectedTickets = this.getSelectedTickets();
+    this.router.navigate(['/checkout'], { queryParams: { tickets: JSON.stringify(selectedTickets) } });
+  }
+  
 }
