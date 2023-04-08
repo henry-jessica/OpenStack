@@ -1,3 +1,4 @@
+import { Time } from "@angular/common";
 
     export interface IAddress {
         city: string;
@@ -25,9 +26,11 @@
     }
 
       export interface ITicket {
-        _id: string;
+        _id: string
         title: string
         price: number
+        date:Date
+        StartTime: Time
         availableSeats: number
       }
       

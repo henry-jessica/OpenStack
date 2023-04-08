@@ -1,0 +1,60 @@
+<h3><strong>Please insert the owner of this ticket:</strong></h3>
+<h3>Ticket date: 15.07 | {{ticket?.title}}     #{{index}}</h3>
+<form [formGroup]="newOrder">
+  <div class="container pt-4">
+    <div class="row">
+      <div class="col-4">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput id="contactNumber"  name="username" type="text" formControlName="username">
+        </mat-form-field>
+      </div>
+
+      <div class="col-4">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Surname</mat-label>
+          <input matInput id="surname" type="text" formControlName="surname">
+        </mat-form-field>
+      </div>
+
+      <div class="col-8">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <label id="example-radio-group-label">Gender:</label>
+    <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="gender"
+      class="example-radio-group">
+      <mat-radio-button value="male">Male</mat-radio-button>
+      <mat-radio-button value="female">Female</mat-radio-button>
+      <mat-radio-button value="nonbinary">Non-binary</mat-radio-button>
+      <mat-radio-button value="other">Other</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="container">
+    <div class="col-6">
+      <mat-form-field appearance="outline">
+        <mat-label>DOB</mat-label>
+        <input matInput [matDatepicker]="eventDateEnds" formControlName="dob">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="eventDateEnds"></mat-datepicker-toggle>
+        <mat-datepicker #eventDateEnds></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1"></label>
+          <select class="form-control" formControlName="county" #county>
+            <option value="">Select County</option>
+            <option *ngFor="let county of counties" [value]="county">{{ county }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

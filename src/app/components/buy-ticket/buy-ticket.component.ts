@@ -31,6 +31,7 @@ export class BuyTicketComponent implements OnInit {
      // this.totalPrice = 0;
       this.selectedTickets = [];
     }
+    console.log('event check', this.event); 
   }
   
   onTotalPriceChange(eventData: {ticket: ITicket, totalPrice: number, operation: string}) {
@@ -79,7 +80,12 @@ export class BuyTicketComponent implements OnInit {
   
   onCheckout() {
     const selectedTickets = this.getSelectedTickets();
-    this.router.navigate(['/checkout'], { queryParams: { tickets: JSON.stringify(selectedTickets) } });
-  }
+    this.router.navigate(['/checkout'], {
+      queryParams: {
+        tickets: JSON.stringify(selectedTickets),
+        event: JSON.stringify(this.event)
+      }
+    });
+    }
   
 }

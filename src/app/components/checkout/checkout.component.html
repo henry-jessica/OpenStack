@@ -1,87 +1,33 @@
 <div class="container justify-content-center pt-4 mt-5 pb-4">
-  <h1>ALMA 2023 | música + games + esportes + artes @ RioCentro</h1>
-  <div class="col-12">
-    <i class="bi bi-chat-square-text p-3"></i>
-    <span>Evento presencial em Riocentro, Rio de Janeiro - RJ</span>
+  <h1>{{event?.name}}</h1>
+  <div class="col-12 mb-2">
+    <i class="bi bi-geo-alt p-3"></i>
+    <span>{{event?.address?.line1}} {{event?.address?.city}}, {{event?.address?.county}} {{event?.address?.eircode}}</span>
   </div>
   <div class="col-12">
-    <i class="bi bi-chat-square-text p-3"></i>
+    <i class="bi bi-calendar2-event p-3"></i>
     <span>15 jul - 2023 • 14:00 > 17 jul - 2023 • 07:00</span>
   </div>
 
   <mat-card *ngIf="!authenticator.user" class="mt-5">
     <mat-card-content>
       <div class="d-flex align-items-center">
-        <!-- <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid"/> -->
+        <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid"/>
         <span>Please <a routerLink="/login">log in</a> or create an account in EasyEvent to purchase this ticket.</span>
       </div>
     </mat-card-content>
   </mat-card>
 
-
-  <div  *ngIf="authenticator.user">
-    <h1>Tiket information</h1>
-    <h3>Ingresso nº1: 15.07 | PISTA (MEIA) #3</h3>
-    <form [formGroup]="newOrder">
-      <div class="container pt-4">
-        <div class="row">
-          <div class="col-4">
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Name</mat-label>
-              <input matInput id="contactNumber" type="text" formControlName="username">
-            </mat-form-field>
-          </div>
-
-          <div class="col-4">
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Surname</mat-label>
-              <input matInput id="surname" type="text" formControlName="surname">
-            </mat-form-field>
-          </div>
-
-          <div class="col-8">
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Email</mat-label>
-              <input matInput formControlName="email">
-            </mat-form-field>
-          </div>
+  <div *ngIf="authenticator.user" class="pt-5">
+    <div *ngFor="let item of ticketsSelected">
+        <div *ngFor="let i of createArrayFromQuantity(item.quantity)">
+          <app-user-ticket [ticket]="item.ticket" [index]="i.index"></app-user-ticket>
         </div>
-
-        <label id="example-radio-group-label">Gender:</label>
-        <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="gender"
-          class="example-radio-group">
-          <mat-radio-button value="male">Male</mat-radio-button>
-          <mat-radio-button value="female">Female</mat-radio-button>
-          <mat-radio-button value="nonbinary">Non-binary</mat-radio-button>
-          <mat-radio-button value="other">Other</mat-radio-button>
-        </mat-radio-group>
-      </div>
-
-      <div class="container">
-        <div class="col-6">
-          <mat-form-field appearance="outline">
-            <mat-label>DOB</mat-label>
-            <input matInput [matDatepicker]="eventDateEnds" formControlName="dob">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="eventDateEnds"></mat-datepicker-toggle>
-            <mat-datepicker #eventDateEnds></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <div class="form-group">
-              <label for="exampleFormControlSelect1"></label>
-              <select class="form-control" formControlName="county" #county>
-                <option value="">Select County</option>
-                <option *ngFor="let county of counties" [value]="county">{{ county }}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 d-flex justify-content-end">
-        <button mat-button class="btn btn-primary" mat-button (click)="onSubmit()">Make the payment</button>
-      </div>
-    </form>
+    </div>
   </div>
+  <div class="col-6 d-flex justify-content-end">
+    <button mat-button class="btn btn-primary" mat-button (click)="onSubmit()">Make the payment</button>
+  </div>
+  
+
 </div>
