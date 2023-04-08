@@ -29,6 +29,12 @@ export class EventService {
       .pipe(tap(), catchError(this.handleError));
   }
 
+  getEventsCategory(keyword: string): Observable<IEvent[]> {
+    return this._http
+      .get<IEvent[]>(this.dataUri + '?category=' + keyword)
+      .pipe(tap(), catchError(this.handleError));
+  }
+
   //Deleting a event
   deleteEvent(id: string): Observable<unknown> {
     const url = `${this.dataUri}/${id}`; // DELETE
@@ -67,5 +73,33 @@ export class EventService {
     );
   }
 
+counties = [
+      "Carlow",
+      "Cavan",
+      "Clare",
+      "Cork",
+      "Donegal",
+      "Dublin",
+      "Galway",
+      "Kerry",
+      "Kildare",
+      "Kilkenny",
+      "Laois",
+      "Leitrim",
+      "Limerick",
+      "Longford",
+      "Louth",
+      "Mayo",
+      "Meath",
+      "Monaghan",
+      "Offaly",
+      "Roscommon",
+      "Sligo",
+      "Tipperary",
+      "Waterford",
+      "Westmeath",
+      "Wexford",
+      "Wicklow"
+    ]
   
 }
