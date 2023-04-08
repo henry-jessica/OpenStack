@@ -1,6 +1,5 @@
 
-
-    export interface Address {
+    export interface IAddress {
         city: string;
         county: string;
         line1: string;
@@ -12,16 +11,38 @@
         description: string;
         contactNumber: string;
         contact_email: string;
+        category: string;
         eventDateStarts: Date;
         eventDateEnds: Date;
         createdDate: Date;
-        address: Address;
+        address: IAddress;
         startsPrice: number;
         refundpolicy: string;
         currency: string;
         // tags: string[];
         urlImg:string;
+        tickets: ITicket[];
     }
 
-
-    
+      export interface ITicket {
+        _id: string;
+        title: string
+        price: number
+        availableSeats: number
+      }
+      
+      export interface IOrder{
+        tickets: ITicket[];
+        eventID: string; 
+        seatRef:string; 
+        user:IUser
+      }
+      export interface IUser{
+        userId:string; 
+        username: string; 
+        surname:string; 
+        DOB: Date; 
+        address:IAddress; 
+        email: string; 
+        contact:number; 
+      }
