@@ -1,0 +1,19 @@
+<div class="card" style="width: 16rem;">
+
+    <div class="card-body">
+        <button [disabled]="ticketcounter==0"  (click)="CounterTickets('dec')" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>do_not_disturb_on</mat-icon>
+        </button>
+        {{ticketcounter}}
+        <button [disabled]="ticketcounter==ticket?.availableSeats"  (click)="CounterTickets('inc')" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+
+        <span>All Events</span>
+      <h5 class="card-title">Price</h5>
+      <p class="card-subtitle mb-2 text-muted">This price might change </p>
+      <h4 class="card-text">{{ticket?.title}}</h4>
+      <h4 class="card-text">{{ticket?.price}}</h4>
+      <h4 class="card-text">{{ticket?.availableSeats}}</h4>
+    </div>
+  </div>
