@@ -7,9 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "types": [
-      "node",
-      "ngx-stripe"
-    ],
+      "node"    ],
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
