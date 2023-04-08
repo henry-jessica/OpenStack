@@ -28,16 +28,12 @@
           </ul>
           </div>
           <div class="col-4">
-            <div class="card" style="width: 16rem;">
-              <div class="card-body">
-                <h5 class="card-title">Price</h5>
-                <p class="card-subtitle mb-2 text-muted">This price might change </p>
-                <h4 class="card-text">{{event?.startsPrice | currency:'EUR':true}}</h4>
-              </div>
-            </div>
+        <app-buy-ticket [event]="event"></app-buy-ticket> 
+        <button mat-raised-button color="primary" [routerLink]="['/checkout']">Buy Ticket</button>
+
           </div>
         </div> 
-        <div *ngIf="userRole=='admin'" class="row">
+        <div *ngIf="userGroup=='manager'" class="row">
           <div class="col-3">
             <button class="btn btn-info w-100" (click)="onEditEvent()">Edit Event</button>
           </div>

@@ -17,13 +17,14 @@ import { DOCUMENT } from '@angular/common';
 })
 export class EventDetailsComponent implements OnInit {
 
-  userRole:string="user"; 
+  
+  // userRole:string="user"; 
   event:IEvent | undefined; 
   id?:string;
   message?:IMessages; 
   displaySucessMessage: boolean=false;
   isShow:boolean = false; 
-
+  userGroup: string | null = '';
   
   private sub: any;
   private dialogRef?: MatDialogRef<EventFormComponent>
@@ -42,9 +43,11 @@ export class EventDetailsComponent implements OnInit {
   //  isAuthenticated$ = this.auth.isAuthenticated$;
 
   ngOnInit(): void {   
+    this.userGroup =  localStorage.getItem('userGroup'); 
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
     // this.getUserRole();
+
 
   }
   getEvent():boolean{
