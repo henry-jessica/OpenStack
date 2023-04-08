@@ -37,7 +37,13 @@ export class HomeComponent implements OnInit {
     ) { 
       Auth.currentAuthenticatedUser()
     .then(user => {
-      this.userGroup = user.signInUserSession.accessToken.payload["cognito:groups"][0];
+
+      if(user.signInUserSession.accessToken.payload["cognito:groups"][0]){
+        localStorage.setItem('userGroup', JSON.stringify(this.userGroup)); 
+      }
+      else{
+        localStorage.setItem('userGroup', JSON.stringify('user')); 
+      }
     })
     .catch(err => console.log(err));
     }
@@ -47,6 +53,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     console.log(this.userGroup); 
+
+    localStorage.setItem('manager', JSON.stringify(this.userGroup)); 
+
+
     // this.auth.isAuthenticated$.subscribe(isAuthenticated =>{
     //   if(isAuthenticated){
     //     this.showNav = true;
@@ -79,6 +89,41 @@ export class HomeComponent implements OnInit {
     return false; 
     }
 
+    SetTabIndex(event:any)
+    {
+      console.log('this', event.index);
+      if(event.index==0){
+        this.getEventsByCategory('');
+      } 
+      if(event.index==1){
+        this.getEventsByCategory('Concert');
+      }
+      if(event.index==2){
+        this.getEventsByCategory('Sport');
+      }
+      if(event.index==3){
+        this.getEventsByCategory('Art');
+      }
+      if(event.index==4){
+        this.getEventsByCategory('Other');
+      }
+    }
+
+    
+    getEventsByCategory(cat:string){
+      this._httpEventService.getEventsCategory(cat).subscribe(
+        event => {
+          this.event=event; 
+          this.events= this.event;   
+          this.events?.forEach(element => {
+            console.log('element',element);  //TODO: IF DONT FIND THE ELEMENT NEED INFORM TO USER - CREATE MESSAGE 
+          });
+        }, 
+        error=> this.errorMessage = <any>error 
+      ); 
+      return false; 
+      
+    }
   // getUserRole() {
   //   console.log('CALLED  ');
 
