@@ -42,6 +42,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { UserTicketComponent } from './components/user-ticket/user-ticket.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { PaymentManagerComponent } from './components/payment-manager/payment-manager.component';
 
 // import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
 // >>New - Configuring Auth Module
@@ -64,6 +66,8 @@ Auth.configure(awsconfig);
     TicketComponent,
     CheckoutComponent,
     UserTicketComponent,
+    UserProfileComponent,
+    PaymentManagerComponent,
   ],
   imports: [
     MatAutocompleteModule,

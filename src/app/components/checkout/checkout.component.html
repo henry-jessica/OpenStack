@@ -10,6 +10,7 @@
   </div>
 
   <mat-card *ngIf="!authenticator.user" class="mt-5">
+
     <mat-card-content>
       <div class="d-flex align-items-center">
         <!-- <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid"/> -->
@@ -19,6 +20,7 @@
   </mat-card>
 
   <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <div class="p-3 error-message" *ngIf="errorMessage">* {{ errorMessage }}</div>
     <div *ngIf="authenticator.user">
       <div *ngFor="let item of ticketsSelected">
           <div *ngFor="let i of createArrayFromQuantity(item.quantity)">
@@ -27,6 +29,13 @@
       </div>
     </div>
     <div class="mt-5">
+
       <button  class="btn btn-primary">Submit</button>
-    </div>
+      <!-- <div *ngIf="isValid">
+        <app-payment-manager [order]="order"></app-payment-manager>
+      </div> -->
+
+</div>
+
+
 

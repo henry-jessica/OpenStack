@@ -16,6 +16,9 @@
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Name</mat-label>
           <input matInput id="contactNumber" type="text" formControlName="username">
+          <mat-error *ngIf="ticketUserOwner.get('username')?.invalid && (ticketUserOwner.get('username')?.dirty || ticketUserOwner.get('username')?.touched)">Please enter a name</mat-error>
+       
+       
         </mat-form-field>
       </div>
 
@@ -23,6 +26,7 @@
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Surname</mat-label>
           <input matInput id="surname" type="text" formControlName="surname">
+          <mat-error *ngIf="ticketUserOwner.get('surname')?.invalid && (ticketUserOwner.get('surname')?.dirty || ticketUserOwner.get('surname')?.touched)">Please enter a surname</mat-error>
         </mat-form-field>
       </div>
 
@@ -72,4 +76,5 @@
       </div>
     </div>
   </div>
+  
 </form>

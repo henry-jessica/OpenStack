@@ -203,7 +203,7 @@ export class EventFormComponent implements OnInit {
 
       this._httpEventService.addEvent(formData).subscribe(
         sucess => this.sucessMessage('submit'),
-        error => console.log(error),
+        // error => console.log(error),
         () => console.log("complete")
       );
 
