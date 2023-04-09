@@ -1,23 +1,35 @@
-<h3><strong>Please insert the owner of this ticket:</strong></h3>
-<h3>Ticket date: 15.07 | {{ticket?.title}}     #{{index}}</h3>
-<form [formGroup]="newOrder">
+<form [formGroup]="ticketUserOwner" (ngSubmit)="onSubmit()">
   <div class="container pt-4">
+    <h3>Ticket date: 15.07 | {{ticket?.title}}     #{{index}}</h3>
+    <div class="row col-6" >
+      <div class="col-6">
+        <h3><strong>Please insert the owner of this ticket:</strong></h3>
+      </div>
+      <div class="col-6 d-flex justify-content-end">
+        <mat-slide-toggle (change)="selectCurrentUser()">It is for me</mat-slide-toggle>
+    
+      </div>
+    </div>
+
     <div class="row">
-      <div class="col-4">
+      <div class="col-3">
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Name</mat-label>
-          <input matInput id="contactNumber"  name="username" type="text" formControlName="username">
+          <input matInput id="contactNumber" type="text" formControlName="username">
         </mat-form-field>
       </div>
 
-      <div class="col-4">
+      <div class="col-3">
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Surname</mat-label>
           <input matInput id="surname" type="text" formControlName="surname">
         </mat-form-field>
       </div>
 
-      <div class="col-8">
+    </div>
+
+    <div class="row">
+      <div class="col-6">
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email">
@@ -36,15 +48,18 @@
   </div>
 
   <div class="container">
-    <div class="col-6">
-      <mat-form-field appearance="outline">
-        <mat-label>DOB</mat-label>
-        <input matInput [matDatepicker]="eventDateEnds" formControlName="dob">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="eventDateEnds"></mat-datepicker-toggle>
-        <mat-datepicker #eventDateEnds></mat-datepicker>
-      </mat-form-field>
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="outline">
+          <mat-label>DOB</mat-label>
+          <input matInput [matDatepicker]="eventDateEnds" formControlName="dob">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="eventDateEnds"></mat-datepicker-toggle>
+          <mat-datepicker #eventDateEnds></mat-datepicker>
+        </mat-form-field>
+      </div>
     </div>
+
     <div class="row">
       <div class="col-6">
         <div class="form-group">
