@@ -1,3 +1,5 @@
+<!-- <div *ngIf="!successOrder" class="row">
+<div class="col-8">
 <div class="container justify-content-center pt-4 mt-5 pb-4">
   <h1>{{event?.name}}</h1>
   <div class="col-12 mb-2">
@@ -8,12 +10,10 @@
     <i class="bi bi-calendar2-event p-3"></i>
     <span>15 jul - 2023 • 14:00 > 17 jul - 2023 • 07:00</span>
   </div>
-
   <mat-card *ngIf="!authenticator.user" class="mt-5">
 
     <mat-card-content>
       <div class="d-flex align-items-center">
-        <!-- <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid"/> -->
         <span>Please <a routerLink="/login">log in</a> or create an account in EasyEvent to purchase this ticket.</span>
       </div>
     </mat-card-content>
@@ -29,13 +29,105 @@
       </div>
     </div>
     <div class="mt-5">
-
-      <button  class="btn btn-primary">Submit</button>
+      <button  class="btn btn-primary">Submit</button> -->
       <!-- <div *ngIf="isValid">
         <app-payment-manager [order]="order"></app-payment-manager>
       </div> -->
+<!-- </div>
 
+
+<div *ngIf="successOrder">
+
+</div> -->
+<div *ngIf="!successOrder" class="container">
+    <div class=" justify-content-center pt-4 mt-5 pb-4 row">
+      <div class="col-8">
+
+      <h1>{{event?.name}}</h1>
+      <div class="col-12 mb-2">
+        <i class="bi bi-geo-alt p-3"></i>
+        <span>{{event?.address?.line1}} {{event?.address?.city}}, {{event?.address?.county}} {{event?.address?.eircode}}</span>
+      </div>
+      <div class="col-12">
+        <i class="bi bi-calendar2-event p-3"></i>
+        <span>15 jul - 2023 • 14:00 > 17 jul - 2023 • 07:00</span>
+      </div>
+      <mat-card *ngIf="!authenticator.user" class="mt-5">
+        <mat-card-content>
+          <div class="d-flex align-items-center">
+            <!-- <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid"/> -->
+            <span>Please <a routerLink="/login">log in</a> or create an account in EasyEvent to purchase this ticket.</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+        <div class="p-3 error-message" *ngIf="errorMessage">* {{ errorMessage }}</div>
+        <div *ngIf="authenticator.user">
+          <div *ngFor="let item of ticketsSelected">
+            <div *ngFor="let i of createArrayFromQuantity(item.quantity)">
+              <app-user-ticket [ticket]="item.ticket"  #userTicket></app-user-ticket>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5">
+          <button  class="btn btn-primary">Submit</button>
+          <!-- <div *ngIf="isValid">
+            <app-payment-manager [order]="order"></app-payment-manager>
+          </div> -->
+        </div>
+      </form>
+    </div>
+      <div class="col-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Your cart</span>
+          <span class="badge badge-secondary badge-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Product name</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">$12</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Second product</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">$8</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Third item</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">Promo code</h6>
+              <small>EXAMPLECODE</small>
+            </div>
+            <span class="text-success">-$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong>$20</strong>
+          </li>
+        </ul>
+
+        <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Promo code">
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-secondary">Redeem</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
 </div>
-
-
-
+<div *ngIf="successOrder">
+  <!-- Your success message or additional content here -->
+</div>

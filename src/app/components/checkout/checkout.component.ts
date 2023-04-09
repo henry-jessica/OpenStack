@@ -104,6 +104,7 @@ export class CheckoutComponent implements OnInit {
 
   event: any;
   isValid: boolean = false;
+  successOrder: boolean=false;
   constructor(private http: EventService, public authenticator: AuthenticatorService,private _httpOrderService: OrderService,private route: ActivatedRoute) { 
   }
   selectedGender?: string;
@@ -164,22 +165,14 @@ export class CheckoutComponent implements OnInit {
           });
         }
       }
-  
-      const customer = {
-        name: `${formValues.firstName} ${formValues.lastName}`,
-        email: formValues.email,
-        address: formValues.address,
-        city: formValues.city,
-        state: formValues.state,
-        zip: formValues.zip,
-      };
-  
+    
       const order = {
         eventName: this.event.name,
         eventDate: this.event.date,
         tickets: userTickets,
         totalAmount: userTickets.reduce((total, ticket) => total + ticket.price * ticket.quantity, 0),
-        customer: customer,
+        customer: this.authenticator?.user,
+        event: this.event
       };
   
       console.log(order); // Log the final object
@@ -227,12 +220,14 @@ export class CheckoutComponent implements OnInit {
 
   confirmpayment(stripeToken: any) {
     console.log(' // Add your code here to confirm the payment', stripeToken); 
-      this._httpOrderService.addOrder(this.order).subscribe(
-        sucess => this.sucessMessage('submit'),
-        error => console.log(error),
-        () => console.log("complete")
-      );
-
-    }
+    this._httpOrderService.addOrder(this.order).subscribe(
+      success => {
+        this.sucessMessage('submit');
+        this.successOrder = true; // set successOrder to true on success
+      },
+      error => console.log(error),
+      () => console.log('complete')
+    );
+  }
 }
 
