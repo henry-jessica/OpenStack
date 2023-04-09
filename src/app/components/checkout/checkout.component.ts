@@ -78,7 +78,7 @@
 //////////
 
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, Pipe, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { EventService } from 'app/services/event.service';
@@ -86,6 +86,7 @@ import { Auth } from 'aws-amplify';
 import { ActivatedRoute } from '@angular/router';
 import { UserTicketComponent } from '../user-ticket/user-ticket.component';
 import { OrderService } from 'app/services/order.service';
+import { EurPipe } from '../../eur.pipe';
 
 @Component({
   selector: 'app-checkout',
@@ -98,6 +99,7 @@ export class CheckoutComponent implements OnInit {
   ticketsSelected: any;
   selectedTickets: any;
   errorMessage: string = '';
+  timer: any;
 
   order:any; 
   @ViewChildren(UserTicketComponent) userTickets!: QueryList<UserTicketComponent>;
@@ -105,22 +107,55 @@ export class CheckoutComponent implements OnInit {
   event: any;
   isValid: boolean = false;
   successOrder: boolean=false;
+  counter: number = 10 * 60; // 10 minutes in seconds
+  totalAmount?: any;
+  message: any;
+
   constructor(private http: EventService, public authenticator: AuthenticatorService,private _httpOrderService: OrderService,private route: ActivatedRoute) { 
   }
   selectedGender?: string;
   orderForm: FormGroup = new FormGroup({}, { updateOn: 'change' });
-  
+
+
   ngOnInit(): void {
     this.counties = this.http.counties; 
+    
+    this.startTimer();
 
     const queryParams = this.route.snapshot.queryParams;
     this.ticketsSelected = JSON.parse(queryParams['tickets']);
     this.event = JSON.parse(queryParams['event']);
-
+    this.calculePrice(); 
+    console.log('ticket selected',this.ticketsSelected); 
     console.log(this.event); 
     console.log('test', this.authenticator.user); 
   }
 
+  calculePrice() {
+    this.totalAmount = this.ticketsSelected.reduce((total: number, { ticket, quantity }: any) => {
+      return total + (ticket.price * quantity);
+    }, 0);
+    console.log(this.totalAmount); 
+  }
+  
+  startTimer() {
+    this.timer = setInterval(() => {
+      this.counter--;
+      if (this.counter <= 0) {
+        clearInterval(this.timer);
+        // Do something when the timer reaches 0
+      }
+    }, 1000);
+  }
+  getMinutes() {
+    return Math.floor(this.counter / 60);
+  }
+
+  getSeconds() {
+    return this.counter % 60;
+  }
+
+  
   onSubmit() {
     console.log(this.orderForm.valid); 
     this.isValid = true; 
@@ -171,7 +206,7 @@ export class CheckoutComponent implements OnInit {
         eventDate: this.event.date,
         tickets: userTickets,
         totalAmount: userTickets.reduce((total, ticket) => total + ticket.price * ticket.quantity, 0),
-        customer: this.authenticator?.user,
+        customer: 'jessica',
         event: this.event
       };
   
@@ -210,24 +245,49 @@ export class CheckoutComponent implements OnInit {
         this.confirmpayment(stripeToken);
       },
     });
+    
     paymentHandler.open({
       name: 'EasyEvent',
-      description: this.order?.totalAmount,
-      amount: this.order?.totalAmount * 100,
+      description: this.order?.totalAmount + ( this.order?.totalAmount*0.23),
+      amount: this.order?.totalAmount + ( this.order?.totalAmount*0.23)*100,
     });
     // }
   }
-
   confirmpayment(stripeToken: any) {
     console.log(' // Add your code here to confirm the payment', stripeToken); 
-    this._httpOrderService.addOrder(this.order).subscribe(
-      success => {
-        this.sucessMessage('submit');
-        this.successOrder = true; // set successOrder to true on success
+    this._httpOrderService.addOrderDB(event).subscribe({
+      next: (responseBody: any) => {
+        console.log('Response body:', responseBody);
+        // handle the response body here
       },
-      error => console.log(error),
-      () => console.log('complete')
-    );
+      error: (error: any) => console.log(error),
+      complete: () => console.log('complete')
+    });
+    
+    this.successOrder = true; // set successOrder to true on success
   }
+  
+//   confirmpayment(stripeToken: any) {
+//     console.log(' // Add your code here to confirm the payment', stripeToken); 
+//     this._httpOrderService.addOrderDB(this.order).subscribe({
+//       next: (value: any )=>this.order = value,
+//       complete: () => console.log('not available service finished ' +  JSON.stringify((this.order))),
+//       error: (mess) => this.message = mess
+//     })
+// }
+
+
+  // confirmpayment(stripeToken: any) {
+  //   console.log(' // Add your code here to confirm the payment', stripeToken); 
+  //   this._httpOrderService.addOrderDB(this.order).subscribe(
+  //     success => {
+  //       this.sucessMessage('submit');
+  //     },
+  //     error => console.log(error),
+  //     () => console.log('complete')
+  //   );
+  //   this.successOrder = true; // set successOrder to true on success
+
+  // }
 }
 

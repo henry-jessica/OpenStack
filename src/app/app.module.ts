@@ -44,6 +44,7 @@ import { UserTicketComponent } from './components/user-ticket/user-ticket.compon
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PaymentManagerComponent } from './components/payment-manager/payment-manager.component';
+import { EurPipe } from './eur.pipe';
 
 // import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
 // >>New - Configuring Auth Module
@@ -68,6 +69,7 @@ Auth.configure(awsconfig);
     UserTicketComponent,
     UserProfileComponent,
     PaymentManagerComponent,
+    EurPipe,
   ],
   imports: [
     MatAutocompleteModule,
