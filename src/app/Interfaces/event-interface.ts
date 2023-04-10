@@ -7,23 +7,33 @@ import { Time } from "@angular/common";
         eircode: string;
     }
     export interface IEvent {
-        _id: string, 
-        name: string;
-        description: string;
-        contactNumber: string;
-        contact_email: string;
-        category: string;
-        eventDateStarts: Date;
-        eventDateEnds: Date;
-        createdDate: Date;
-        address: IAddress;
-        startsPrice: number;
-        refundpolicy: string;
-        currency: string;
-        // tags: string[];
-        urlImg:string;
-        tickets: ITicket[];
+      _id: string, 
+      name: string;
+      description: string;
+      contactNumber: string;
+      contact_email: string;
+      category: string;
+      eventDateStarts: Date;
+      eventDateEnds: Date;
+      createdDate: Date;
+      address: {
+          city: string,
+          county?: string,
+          line1?: string,
+          line2?: string,
+          eircode: string,
+          // _id?:string
+          // remove _id property
+      },
+      startsPrice: number;
+      refundpolicy: string;
+      currency: string;
+      // tags: string[];
+      urlImg:string;
+      tickets: ITicket[];
+      views:number;
     }
+    
 
       export interface ITicket {
         _id: string

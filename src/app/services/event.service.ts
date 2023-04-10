@@ -8,6 +8,7 @@ import { IEvent } from '../Interfaces/event-interface';
 })
 export class EventService {
   private dataUri = `${environment.apiUri}/api/events`;
+  private readonly apiFavouriteURL = 'https://your-api-gateway-url.execute-api.your-region.amazonaws.com/dev';
 
   constructor(private _http: HttpClient) {}
 
@@ -59,6 +60,13 @@ export class EventService {
       .pipe(tap(), catchError(this.handleError));
   }
 
+  getFavouriteEvents(): Observable<IEvent[]> {
+    return this._http
+      .get<IEvent[]>('https://xfnk4jc4s7.execute-api.eu-west-1.amazonaws.com/dev/get-all-favourties')
+      .pipe(tap(), catchError(this.handleError));
+  }
+
+
   //Deleting a event
   deleteEvent(id: string): Observable<unknown> {
     const url = `${this.dataUri}/${id}`; // DELETE
@@ -72,10 +80,26 @@ export class EventService {
       .put<IEvent>(dataUri, event)
       .pipe(catchError(this.handleError));
   }
+
+  deleteFavourite(id: string) {
+    const url = `${this.apiFavouriteURL}/favourite-remove/${id}`;
+    return this._http.delete(url);
+  }
+
+  // deleteEvent() {
+  //   const eventId = '643403c9acec226339a47a54'; // Replace with the actual ID of the event to delete
+  //   this.eventService.deleteEvent(eventId).subscribe(result => {
+  //     console.log(result); // Handle the success response
+  //   }, error => {
+  //     console.error(error); // Handle the error response
+  //   });
+  // }
+
+
   // Get Event By ID
-  getEventById(id: string | undefined): Observable<IEvent> {
+  getEventById(id: string | undefined): Observable<any> {
     return this._http
-      .get<IEvent>(`${this.dataUri}/${id}`)
+      .get<any>(`${this.dataUri}/${id}`)
       .pipe(tap(), catchError(this.handleError));
   }
 

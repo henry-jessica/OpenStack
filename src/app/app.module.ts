@@ -45,6 +45,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PaymentManagerComponent } from './components/payment-manager/payment-manager.component';
 import { EurPipe } from './eur.pipe';
+import { FavouritesComponent } from './components/favourites/favourites.component';
 
 // import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
 // >>New - Configuring Auth Module
@@ -70,6 +71,7 @@ Auth.configure(awsconfig);
     UserProfileComponent,
     PaymentManagerComponent,
     EurPipe,
+    FavouritesComponent,
   ],
   imports: [
     MatAutocompleteModule,

@@ -8,6 +8,8 @@ import { MessagesComponent } from '../messages/messages.component';
 import { IMessages } from 'app/Interfaces/message-interface';
 import { AuthService as AuthAPIService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
+import { catchError, Observable, of, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 // import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -19,7 +21,7 @@ export class EventDetailsComponent implements OnInit {
 
   
   // userRole:string="user"; 
-  event:IEvent | undefined; 
+  event?:IEvent; 
   id?:string;
   message?:IMessages; 
   displaySucessMessage: boolean=false;
@@ -29,8 +31,9 @@ export class EventDetailsComponent implements OnInit {
   private sub: any;
   private dialogRef?: MatDialogRef<EventFormComponent>
   private dialogRef2?: MatDialogRef<MessagesComponent>
+  handleError: any;
   
-  constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router,
+  constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router, private _http:EventService,
     @Inject(DOCUMENT) public document: Document,
     // public auth: AuthService,
     private router: Router,
@@ -47,20 +50,35 @@ export class EventDetailsComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
     // this.getUserRole();
-
-
   }
   getEvent():boolean{
     this._httpEvent.getEventById(this.id).subscribe(
       event => {
         this.event=event; 
         this.event = this.event;   
+        console.log('getting', event); 
+        // this.seeEvent(); 
+
       }, 
       // error=> this.errorMessage = <any>error TODO  error Message
     ); 
     return false; 
     }
 
+
+    // seeEvent() {
+    //   if(this.event){
+    //   this.event.views++; // increment view count by 1
+    //   this._http.updateEvent(this.event?._id, this.event).subscribe({
+    //     next: book => {
+    //       console.log(JSON.stringify(book) + ' has been updated');
+    //       // this.successMessage('update')
+    //     },
+    //     error: err => console.log(err)
+    //   });
+    // }
+    // }
+    
 
   // getUserRole() {
   //   console.log('CALLED  ');

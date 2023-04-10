@@ -93,7 +93,8 @@ export class EventFormComponent implements OnInit {
         line1: new FormControl(this.event?.address?.line1),
         eircode: new FormControl(this.event?.address?.eircode),
       }),
-      views: new FormControl(0), // Set the 'views' form control to 0
+      views:new FormControl(0),
+
     });
   }
 

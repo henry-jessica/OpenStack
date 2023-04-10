@@ -40,6 +40,16 @@
                   <div class="pt-3"></div>
                 </div>
               </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon mr-1">today</mat-icon>
+                  <span class="btn-tab">Favourites</span>
+                </ng-template>
+                <div>
+                  <div class="pt-3"></div>
+                </div>
+              </mat-tab>
+              
             </mat-tab-group>
           </div>
   
@@ -76,10 +86,11 @@
     </form>
   </div>
  </div>
+<button (click)="getEventFavourites()">See My Favourites</button>
 
 <div class="container pt-4" [class.border]="isShow">
     <app-event-list [eventList]="events "></app-event-list>
-  </div>
+</div>
 
 
  

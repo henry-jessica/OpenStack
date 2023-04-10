@@ -105,7 +105,7 @@ export class HomeComponent implements OnInit {
         this.getEventsByCategory('Art');
       }
       if(event.index==4){
-        this.getEventsByCategory('Other');
+        this.getEventFavourites(); 
       }
     }
 
@@ -123,6 +123,21 @@ export class HomeComponent implements OnInit {
       ); 
       return false; 
       
+    }
+
+    getEventFavourites(){
+      console.log('check fav')
+      this._httpEventService.getFavouriteEvents().subscribe(
+        event => {
+          this.event=event; 
+          this.events= this.event;   
+          this.events?.forEach(element => {
+            console.log('element',element);  //TODO: IF DONT FIND THE ELEMENT NEED INFORM TO USER - CREATE MESSAGE 
+          });
+        }, 
+        error=> this.errorMessage = <any>error 
+      ); 
+      return false; 
     }
   // getUserRole() {
   //   console.log('CALLED  ');
