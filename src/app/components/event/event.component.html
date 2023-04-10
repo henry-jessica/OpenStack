@@ -27,7 +27,7 @@
       <mat-card-subtitle>Jessica Henry</mat-card-subtitle>
       <!-- <span [ngClass]="{'material-icons-outlined': !isStarred, 'material-icons': isStarred, 'purple-star': isStarred}" class="example-card-icon" (click)="toggleStar()">star_rate</span> -->
       <!-- <span [ngClass]="{'material-icons-outlined': !isStarred, 'material-icons': isStarred, 'purple-star': isStarred}" class="example-card-icon" (click)="toggleStar()">star_rate</span> -->
-<span [ngClass]="{'material-icons-outlined': !isStarred, 'material-icons': isStarred, 'purple-star': isStarred}" class="example-card-icon" (click)="toggleStar()">star_rate</span>
+      <span  *ngIf="authenticator?.user" [ngClass]="{'material-icons-outlined': !isStarred, 'material-icons': isStarred, 'purple-star': isStarred}" class="example-card-icon" (click)="toggleStar()">star_rate</span>
 
     </mat-card-header>
     <img mat-card-image src="https://s3-images-web-ca2.s3.eu-west-1.amazonaws.com/{{event?.urlImg}}" alt="Photo of a Shiba Inu">

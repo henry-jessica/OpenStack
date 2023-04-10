@@ -8,7 +8,7 @@ import { IEvent } from '../Interfaces/event-interface';
 })
 export class EventService {
   private dataUri = `${environment.apiUri}/api/events`;
-  private readonly apiFavouriteURL = 'https://your-api-gateway-url.execute-api.your-region.amazonaws.com/dev';
+  private readonly apiFavouriteURL = 'https://ugjhe6itie.execute-api.eu-west-1.amazonaws.com/dev';
 
   constructor(private _http: HttpClient) {}
 

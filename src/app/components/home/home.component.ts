@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   showNav: boolean = false; 
   userGroup?: string;
   eventsFav?: any[];
+  isFav:boolean = false; 
   
   constructor(private _httpEventService:EventService, public dialog:MatDialog,private eventFilterService: EventFilterService,public authenticator: AuthenticatorService,
     @Inject(DOCUMENT) public document: Document,
@@ -73,6 +74,7 @@ export class HomeComponent implements OnInit {
 
     SetTabIndex(event:any)
     {
+      this.isFav = false;
       console.log('this', event.index);
       if(event.index==0){
         this.getEventsByCategory('');
@@ -88,6 +90,8 @@ export class HomeComponent implements OnInit {
       }
       if(event.index==4){
         this.getEventFavourites(); 
+        this.isFav = true; 
+        console.log(this.isFav); 
       }
     }
 
@@ -151,7 +155,7 @@ export class HomeComponent implements OnInit {
             console.log('eventData', eventData);
             this.events.push(eventData); // add eventData to events array
           });
-          localStorage.setItem('favourites', JSON.stringify(this.events)); 
+          localStorage.setItem('favourites', JSON.stringify(this.eventsFav)); 
 
         },
         error => this.errorMessage = <any>error
