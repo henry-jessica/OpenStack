@@ -139,7 +139,7 @@ export class HomeComponent implements OnInit {
               _id: element._id, // add missing properties or create a new object
               category: "category", // add missing properties or create a new object
               tickets: [], // add missing properties or create a new object
-              views: 0, // add missing properties or create a new object
+              views: element.eventData.view, // add missing properties or create a new object
               name: element.eventData.name,
               description: element?.eventData?.description,
               contactNumber: element?.eventData?.contactNumber,
