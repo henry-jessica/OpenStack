@@ -10,6 +10,8 @@ import { AuthService as AuthAPIService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Auth } from 'aws-amplify';
 // import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -34,6 +36,7 @@ export class EventDetailsComponent implements OnInit {
   handleError: any;
   
   constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router, private _http:EventService,
+    public authenticator:AuthenticatorService,
     @Inject(DOCUMENT) public document: Document,
     // public auth: AuthService,
     private router: Router,
@@ -41,12 +44,18 @@ export class EventDetailsComponent implements OnInit {
     ) {
     this.route.params
     .subscribe(params=>console.log(params)); 
-   }
-
+    Auth.currentAuthenticatedUser()
+    .then(user => {
+      this.userGroup = user.signInUserSession.accessToken.payload["cognito:groups"][0];
+      console.log(this.userGroup); 
+  
+    })
+    .catch(err => console.log(err));
+    }
   //  isAuthenticated$ = this.auth.isAuthenticated$;
 
   ngOnInit(): void {   
-    this.userGroup =  localStorage.getItem('userGroup'); 
+    // this.userGroup =  localStorage.getItem('userGroup'); 
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
     // this.getUserRole();

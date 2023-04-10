@@ -37,8 +37,8 @@ export class EventFormComponent implements OnInit {
   stepper?: MatStepper;
   
   filteredpositivekeywordss: Observable<string[]>;
-  positivekeywordss: string[] = ['morning walk'];
-  allpositivekeywordss: string[] = ['Take care', 'Minder', 'Overnight', 'Feed'];
+  positivekeywordss: string[] = ['#nightout'];
+  allpositivekeywordss: string[] = ['#lifeisnow', '#sport', '#goRovers', '#SligoNight'];
   
   public dialogRef2?: MatDialogRef<MessagesComponent>;
 

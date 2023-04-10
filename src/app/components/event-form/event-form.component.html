@@ -136,11 +136,11 @@
             <div class="row">
              
               <mat-form-field hintLabel="Max 70 characters" appearance="outline">
-                <mat-label>Insert service title</mat-label>
+                <mat-label>Insert Event Title</mat-label>
                 <textarea matInput maxlength="70" 
                 placeholder="I will..."
                 id="name" type="text" formControlName="name"
-                placeholder="service title" #name  required></textarea>
+                placeholder="event title" #name  required></textarea>
                 <mat-hint align="end">{{name.value.length}}/70</mat-hint>
               </mat-form-field>
               
@@ -165,11 +165,11 @@
                </mat-form-field>
               </div>
 
-              <mat-form-field hintLabel="Max 70 characters" appearance="outline">
-                <mat-label>Insert service description</mat-label>
-                <textarea matInput #description  maxlength="70" 
+              <mat-form-field hintLabel="Max 300 characters" appearance="outline">
+                <mat-label>Insert event description</mat-label>
+                <textarea matInput #description  maxlength="300" 
                 id="description" type="text" formControlName="description" ></textarea>
-                <mat-hint align="end">{{description.value.length}}/70</mat-hint>
+                <mat-hint align="end">{{description.value.length}}/300</mat-hint>
               </mat-form-field>
               
 
@@ -188,7 +188,7 @@
                 <div class="form-group">
                   <label for="exampleFormControlSelect1"></label>
                   <select class="form-control"formControlName="category"  #category>
-                    <option>select a service category</option>
+                    <option>select a event category</option>
                     <option>Concert</option>
                     <option>Sports</option>
                     <option>Art & Theater</option>
@@ -205,11 +205,11 @@
               Search tags
             </h3>
             <p>
-              Tag your Event with buzz words that are relevant to the services you offer. Use all 5 tags to get found.</p>
+              Tag your Event with buzz words that are relevant to the events you offer. Use all 5 tags to get found.</p>
           </div>
           <div class="col-8">
             <h3>Positive keywords</h3>
-            <p>Enter search terms you feel the pet owners will use when looking for your service.</p>
+            <p>Enter search terms you feel the pet owners will use when looking for your event.</p>
             <mat-form-field class="example-chip-list" appearance="outline">
               <mat-label>Positive keywords</mat-label>
               <mat-chip-list #chipList aria-label="positivekeywords selection">
@@ -253,18 +253,18 @@
   </mat-step>
   <mat-step [stepControl]="eventForm" [optional]="isOptional" >
     <form [formGroup]="eventForm">
-      <ng-template matStepLabel>Pricing and Description</ng-template>
+      <ng-template matStepLabel>Pricing and Tickets</ng-template>
         <div class="container pt-4">
           <div class="row">
             <div class="col-4">
-              <h6>Description</h6>
-              <p>Briefly describe your service, here the pet owner can see more details of what you're offering</p>
+              <h6>Ticket Description</h6>
+              <p>Insert just the name of the ticket</p>
                </div>
             <div class="col-8">
               <div class="row">
                 <mat-form-field class="example-full-width" hintLabel="Max 300 characters"  appearance="outline">
-                  <mat-label>Insert service description</mat-label>
-                  <textarea #description  maxlength="300"  matInput placeholder="more details" formControlName="description" required #des></textarea>
+                  <mat-label>Insert Ticket Category</mat-label>
+                  <textarea #ticketType  maxlength="300"  matInput placeholder="more details" formControlName="description" required></textarea>
                   <mat-hint align="end">{{description.value.length}}/300</mat-hint>
                 </mat-form-field>
               </div>
@@ -274,7 +274,7 @@
             <div class="col-4">
               <h6>Starting Pricing</h6>
               <p>
-                Insert the start price of the service, for extra service you might change the price charged, you can negociate with Pet Owner through chat.</p>
+                Insert the start price of the event, for extra event you might change the price charged, you can negociate with Pet Owner through chat.</p>
             </div>
             <div class="col-4">
               <div class="row">
@@ -284,11 +284,24 @@
                   </mat-form-field>
               </div>
             </div>
+            <div class="col-4">
+              <div class="row">
+                   <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Quantity Available</mat-label>
+                    <input matInput placeholder="" #quantity>
+                  </mat-form-field>
+              </div>
+            </div>
+            <div class="col-4">
+              <mat-form-field>
+                <mat-label>Order Start Time</mat-label>
+                <input matInput [matDatepicker]="startDatepicker"  formControlName="OrderStartDate" >
+                <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #startDatepicker></mat-datepicker>
+                <input matInput type="time" placeholder="Time" formControlName="StartTime">
+              </mat-form-field>
+            </div>
           </div>
-          <!-- <div class="mb-3">
-            <label for="image">Image file</label>
-            <input id="image" type="file" id="image" (change)="onFileUpload($event)" formControlName="image" class="form-control">
-          </div> -->
 
           <div class="row pt-4">
             <div class="col-6">
@@ -309,8 +322,10 @@
 
   </mat-step>
 
+    
     <mat-step [stepControl]="eventForm">
       <form [formGroup]="eventForm" >
+        <div class="container">
 
         <div formGroupName="address">
           <div class="mb-3 col-12 mt-3">
@@ -332,18 +347,18 @@
               <input id="eircode" type="text" formControlName="eircode" class="form-control">
             </div>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="image">Image file</label>
               <input id="image" type="file" id="image" (change)="onFileUpload($event)" class="form-control">
-            </div>
+            </div> -->
 
           </div>
           </div>
-          <div class="col-6 d-flex justify-content-end">
+          <!-- <div class="col-6 d-flex justify-content-end">
             <button mat-button class="btn btn-primary" mat-button matStepperNext (click)="onSubmit()">Save & Continue</button>
-          </div>
+          </div> -->
 
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field appearance="outline">
             <mat-label>Event Date Starts</mat-label>
             <input matInput [matDatepicker]="eventDateStarts" formControlName="eventDateStarts">
             <mat-hint>MM/DD/YYYY</mat-hint>
@@ -356,18 +371,18 @@
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="eventDateEnds"></mat-datepicker-toggle>
             <mat-datepicker #eventDateEnds></mat-datepicker>
-          </mat-form-field>
+          </mat-form-field> -->
           
           
     <ng-template matStepLabel>Gallery</ng-template>
           <div class="container pt-2">
 <div class="row">
   <h5>Showcase Your Events In a Event Gallery</h5> 
-  <p>Encourage Pet Owners to choose your service by featuring a variety of your work.</p>
+  <p>Encourage Pet Owners to choose your event by featuring a variety of your work.</p>
 </div>
    <div class="row pt-3">
     <h6>Images (up to 3)</h6>
-    <p>Get noticed by the right buyers with visual examples of your services.</p>
+    <p>Get noticed by the right buyers with visual examples of your events.</p>
 
     <div class="col-3">
       <div class="dragBox">
@@ -417,6 +432,7 @@
         </div>
       </div>
     </div>
+</div>
 </div>
 </form>
   </mat-step>

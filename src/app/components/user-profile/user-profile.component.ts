@@ -14,9 +14,9 @@ export class UserProfileComponent implements OnInit {
   user: any;
   counties?: string[];
   userForm: FormGroup = new FormGroup({}, { updateOn: 'change' });
-
   constructor( public _http: HttpClient, public authenticator: AuthenticatorService, public _httpUser:EventService, private fb: FormBuilder) { 
     this.counties = this._httpUser.counties;
+    
 
   }
 
@@ -26,14 +26,13 @@ export class UserProfileComponent implements OnInit {
     this.email = this.authenticator?.user?.attributes?.email;
     this.getUser(); 
 
-    
     // this._http.put('https://41z1wg9xa4.execute-api.eu-west-1.amazonaws.com/dev/put-user',this.user).subscribe(data => {
     //   console.log('my data',data);
     // });
 
     this.userForm = new FormGroup({
-      username: new FormControl(this.user?.username, [Validators.required]),
-      surname: new FormControl(this.user?.username, [Validators.required]),
+      username: new FormControl(this.authenticator?.user?.attributes?.['name'], [Validators.required]),
+      surname: new FormControl(this.authenticator?.user?.attributes?.['family_name'], [Validators.required]),
       email: new FormControl(),
       gender: new FormControl('', [Validators.required]),
       dob: new FormControl('', [Validators.required]),
@@ -43,10 +42,11 @@ export class UserProfileComponent implements OnInit {
 
 
     this.getUser().then(() => {
+      console.log(this.user)
       // Set the values of the form controls based on the user object
       this.userForm.patchValue({
-          username: this.user.username,
-          surname: this.user.surname,
+          username: this.user.name,
+          surname: this.user.family_name,
           email: this.user.email,
           gender: this.user.gender,
           dob: this.user.dob,
@@ -69,7 +69,7 @@ updateUser() {
     zip: formData.zip
   };
   const payload = {
-    email: 'col3@gmail.com',
+    email:  this.email ,
     updateFields: updateFields
   };
 
