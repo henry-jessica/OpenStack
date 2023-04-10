@@ -25,12 +25,10 @@ export class HomeComponent implements OnInit {
   errorMessage:any; 
   showNav: boolean = false; 
   userGroup?: string;
+  eventsFav?: any[];
   
-
-
   constructor(private _httpEventService:EventService, public dialog:MatDialog,private eventFilterService: EventFilterService,public authenticator: AuthenticatorService,
     @Inject(DOCUMENT) public document: Document,
-    // public auth2: AuthService,
     private router: Router,
     private _httpAuthService: AuthAPIService,
     private store: Store
@@ -48,27 +46,11 @@ export class HomeComponent implements OnInit {
     .catch(err => console.log(err));
     }
 
-  // isAuthenticated$ = this.auth.isAuthenticated$
-
   ngOnInit(): void {
 
     console.log(this.userGroup); 
 
     localStorage.setItem('manager', JSON.stringify(this.userGroup)); 
-
-
-    // this.auth.isAuthenticated$.subscribe(isAuthenticated =>{
-    //   if(isAuthenticated){
-    //     this.showNav = true;
-    //   }
-    //   else{
-    //          this.router.navigate(['']);
-    //   }
-
-    //   console.log('test',this.isAuthenticated$ )
-
-    // })
-    // this.getUserRole()
     this.eventFilterService.getEvents().subscribe(events => {
       this.events = events;
     });
@@ -125,43 +107,58 @@ export class HomeComponent implements OnInit {
       
     }
 
-    getEventFavourites(){
+    // getEventFavourites() {
+    //   console.log('check fav')
+    //   this._httpEventService.getFavouriteEvents().subscribe(
+    //     response => {
+    //       this.eventsFav = response
+    //       console.log( 'events', this.eventsFav); 
+    //       this.events.forEach(element => {
+    //         console.log('element', element); //TODO: IF DONT FIND THE ELEMENT NEED INFORM TO USER - CREATE MESSAGE 
+    //       });
+    //     },
+    //     error => this.errorMessage = <any>error
+    //   );
+
+    //   return false;
+    // }
+    getEventFavourites() {
       console.log('check fav')
       this._httpEventService.getFavouriteEvents().subscribe(
-        event => {
-          this.event=event; 
-          this.events= this.event;   
-          this.events?.forEach(element => {
-            console.log('element',element);  //TODO: IF DONT FIND THE ELEMENT NEED INFORM TO USER - CREATE MESSAGE 
+        response => {
+          this.eventsFav = response
+          console.log( 'events', this.eventsFav); 
+          this.events = []; // clear events array before adding new events
+          this.eventsFav.forEach(element => {
+            console.log(element); 
+            const eventData = {
+              _id: element._id, // add missing properties or create a new object
+              category: "category", // add missing properties or create a new object
+              tickets: [], // add missing properties or create a new object
+              views: 0, // add missing properties or create a new object
+              name: element.eventData.name,
+              description: element?.eventData?.description,
+              contactNumber: element?.eventData?.contactNumber,
+              contact_email: element?.eventData?.contact_email,
+              eventDateStarts: element?.eventData?.eventDateStarts,
+              eventDateEnds: element.eventData.eventDateEnds,
+              urlImg: element?.eventData?.urlImg,
+              address: element?.eventData?.address,
+              startsPrice: element?.eventData?.startsPrice,
+              refundpolicy: element?.reventData?.efundpolicy,
+              currency: element?.eventData?.currency
+            };
+            console.log('eventData', eventData);
+            this.events.push(eventData); // add eventData to events array
           });
-        }, 
-        error=> this.errorMessage = <any>error 
-      ); 
-      return false; 
+          localStorage.setItem('favourites', JSON.stringify(this.events)); 
+
+        },
+        error => this.errorMessage = <any>error
+      );
+    
+      return false;
     }
-  // getUserRole() {
-  //   console.log('CALLED  ');
-
-  //   this.auth2.user$.subscribe((user) => {
-  //     console.log('USER ==> ', user?.sub);
-  //     console.log('this.userId', user?.sub);
-  //     if(user?.sub){
-  //     }
-  //     const res =
-  //       user?.sub &&
-  //       this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
-  //         console.log('USER ROLE: ', res[0]?.name);
-  //         this.store.dispatch(
-  //           new AddAuth({
-  //             id: res[0]?.id,
-  //             name: res[0]?.name,
-  //             description: res[0]?.description,
-  //           })
-  //         );
-          
-  //       });
-  //   });
-  // }
-
+    
   }
 

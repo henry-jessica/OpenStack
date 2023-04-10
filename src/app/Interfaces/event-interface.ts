@@ -15,7 +15,7 @@ import { Time } from "@angular/common";
       category: string;
       eventDateStarts: Date;
       eventDateEnds: Date;
-      createdDate: Date;
+      createdDate?: Date;
       address: {
           city: string,
           county?: string,

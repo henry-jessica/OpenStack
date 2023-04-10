@@ -60,9 +60,9 @@ export class EventService {
       .pipe(tap(), catchError(this.handleError));
   }
 
-  getFavouriteEvents(): Observable<IEvent[]> {
+  getFavouriteEvents(): Observable<any[]> {
     return this._http
-      .get<IEvent[]>('https://xfnk4jc4s7.execute-api.eu-west-1.amazonaws.com/dev/get-all-favourties')
+      .get<any[]>('https://xfnk4jc4s7.execute-api.eu-west-1.amazonaws.com/dev/get-all-favourties')
       .pipe(tap(), catchError(this.handleError));
   }
 

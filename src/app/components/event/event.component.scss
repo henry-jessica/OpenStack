@@ -7,8 +7,22 @@
     background-image: url('https://c1.thejournal.ie/media/2020/06/kin-3-752x501.png');
     background-size: cover;
   }
-
-
+  .example-card .mat-card-header .example-card-icon {
+    margin-left: auto;
+    cursor: pointer;
+  }
+  .starred {
+    color: yellow;
+  }
+  .purple-star {
+    color: purple;
+  }
+  .example-card-icon.purple-star {
+    color: purple;
+  }
+  
+  
+  
 .time-stamp{
   font-size: 14px;
   letter-spacing: 0.18px;

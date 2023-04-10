@@ -13,7 +13,10 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./event.component.scss']
 })
 export class EventComponent implements OnInit {
-  favouriteEvent?: { event: IEvent | undefined; userId: any; };
+  favouriteEvent?: { eventData: IEvent | undefined; userId: any; };
+  isStarred = false;
+  eventsFav?: any[];
+  errorMessage: any;
 
   constructor(private _eventService:EventService,  private dialog: MatDialog, private route:Router, private http:HttpClient) { }
   
@@ -35,15 +38,16 @@ export class EventComponent implements OnInit {
             }); 
         } 
   }
-  // onCreateEvent(eventID?:string) {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.width = '97%';
-  //   dialogConfig.height = '97%';
-  //   this.dialog.open(EventDetailsComponent, {data:{id:eventID}}); 
+toggleStar() {
+  const eventId = this.event?._id;
+  if (eventId) {
+    const foundEvent = this.eventsFav?.find((event: any) => event._id === eventId);
+    this.isStarred = foundEvent !== undefined;
+  } else {
+    this.isStarred = false;
+  }
+}
 
-  // }
  
   seeEvent(){
 
@@ -68,8 +72,22 @@ export class EventComponent implements OnInit {
     });
   }
   }
+  getEventFavourites() {
+    console.log('check fav')
+    this._eventService.getFavouriteEvents().subscribe(
+      response => {
+        const events = response.map(item => item.event);
+        this.eventsFav = events;
+        this.eventsFav.forEach(element => {
+          console.log('element', element); //TODO: IF DONT FIND THE ELEMENT NEED INFORM TO USER - CREATE MESSAGE 
+        });
+      },
+      error => this.errorMessage = <any>error
+    );
+    return false;
+  }
 
-  seeEvent2(){
+  AddEventFavourite(){
     console.log('saveToFavourite', this.event);
 
     if (!this.event) {
@@ -81,12 +99,12 @@ export class EventComponent implements OnInit {
     if (userStr !== null) {
       const user = JSON.parse(userStr);
        this.favouriteEvent = {
-        event: this.event,
+        eventData: this.event,
         userId: user._id
       };
-      console.log('my object', this.favouriteEvent); 
     }
-  
+    console.log('my object', this.favouriteEvent); 
+
     console.log('it has being saved'); 
     const url = 'https://yamura76ja.execute-api.eu-west-1.amazonaws.com/dev/favourites/add';
     this.http.post(url, this.favouriteEvent).subscribe(result => {
@@ -97,26 +115,4 @@ export class EventComponent implements OnInit {
   
   }
   
-  saveToFavourite() {
-    console.log('saveToFavourite'); 
-
-//     console.log('Save to Favourite button clicked!');
-
-//     const userStr = localStorage.getItem('user');
-//     if (userStr !== null) {
-//       const user = JSON.parse(userStr);
-//        this.favouriteEvent = {
-//         event: this.event,
-//         userId: user._id
-//       };
-//     }
-// console.log('it has being saved'); 
-//     const url = 'https://yamura76ja.execute-api.eu-west-1.amazonaws.com/dev/favourites/add';
-//     this.http.post(url, this.favouriteEvent).subscribe(result => {
-//       console.log(result); // Handle the success response
-//     }, error => {
-//       console.error(error); // Handle the error response
-//     });
-//   }
-  }
 }

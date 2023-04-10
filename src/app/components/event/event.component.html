@@ -23,8 +23,12 @@
   <mat-card class="example-card custom-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      <mat-card-title>ShowTime</mat-card-title>
+      <mat-card-subtitle>Jessica Henry</mat-card-subtitle>
+      <!-- <span [ngClass]="{'material-icons-outlined': !isStarred, 'material-icons': isStarred, 'purple-star': isStarred}" class="example-card-icon" (click)="toggleStar()">star_rate</span> -->
+      <!-- <span [ngClass]="{'material-icons-outlined': !isStarred, 'material-icons': isStarred, 'purple-star': isStarred}" class="example-card-icon" (click)="toggleStar()">star_rate</span> -->
+<span [ngClass]="{'material-icons-outlined': !isStarred, 'material-icons': isStarred, 'purple-star': isStarred}" class="example-card-icon" (click)="toggleStar()">star_rate</span>
+
     </mat-card-header>
     <img mat-card-image src="https://s3-images-web-ca2.s3.eu-west-1.amazonaws.com/{{event?.urlImg}}" alt="Photo of a Shiba Inu">
     <mat-card-content>
@@ -34,11 +38,8 @@
         <p class="card-text text-muted">Starts at {{event?.startsPrice | currency:'EUR':true}}</p>    
     </mat-card-content>
     <mat-card-actions>
-      <!-- <button mat-button [routerLink]="['/events', event?._id]" >SEE EVENT</button> -->
       <button mat-button (click)="seeEvent()">SEE EVENT</button>
-      <button mat-button (click)="seeEvent2()">SEE EVENT2</button>
-
-      <button mat-button (click)="saveToFavourite()">SAVE TO FAVOURITE</button>
+      <button mat-button (click)="AddEventFavourite()">SEE EVENT2</button>
     </mat-card-actions>
   </mat-card>
 
