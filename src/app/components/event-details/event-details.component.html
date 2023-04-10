@@ -1,7 +1,7 @@
 <div class="wrapper">
       <app-hero [title]="event?.name"></app-hero>  
     <div class="container p-2 mt-5">
-      <div class="row bg-light pt-5">
+      <div class="row bg-light pt-5">        
         <div class="col-4">
           <img class="card-img-top p-2"
             src="https://s3-images-web-ca2.s3.eu-west-1.amazonaws.com/{{event?.urlImg}}"
@@ -9,7 +9,7 @@
           <p class="mt-3 pl-3 pl-md-2">
             <span>Refund Policy : {{event?.refundpolicy | titlecase}} </span>
           </p>
-
+          <p>Total views: {{event?.views}}</p>
             <div *ngIf="userGroup=='manager'" class="row pt-4">
               <div class="col-6">
                 <button class="btn btn-info w-100" (click)="onEditEvent()">Edit Event</button>
@@ -25,11 +25,11 @@
         <div class="col-8">
           <h1>{{ event?.name }}</h1>
           <p>{{event?.description}}</p>
-          <h5>When and where</h5>
+          <h4>When and where</h4>
           <div class="row">
           <div class="col-2">
             <p>Date and time</p>
-            <h6>{{event?.eventDateStarts | date : 'fullDate' }}</h6>
+            <h5>{{event?.eventDateStarts | date : 'fullDate' }}</h5>
             <p>{{event?.eventDateStarts | date:'shortTime'}}</p>
           </div>
           <div class="col-6">

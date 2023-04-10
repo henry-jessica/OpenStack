@@ -143,7 +143,6 @@ export class CheckoutComponent implements OnInit {
       this.counter--;
       if (this.counter <= 0) {
         clearInterval(this.timer);
-        // Do something when the timer reaches 0
       }
     }, 1000);
   }
@@ -206,7 +205,7 @@ export class CheckoutComponent implements OnInit {
         eventDate: this.event.date,
         tickets: userTickets,
         totalAmount: userTickets.reduce((total, ticket) => total + ticket.price * ticket.quantity, 0),
-        customer: 'jessica',
+        customer: this.authenticator?.user?.attributes?.email,
         event: this.event
       };
   
@@ -251,11 +250,10 @@ export class CheckoutComponent implements OnInit {
       description: this.order?.totalAmount + ( this.order?.totalAmount*0.23),
       amount: this.order?.totalAmount + ( this.order?.totalAmount*0.23)*100,
     });
-    // }
   }
   confirmpayment(stripeToken: any) {
     console.log(' // Add your code here to confirm the payment', stripeToken); 
-    this._httpOrderService.addOrderDB(event).subscribe({
+    this._httpOrderService.addOrderDB(this.order).subscribe({
       next: (responseBody: any) => {
         console.log('Response body:', responseBody);
         // handle the response body here
