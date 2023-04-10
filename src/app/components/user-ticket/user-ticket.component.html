@@ -6,7 +6,7 @@
         <h3><strong>Please insert the owner of this ticket:</strong></h3>
       </div>
       <div class="col-6 d-flex justify-content-end">
-        <mat-slide-toggle (change)="selectCurrentUser()">It is for me</mat-slide-toggle>
+        <mat-slide-toggle #toggle (change)="toggleChecked()">It is for me</mat-slide-toggle>
     
       </div>
     </div>

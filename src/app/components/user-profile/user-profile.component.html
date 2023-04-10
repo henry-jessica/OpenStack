@@ -1,6 +1,8 @@
-<div class="container">
+
+<div class="container mt-4 pt-4">
     <div class="row gutters">
-    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+
+    <div class="col-3">
     <div class="card h-100">
         <div class="card-body">
             <div class="account-settings">
@@ -8,85 +10,124 @@
                     <div class="user-avatar">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
                     </div>
-                    <h5 class="user-name">Yuki Hayashi</h5>
-                    <h6 class="user-email">yuki@Maxwell.com</h6>
+                    <h5 class="user-name">{{authenticator?.user?.username}}</h5>
+                    <h6 class="user-email">{{authenticator?.user?.attributes?.email}}</h6>
                 </div>
              
             </div>
         </div>
     </div>
+
+
+
     </div>
-    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-    <div class="card h-100">
-        <div class="card-body">
-            <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h6 class="mb-2 text-primary">Personal Details</h6>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+    <div class="col-9">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h6 class="mb-2 text-primary">Personal Details</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                              <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput id="contactNumber" type="text" formControlName="username">
+                                <!-- <mat-error *ngIf="ticketUserOwner.get('username')?.invalid && (ticketUserOwner.get('username')?.dirty || ticketUserOwner.get('username')?.touched)">Please enter a name</mat-error> -->
+                             
+                             
+                              </mat-form-field>
+                            </div>
+                      
+                            <div class="col-6">
+                              <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Surname</mat-label>
+                                <input matInput id="surname" type="text" formControlName="surname">
+                                <!-- <mat-error *ngIf="ticketUserOwner.get('surname')?.invalid && (ticketUserOwner.get('surname')?.dirty || ticketUserOwner.get('surname')?.touched)">Please enter a surname</mat-error> -->
+                              </mat-form-field>
+                            </div>
+                      
+                          </div>
+                      
+                          <div class="row">
+                            <div class="col-12">
+                              <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input matInput formControlName="email" readonly>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                      
+                          <div class="row">
+                            <div class="col-12">
+                              <mat-form-field appearance="outline">
+                                <mat-label>County</mat-label>
+                                <select matNativeControl formControlName="county" #county>
+                                  <option value="">Select County</option>
+                                  <!-- <option *ngFor="let county of counties" [value]="county">{{ county }}</option> -->
+                                </select>
+                              </mat-form-field>
+                            </div>
+              
+                          
+                          </div>
+                          
+                      
+                          <div class="row ">
+                            <div class="col-6 mb-2 pb-2">
+                              <mat-form-field appearance="outline">
+                                <mat-label>DOB</mat-label>
+                                <input matInput [matDatepicker]="eventDateEnds" formControlName="dob">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="eventDateEnds"></mat-datepicker-toggle>
+                                <mat-datepicker #eventDateEnds></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+                      
+                            <div class="col-6">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                  <mat-label>ZIP</mat-label>
+                                  <input matInput id="zip" type="text" formControlName="zip">
+                                  <!-- <mat-error *ngIf="ticketUserOwner.get('username')?.invalid && (ticketUserOwner.get('username')?.dirty || ticketUserOwner.get('username')?.touched)">Please enter a name</mat-error> -->
+                                </mat-form-field>
+        
+                        </div>
+                          <!-- <div class="row">
+                            <div class="col-12">
+                              <div class="form-group">
+                                <label for="exampleFormControlSelect1"></label>
+                                <select class="form-control" formControlName="county" #county>
+                                  <option value="">Select County</option>
+                                  <option *ngFor="let county of counties" [value]="county">{{ county }}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div> -->
+                      
+                          <label id="example-radio-group-label" >Gender:</label>
+                          <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="gender"
+                            class="example-radio-group">
+                            <mat-radio-button value="male">Male</mat-radio-button>
+                            <mat-radio-button value="female">Female</mat-radio-button>
+                            <mat-radio-button value="nonbinary">Non-binary</mat-radio-button>
+                            <mat-radio-button value="other">Other</mat-radio-button>
+                          </mat-radio-group>
                     </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="eMail">Email</label>
-                        <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="website">Website URL</label>
-                        <input type="url" class="form-control" id="website" placeholder="Website url">
+               
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="text-right">
+                                <button  class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h6 class="mt-3 mb-2 text-primary">Address</h6>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="Street">Street</label>
-                        <input type="name" class="form-control" id="Street" placeholder="Enter Street">
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="ciTy">City</label>
-                        <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="sTate">State</label>
-                        <input type="text" class="form-control" id="sTate" placeholder="Enter State">
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="zIp">Zip Code</label>
-                        <input type="text" class="form-control" id="zIp" placeholder="Zip Code">
-                    </div>
-                </div>
             </div>
-            <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="text-right">
-                        <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-                        <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
-                    </div>
-                </div>
             </div>
-        </div>
+            </form>
     </div>
-    </div>
-    </div>
+
     </div>
