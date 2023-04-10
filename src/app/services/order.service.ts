@@ -19,6 +19,10 @@ export class OrderService {
     );
   }
 
+
+
+    
+
   addOrderDB(event: any): Observable<any> {
     return this._http.post("https://gz5aq0g6z8.execute-api.eu-west-1.amazonaws.com/dev/order", event)
       .pipe(

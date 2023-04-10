@@ -17,6 +17,30 @@ export class EventService {
       .pipe(retry(3), catchError(this.handleError));
   }
 
+
+      // 
+      // getUser(email:string): Observable<any> {
+      //   return this._http
+      //     .get<any>('https://yj7utnncl0.execute-api.eu-west-1.amazonaws.com/dev/get-user-database?email=s@test')
+      //     .pipe(retry(3), catchError(this.handleError));
+      // }
+      getUser(email:string): Observable<any>{
+        return this._http
+        .get<any>(
+           `https://yj7utnncl0.execute-api.eu-west-1.amazonaws.com/dev/get-user-database?email=${email}`
+        )
+        .pipe(
+            tap((user: any) => {
+                localStorage.setItem('user', JSON.stringify(user))
+            }),
+            catchError(this.hangleError2))
+    } private hangleError2(err: HttpErrorResponse){
+      return throwError('error: ' + err.message)
+  }
+
+      
+      //https://r1tulkewqd.execute-api.eu-west-1.amazonaws.com/dev/get-user-database?email=s@test
+      //https://50bqcxeszd.execute-api.eu-west-1.amazonaws.com/dev/user/
   //Adding a event
   addEvent(event: any): Observable<IEvent> {
     return this._http.post<any>(this.dataUri, event).pipe(take(1));
