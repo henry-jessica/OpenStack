@@ -5,7 +5,7 @@
             <mat-tab-group animationDuration="0ms" mat-stretch-tabs (selectedTabChange)="SetTabIndex($event)">
               <mat-tab>
                 <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon mr-1">rocket</mat-icon>
+                  <mat-icon class="example-tab-icon pl-2">local_fire_department</mat-icon>
                   <span>All Events</span>
                 </ng-template>
                 <div>
@@ -15,7 +15,7 @@
   
               <mat-tab>
                 <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon mr-1">local_fire_department</mat-icon>
+                  <mat-icon class="example-tab-icon mr-1">equalizer</mat-icon>
                   <span>Concert</span>
                 </ng-template>
                 <div>
@@ -24,7 +24,7 @@
               </mat-tab>
               <mat-tab>
                 <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon mr-1">arrow_upward</mat-icon>
+                  <mat-icon class="example-tab-icon mr-1">sports_basketball</mat-icon>
                   <span>Sport</span>
                 </ng-template>
                 <div>
@@ -33,16 +33,16 @@
               </mat-tab>
               <mat-tab>
                 <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon mr-1">today</mat-icon>
+                  <mat-icon class="example-tab-icon mr-1">theater_comedy</mat-icon>
                   <span class="btn-tab">Art & Theater</span>
                 </ng-template>
                 <div>
                   <div class="pt-3"></div>
                 </div>
               </mat-tab>
-              <mat-tab>
-                <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon mr-1">today</mat-icon>
+              <mat-tab *ngIf="authenticator?.user">
+                <ng-template mat-tab-label >
+                  <mat-icon class="example-tab-icon mr-1">star</mat-icon>
                   <span class="btn-tab">Favourites</span>
                 </ng-template>
                 <div>

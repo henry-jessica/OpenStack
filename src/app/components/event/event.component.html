@@ -37,11 +37,18 @@
         <p class="card-text text-muted card-sub-information"> {{event?.address?.line1}},{{event?.address?.city}}</p>    
         <p class="card-text text-muted">Starts at {{event?.startsPrice | currency:'EUR':true}}</p>    
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="seeEvent()">SEE EVENT</button>
-      <button mat-button (click)="AddEventFavourite()">SEE EVENT2</button>
-    </mat-card-actions>
+    <!-- <div style="text-align: center;"> -->
+      <mat-card-actions class="row d-flex justify-content-center">
+          <button mat-raised-button color="primary" class="w-75" (click)="seeEvent()">See Event</button>
+          <!-- <button mat-raised-button>Basic</button> -->
+
+        <!-- <button mat-button (click)="AddEventFavourite()">SEE EVENT2</button> -->
+      </mat-card-actions>
+      
+  <!-- </div> -->
+
   </mat-card>
+
 
 
  
