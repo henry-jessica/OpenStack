@@ -83,10 +83,10 @@
   </form>
   <div class="collapse navbar-collapse  justify-content-end" id="navbarNavAltMarkup">
     <div class="navbar-nav" >
-      <a class="nav-item nav-link" routerLink="/initial" routerLinkActive="active">Home <span class="sr-only"></span></a>
-      <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active">Became a Promoter</a>
-      <a class="nav-item nav-link" routerLink="/Register" routerLinkActive="active">Login</a>    
-        <a class="nav-item nav-link" routerLink="/Register" routerLinkActive="active">Sign in</a>
+      <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" *ngIf="authenticator?.user" routerLink="/login" routerLinkActive="active">Became a Promoter</a>
+      <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active">Login</a>    
+        <a class="nav-item nav-link" routerLink="/register" routerLinkActive="active">Register</a>
 
     </div>
   </div>
