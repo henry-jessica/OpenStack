@@ -31,6 +31,8 @@ export class EventDetailsComponent implements OnInit {
   private dialogRef?: MatDialogRef<EventFormComponent>
   private dialogRef2?: MatDialogRef<MessagesComponent>
   handleError: any;
+  isLoading = true;
+
   
   constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router, private _http:EventService,
     public authenticator:AuthenticatorService,
@@ -51,6 +53,10 @@ export class EventDetailsComponent implements OnInit {
   ngOnInit(): void {   
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
+    this.loadData().then(() => {
+      // When data is loaded, hide the progress bar
+      this.isLoading = false;
+    });
   }
   getEvent():boolean{
     this._httpEvent.getEventById(this.id).subscribe(
@@ -79,6 +85,13 @@ export class EventDetailsComponent implements OnInit {
       dialogConfig.height = '97%',
       dialogConfig.data= this.event,
       this.dialogRef= this.dialog.open(EventFormComponent,dialogConfig);
+    }
+    private async loadData(): Promise<void> {
+      return new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
     }
 
     onDelete(){
