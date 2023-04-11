@@ -46,6 +46,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { PaymentManagerComponent } from './components/payment-manager/payment-manager.component';
 import { EurPipe } from './eur.pipe';
 import { FavouritesComponent } from './components/favourites/favourites.component';
+import { UserStore } from './store/user.store';
 
 // import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
 // >>New - Configuring Auth Module
@@ -100,7 +101,8 @@ Auth.configure(awsconfig);
     MatIconModule,
     NgxsModule.forRoot([AuthState]),
   ],
-  providers: [],
+  providers: [UserStore],
+
   bootstrap: [AppComponent], 
   entryComponents:[EventFormComponent], 
 

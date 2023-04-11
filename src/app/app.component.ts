@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { UserStore } from './store/user.store';
+import { UserQuery } from './store/user.query';
 
 @Component({
   selector: 'app-root',

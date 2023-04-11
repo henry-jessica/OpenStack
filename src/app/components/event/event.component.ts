@@ -40,7 +40,6 @@ export class EventComponent implements OnInit {
       this.isStarred = foundEvent !== undefined;
     }
 
-    console.log('is Fav', this.isFav); 
     if(this.isFav){
       this.isStarred = true;
 

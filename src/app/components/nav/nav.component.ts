@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 import { EventFilterService } from './navService';
 import { IEvent } from 'app/Interfaces/event-interface';
 import { Auth } from 'aws-amplify';
+import { User } from 'app/store/user.model';
+import { UserQuery } from '../../store/user.query';
+import { UserStore } from '../../store/user.store';
 
 @Component({
   selector: 'app-nav',
@@ -28,10 +31,12 @@ export class NavComponent implements OnInit {
   events?:IEvent[]; 
   errorMessage:any; 
   userGroup: any;
-  
+  user$: Observable<User[]> = this.userQuery.selectAll();
+
   constructor(
     public authenticator: AuthenticatorService, private readonly  router: Router,
-    private _httpEventService: EventFilterService,
+    private _httpEventService: EventFilterService,private userQuery: UserQuery,
+    private userStore: UserStore,
     private dialog: MatDialog,
 
     // public auth: AuthService
@@ -50,6 +55,11 @@ export class NavComponent implements OnInit {
   public userRole = '';
 
   ngOnInit(): void {
+
+    // this.userQuery.select().subscribe((user) => {
+    //   this.user = user;
+    //   console.log('my user', this.user); 
+    // });
     console.log(this.authenticator.user); 
     this.userInfor =this.authenticator.user;  
     // this.auth$.subscribe((auth) => {
@@ -64,7 +74,6 @@ export class NavComponent implements OnInit {
     this.isLogout = true; 
     this.authenticator?.signOut()
     this.router.navigate(['/login'])
-
 }
 
   onCreateEvent() {
@@ -89,9 +98,4 @@ export class NavComponent implements OnInit {
     );
     return true; // Return true to allow the default behavior of the input element
   }
-  
-    
-  // logout() {
-  //   this.auth.logout();
-  // }
 }
