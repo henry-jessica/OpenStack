@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { environment } from 'environments/environment';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { IEvent } from '../../Interfaces/event-interface';
@@ -17,7 +18,7 @@ export class EventFilterService {
   private dataUri = `${environment.apiUri}/api/events`;
 
 
-  constructor(private _http: HttpClient, private _httpEventService: EventService) {
+  constructor(private _http: HttpClient, private _httpEventService: EventService, public authenticator: AuthenticatorService) {
     this.loadEvents();
   }
 
