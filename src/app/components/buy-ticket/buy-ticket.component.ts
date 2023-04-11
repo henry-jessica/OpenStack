@@ -31,19 +31,12 @@ export class BuyTicketComponent implements OnInit {
      // this.totalPrice = 0;
       this.selectedTickets = [];
     }
-    console.log('event check', this.event); 
   }
   
   onTotalPriceChange(eventData: {ticket: ITicket, totalPrice: number, operation: string}) {
-    console.log('Ticket selected:', eventData.ticket);
-    console.log('Total price:', eventData.totalPrice);
-    console.log('Operation:', eventData.operation || 'default operation');
-
     if (eventData.operation == 'increment') {
       // check if ticket is already in the selected tickets array
       const selectedTicket = this.selectedTickets.find(st => st.ticket._id === eventData.ticket._id);
-      console.log('selected tickets 11111',this.selectedTickets); 
-
       if (selectedTicket) {
         // increment the quantity of the selected ticket
         selectedTicket.quantity += 1;
@@ -65,14 +58,10 @@ export class BuyTicketComponent implements OnInit {
           this.selectedTickets = this.selectedTickets.filter(st => st.ticket._id !== eventData.ticket._id);
         }
       }
-      console.log(selectedTicket); 
     }
 
    // calculate the total price
-   console.log('selected tickets',this.selectedTickets); 
    this.totalPrice = this.selectedTickets.reduce((total, st) => total + (st.quantity * st.ticket.price), 0);
-   console.log(this.totalPrice); // move console.log statement here
-
   }
   getSelectedTickets(): SelectedTicket[] {
     return this.selectedTickets;
