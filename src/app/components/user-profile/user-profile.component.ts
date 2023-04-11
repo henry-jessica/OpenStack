@@ -11,6 +11,8 @@ import { EventService } from 'app/services/event.service';
 })
 export class UserProfileComponent implements OnInit {
   email: any;
+  isLoading = true;
+
   user: any;
   counties?: string[];
   userForm: FormGroup = new FormGroup({}, { updateOn: 'change' });
@@ -21,6 +23,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadData().then(() => {
+      // When data is loaded, hide the progress bar
+      this.isLoading = false;
+    });
 
     console.log(this.authenticator?.user?.attributes)
     this.email = this.authenticator?.user?.attributes?.email;
@@ -50,6 +56,14 @@ export class UserProfileComponent implements OnInit {
       });
   });
 
+}
+
+private async loadData(): Promise<void> {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 1000);
+  });
 }
 
 

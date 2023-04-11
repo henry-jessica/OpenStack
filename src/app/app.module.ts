@@ -47,6 +47,7 @@ import { PaymentManagerComponent } from './components/payment-manager/payment-ma
 import { EurPipe } from './eur.pipe';
 import { FavouritesComponent } from './components/favourites/favourites.component';
 import { UserStore } from './store/user.store';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
 // >>New - Configuring Auth Module
@@ -79,8 +80,11 @@ Auth.configure(awsconfig);
     MatSlideToggleModule,
     // MatDatepickerInput,
     FormsModule,
+    MatProgressBarModule,
     // MatDatepickerInputEvent,
     MatCardModule,
+    BrowserAnimationsModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     MatSelectModule,
     MatChipsModule,
