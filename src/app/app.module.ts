@@ -48,6 +48,7 @@ import { EurPipe } from './eur.pipe';
 import { FavouritesComponent } from './components/favourites/favourites.component';
 import { UserStore } from './store/user.store';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FooterComponent } from './components/footer/footer.component';
 
 // import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
 // >>New - Configuring Auth Module
@@ -74,6 +75,7 @@ Auth.configure(awsconfig);
     PaymentManagerComponent,
     EurPipe,
     FavouritesComponent,
+    FooterComponent,
   ],
   imports: [
     MatAutocompleteModule,

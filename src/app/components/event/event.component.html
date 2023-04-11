@@ -1,15 +1,14 @@
   <mat-card  class="example-card custom-card mt-3 selected-card">
-    <!-- <mat-card-header>
-    </mat-card-header> -->
+
     <img mat-card-image src="https://s3-images-web-ca2.s3.eu-west-1.amazonaws.com/{{event?.urlImg}}" alt="Photo of a Shiba Inu">
     <mat-card-content>
       <div class="row d-flex">
         <div class="col-8">
           <p class="card-text time-stamp"> {{event?.eventDateStarts | date }} at {{event?.eventDateStarts |date:'shortTime'}}</p>
         </div>
-        <div *ngIf="authenticator?.user" class="col-4 d-flex justify-content-end">
+        <div *ngIf="authenticator?.user"  class="col-4 d-flex justify-content-end">
           <button mat-fab matTooltip="Primary" color="white" aria-label="Example fab with a heart icon" class="white-button">
-            <span   [ngClass]="{'bi-heart': !isStarred, 'bi-heart-fill': isStarred, 'purple-star': isStarred}" class="example-card-icon" (click)="toggleStar()"></span>
+            <span  [ngClass]="{'bi-heart': !isStarred, 'bi-heart-fill': isStarred, 'purple-star': isStarred}" class="example-card-icon" (click)="toggleStar()"></span>
 
           </button>
         </div>
