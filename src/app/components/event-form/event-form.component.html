@@ -179,10 +179,10 @@
             <div class="col-4">
               <mat-form-field>
                 <mat-label>Order Start Time</mat-label>
-                <input matInput [matDatepicker]="startDatepicker"  formControlName="OrderStartDate" >
+                <input matInput [matDatepicker]="startDatepicker"  formControlName="eventDateStarts" >
                 <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
                 <mat-datepicker #startDatepicker></mat-datepicker>
-                <input matInput type="time" placeholder="Time" formControlName="StartTime">
+                <input matInput type="time" placeholder="Time">
               </mat-form-field>
             </div>
           </div>

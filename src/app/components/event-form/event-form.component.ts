@@ -84,7 +84,7 @@ export class EventFormComponent implements OnInit {
       contactNumber: new FormControl(this.event?.contactNumber),
       contact_email: new FormControl(this.event?.contact_email),
       eventDateStarts: new FormControl(this.event?.eventDateStarts),
-      eventDateEnds: new FormControl(this.event?.eventDateEnds),
+      // eventDateEnds: new FormControl('20/02/2023'),
       startsPrice: new FormControl(this.event?.startsPrice),
       category: new FormControl(this.event?.category),
       address: new FormGroup({
