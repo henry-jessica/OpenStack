@@ -1,19 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BeginComponent } from './components/begin/begin.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import {HomeComponent} from './components/home/home.component'; 
-import { AuthGuard } from '@auth0/auth0-angular';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { LoginComponent } from './login/login.component';
+// import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
   { path: 'events/:id', component: EventDetailsComponent },
-  { path: '', component: BeginComponent },
-  { path: '#', component: BeginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: LoginComponent },
+
+  { path: '#', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'home/evens/:id', component: EventDetailsComponent },
-  { path: 'begin', component: BeginComponent },
-  { path: '**', component: BeginComponent },
-  { path: 'home', component: BeginComponent, canActivate:[AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent },
+  
+  { path: 'user', component: UserProfileComponent },
+
+  // { path: 'begin', component: BeginComponent },
+  { path: '**', component: HomeComponent },
+  // { path: 'home', component: BeginComponent, canActivate:[AuthGuard] },
+  { path:'', component:HomeComponent},
 
 
 ];

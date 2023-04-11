@@ -1,0 +1,6 @@
+<p>Total: {{totalPrice}}</p>
+<div class="col-4" *ngFor="let ticket of event?.tickets">
+    <app-ticket [ticket]="ticket" (totalPriceChange)="onTotalPriceChange($event)"></app-ticket> 
+</div>
+
+<button mat-raised-button color="primary" (click)="onCheckout()">Buy Ticket</button>

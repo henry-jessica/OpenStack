@@ -2,15 +2,18 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+
     "baseUrl": "src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "types": ["jasmine", "node"], 
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "allowJs": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,

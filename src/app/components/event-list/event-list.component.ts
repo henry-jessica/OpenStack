@@ -11,8 +11,11 @@ export class EventListComponent implements OnInit {
 
   constructor(private _eventService:EventService) { }
   @Input() eventList?: IEvent[];
+  @Input() isFav?:boolean; 
   message:string = ""; 
   ngOnInit(): void {
+    console.log('cheeeeeeck', this.isFav); 
+
       this._eventService.getEvents().subscribe({
         next: (value: IEvent[] )=> this.eventList = value,
         complete: () => console.log('event service finished'), //TODO:COMPLETE EVENT - IF EMPTY DISPLAY SOME MESSAGE TO USER 

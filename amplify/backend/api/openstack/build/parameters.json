@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "openstack",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-openstack-dev-194427-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/10bea4fe5cf4cb64295754fc8a49b28c3a0206d3"
+}

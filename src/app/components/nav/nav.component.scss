@@ -1,34 +1,61 @@
-fa-icon{
-    font-size: 1.5rem;
-    color: rgb(221, 214, 206);
-}
-.favorites{
-    color: rgb(228, 219, 208);
-    border:1px solid white; 
-}
-.nav-item{
-    padding: 0.4rem;
-}
-.btn{
-    background: #f05538;
-    border: none;
+
+
+.bg-primary {
+    background-color: white !important;
 }
 
-.avatar {
+
+.nav-link img {
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	margin: -8px 0;
+	float: left;
+	margin-right: 10px;
+}
+.img-fluid{
+	border-radius: 50%;
+	// width: 5rem;
+	// height: 5rem;
+	margin: -8px 0;
+	float: left;
+	margin-right: 10px;
+}
+.navbar .navbar-brand i {
+	font-size: 20px;
+	margin-right: 5px;
+}
+
+.active{
+	border-bottom: 2px solid #027D95; 
+}
+.navbar-nav .nav-link:hover {
+	color: #fff; /* text color */
+	background-color: #dbdde1; /* background color */
+  }  
+
+.navbar {
+	color: #fff;
+	background: #ffff !important;
+	padding: 5px 16px;
+	border-radius: 0;
+	border: none;
+	box-shadow: 0 0 4px rgba(0,0,0,.1);
+}
+.navbar .profile{
 	border-radius: 50%;
 	width: 36px;
 	height: 36px;
 	margin-right: 10px;
 }
-
-
-
-
-
-//Check 
-
+.logo{
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+}
 .navbar .navbar-brand {
-	color: #17a2b8 !important;
+	color: #4dd4d5 !important;
 	// color: #525357!important;
 	// color: #525357!important;
 	padding-left: 0;
@@ -261,10 +288,7 @@ fa-icon{
 	  right: .25rem;
 	  margin-top: -.25rem;
 	}
-	.img-profile {
-	  height: 2rem;
-	  width: 2rem;
-	}
+
   }
   .badge-danger {
 	color: #fff;
@@ -282,8 +306,22 @@ fa-icon{
 	max-width: 1200px;
 }
 
-.profileBtn{
-	background-color: white;
-	color: black;
-	// border: 1px solid gray;
+.navbar-toggler{
+	background-color: #4dd4d5;
+}
+
+.search-box[_ngcontent-vpa-c227] input[_ngcontent-vpa-c227] {
+    padding-right: 35px;
+    min-height: 38px;
+    border: none;
+    background: #faf7fd !important;
+    border-radius: 3px !important;
+}
+
+.form-control{
+	padding-right: 35px;
+    min-height: 38px;
+    border: none;
+    background: #faf7fd !important;
+    border-radius: 3px !important;
 }

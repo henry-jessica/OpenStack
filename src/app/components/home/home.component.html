@@ -1,29 +1,84 @@
 
-<app-nav *ngIf="showNav"></app-nav>
+
+          <div  class="container pt-4">
+
+            <mat-tab-group animationDuration="0ms" mat-stretch-tabs (selectedTabChange)="SetTabIndex($event)">
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon pl-2">local_fire_department</mat-icon>
+                  <span>All Events</span>
+                </ng-template>
+                <div>
+                  <div class="pt-3"></div>
+                </div>
+              </mat-tab>
+  
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon mr-1">equalizer</mat-icon>
+                  <span>Concert</span>
+                </ng-template>
+                <div>
+                  <div class="pt-3"></div>
+                </div>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon mr-1">sports_basketball</mat-icon>
+                  <span>Sport</span>
+                </ng-template>
+                <div>
+                  <div class="pt-3"></div>
+                </div>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon mr-1">theater_comedy</mat-icon>
+                  <span class="btn-tab">Art & Theater</span>
+                </ng-template>
+                <div>
+                  <div class="pt-3"></div>
+                </div>
+              </mat-tab>
+              <mat-tab *ngIf="authenticator?.user">
+                <ng-template mat-tab-label >
+                  <mat-icon class="example-tab-icon mr-1">favorite</mat-icon>
+                  <span class="btn-tab">Favourites</span>
+                </ng-template>
+                <div>
+                  <div class="pt-3"></div>
+                </div>
+              </mat-tab>
+              
+            </mat-tab-group>
+          </div>
+  
+          
+
 <div class="main-banner">
   <div class="container">
     <form id="search-form">
       <h3 class="mt-5" style="text-align: center; margin-top: 0.4rem">
-        Welcome <span *ngIf="auth.user$ | async as user">{{ user.given_name }}</span> to <br> Event Management Portal
+        Welcome to <br> Event Management Portal
       </h3>
       <div class="align-items-center">
         <div class="row justify-content-center">
           <div class="ml-6 col-sm-6 col-lg-6 mb-5">
             <label for="keyword"></label>
             <div class="input-group justify-content-center">
-              <input
+              <!-- <input
                 type="text"
                 class="form-control"
                 id="location"
                 placeholder="Search for city or event name"
-                #search (keyup)="getEventByLocationOrName(search?.value)"/>
-              <button
+                #search (keyup)="getEventByLocationOrName(search?.value)"/> -->
+              <!-- <button
                 type="submit"
                 class="btn btn-primary"
                 id="search"
-                (click)="getEventByLocationOrName(search?.value)" >
-                Search
-              </button>
+                (click)="getEventByLocationOrName(search?.value)" > -->
+                <!-- Search -->
+              <!-- </button> -->
             </div>
           </div>
         </div>
@@ -33,8 +88,10 @@
  </div>
 
 <div class="container pt-4" [class.border]="isShow">
-    <app-event-list [eventList]="events"></app-event-list>
-  </div>
+    <app-event-list [eventList]="events" [isFav]="isFav"></app-event-list>
+</div>
 
 
  
+
+

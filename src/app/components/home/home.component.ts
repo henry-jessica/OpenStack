@@ -1,6 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { AuthService } from '@auth0/auth0-angular';
 import { IEvent } from '../../Interfaces/event-interface';
 import { EventService } from '../../services/event.service';
 import { EventFormComponent } from '../event-form/event-form.component';
@@ -9,6 +7,11 @@ import { Store } from '@ngxs/store';
 import { AddAuth } from 'app/store/auth.actions';
 import { AuthService as AuthAPIService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Auth } from 'aws-amplify';
+import { EventFilterService } from '../nav/navService';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,35 +19,42 @@ import { DOCUMENT } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
+  events: IEvent[] = [];
   isShow?: boolean = false;
   event?: any; 
-  events?:IEvent[]; 
   errorMessage:any; 
   showNav: boolean = false; 
-
-  constructor(private _httpEventService:EventService, public dialog:MatDialog, public auth: AuthService,
+  userGroup?: string;
+  eventsFav?: any[];
+  isFav:boolean = false; 
+  
+  constructor(private _httpEventService:EventService, public dialog:MatDialog,private eventFilterService: EventFilterService,public authenticator: AuthenticatorService,
     @Inject(DOCUMENT) public document: Document,
-    public auth2: AuthService,
     private router: Router,
     private _httpAuthService: AuthAPIService,
     private store: Store
-    ) { }
+    ) { 
+      Auth.currentAuthenticatedUser()
+    .then(user => {
 
-  isAuthenticated$ = this.auth.isAuthenticated$
-
-  ngOnInit(): void {
-    this.auth.isAuthenticated$.subscribe(isAuthenticated =>{
-      if(isAuthenticated){
-        this.showNav = true;
+      if(user.signInUserSession.accessToken.payload["cognito:groups"][0]){
+        localStorage.setItem('userGroup', JSON.stringify(this.userGroup)); 
       }
       else{
-             this.router.navigate(['']);
+        localStorage.setItem('userGroup', JSON.stringify('user')); 
       }
-
-      console.log('test',this.isAuthenticated$ )
-
     })
-    this.getUserRole()
+    .catch(err => console.log(err));
+    }
+
+  ngOnInit(): void {
+
+    console.log(this.userGroup); 
+
+    localStorage.setItem('manager', JSON.stringify(this.userGroup)); 
+    this.eventFilterService.getEvents().subscribe(events => {
+      this.events = events;
+    });
   }
 
   getEventByLocationOrName(event:any):boolean{
@@ -62,30 +72,81 @@ export class HomeComponent implements OnInit {
     return false; 
     }
 
-  getUserRole() {
-    console.log('CALLED  ');
-
-    this.auth2.user$.subscribe((user) => {
-      console.log('USER ==> ', user?.sub);
-      console.log('this.userId', user?.sub);
-      if(user?.sub){
+    SetTabIndex(event:any)
+    {
+      this.isFav = false;
+      console.log('this', event.index);
+      if(event.index==0){
+        this.getEventsByCategory('');
+      } 
+      if(event.index==1){
+        this.getEventsByCategory('Concert');
       }
-      const res =
-        user?.sub &&
-        this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
-          console.log('USER ROLE: ', res[0]?.name);
-          this.store.dispatch(
-            new AddAuth({
-              id: res[0]?.id,
-              name: res[0]?.name,
-              description: res[0]?.description,
-            })
-          );
-          
-        });
-    });
+      if(event.index==2){
+        this.getEventsByCategory('Sport');
+      }
+      if(event.index==3){
+        this.getEventsByCategory('Art');
+      }
+      if(event.index==4){
+        this.getEventFavourites(); 
+        this.isFav = true; 
+        console.log(this.isFav); 
+      }
+    }
+
+    
+    getEventsByCategory(cat:string){
+      this._httpEventService.getEventsCategory(cat).subscribe(
+        event => {
+          this.event=event; 
+          this.events= this.event;   
+          this.events?.forEach(element => {
+            console.log('element',element);  //TODO: IF DONT FIND THE ELEMENT NEED INFORM TO USER - CREATE MESSAGE 
+          });
+        }, 
+        error=> this.errorMessage = <any>error 
+      ); 
+      return false; 
+      
+    }
+    getEventFavourites() {
+      console.log('check fav')
+      this._httpEventService.getFavouriteEvents().subscribe(
+        response => {
+          this.eventsFav = response
+          console.log( 'events', this.eventsFav); 
+          this.events = []; // clear events array before adding new events
+          this.eventsFav.forEach(element => {
+            console.log(element); 
+            const eventData = {
+              _id: element._id, // add missing properties or create a new object
+              category: "category", // add missing properties or create a new object
+              tickets: [], // add missing properties or create a new object
+              views: element.eventData.view, // add missing properties or create a new object
+              name: element.eventData.name,
+              description: element?.eventData?.description,
+              contactNumber: element?.eventData?.contactNumber,
+              contact_email: element?.eventData?.contact_email,
+              eventDateStarts: element?.eventData?.eventDateStarts,
+              eventDateEnds: element.eventData.eventDateEnds,
+              urlImg: element?.eventData?.urlImg,
+              address: element?.eventData?.address,
+              startsPrice: element?.eventData?.startsPrice,
+              refundpolicy: element?.reventData?.efundpolicy,
+              currency: element?.eventData?.currency
+            };
+            console.log('eventData', eventData);
+            this.events.push(eventData); // add eventData to events array
+          });
+          localStorage.setItem('favourites', JSON.stringify(this.eventsFav)); 
+
+        },
+        error => this.errorMessage = <any>error
+      );
+    
+      return false;
+    }
+    
   }
 
-  }
-
-  

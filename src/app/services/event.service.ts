@@ -8,6 +8,7 @@ import { IEvent } from '../Interfaces/event-interface';
 })
 export class EventService {
   private dataUri = `${environment.apiUri}/api/events`;
+  private readonly apiFavouriteURL = 'https://ugjhe6itie.execute-api.eu-west-1.amazonaws.com/dev';
 
   constructor(private _http: HttpClient) {}
 
@@ -17,6 +18,30 @@ export class EventService {
       .pipe(retry(3), catchError(this.handleError));
   }
 
+
+      // 
+      // getUser(email:string): Observable<any> {
+      //   return this._http
+      //     .get<any>('https://yj7utnncl0.execute-api.eu-west-1.amazonaws.com/dev/get-user-database?email=s@test')
+      //     .pipe(retry(3), catchError(this.handleError));
+      // }
+      getUser(email:string): Observable<any>{
+        return this._http
+        .get<any>(
+           `https://yj7utnncl0.execute-api.eu-west-1.amazonaws.com/dev/get-user-database?email=${email}`
+        )
+        .pipe(
+            tap((user: any) => {
+                localStorage.setItem('user', JSON.stringify(user))
+            }),
+            catchError(this.hangleError2))
+    } private hangleError2(err: HttpErrorResponse){
+      return throwError('error: ' + err.message)
+  }
+
+      
+      //https://r1tulkewqd.execute-api.eu-west-1.amazonaws.com/dev/get-user-database?email=s@test
+      //https://50bqcxeszd.execute-api.eu-west-1.amazonaws.com/dev/user/
   //Adding a event
   addEvent(event: any): Observable<IEvent> {
     return this._http.post<any>(this.dataUri, event).pipe(take(1));
@@ -28,6 +53,19 @@ export class EventService {
       .get<IEvent[]>(this.dataUri + '?city=' + keyword + '&&name=' + keyword)
       .pipe(tap(), catchError(this.handleError));
   }
+
+  getEventsCategory(keyword: string): Observable<IEvent[]> {
+    return this._http
+      .get<IEvent[]>(this.dataUri + '?category=' + keyword)
+      .pipe(tap(), catchError(this.handleError));
+  }
+
+  getFavouriteEvents(): Observable<any[]> {
+    return this._http
+      .get<any[]>('https://xfnk4jc4s7.execute-api.eu-west-1.amazonaws.com/dev/get-all-favourties')
+      .pipe(tap(), catchError(this.handleError));
+  }
+
 
   //Deleting a event
   deleteEvent(id: string): Observable<unknown> {
@@ -42,10 +80,26 @@ export class EventService {
       .put<IEvent>(dataUri, event)
       .pipe(catchError(this.handleError));
   }
+
+  deleteFavourite(id: string) {
+    const url = `${this.apiFavouriteURL}/favourite-remove/${id}`;
+    return this._http.delete(url);
+  }
+
+  // deleteEvent() {
+  //   const eventId = '643403c9acec226339a47a54'; // Replace with the actual ID of the event to delete
+  //   this.eventService.deleteEvent(eventId).subscribe(result => {
+  //     console.log(result); // Handle the success response
+  //   }, error => {
+  //     console.error(error); // Handle the error response
+  //   });
+  // }
+
+
   // Get Event By ID
-  getEventById(id: string | undefined): Observable<IEvent> {
+  getEventById(id: string | undefined): Observable<any> {
     return this._http
-      .get<IEvent>(`${this.dataUri}/${id}`)
+      .get<any>(`${this.dataUri}/${id}`)
       .pipe(tap(), catchError(this.handleError));
   }
 
@@ -67,5 +121,33 @@ export class EventService {
     );
   }
 
+counties = [
+      "Carlow",
+      "Cavan",
+      "Clare",
+      "Cork",
+      "Donegal",
+      "Dublin",
+      "Galway",
+      "Kerry",
+      "Kildare",
+      "Kilkenny",
+      "Laois",
+      "Leitrim",
+      "Limerick",
+      "Longford",
+      "Louth",
+      "Mayo",
+      "Meath",
+      "Monaghan",
+      "Offaly",
+      "Roscommon",
+      "Sligo",
+      "Tipperary",
+      "Waterford",
+      "Westmeath",
+      "Wexford",
+      "Wicklow"
+    ]
   
 }

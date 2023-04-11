@@ -2,6 +2,8 @@
 // @import "~bootstrap-icons/font/bootstrap-icons.css";
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+@import '~@aws-amplify/ui-angular/theme.css';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round";

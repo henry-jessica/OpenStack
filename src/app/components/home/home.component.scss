@@ -7,7 +7,6 @@
     position: relative;
     overflow: hidden;
     background-position: 50%;
-    /* height: 26rem; */
     opacity: 1;
     margin: 0px;
     color: black;
@@ -17,4 +16,9 @@
     background: #ffff;
     color: #f05538;
     border: 1px solid #f05538;
+}
+
+
+mat-icon {
+    margin-right: 1rem;
 }

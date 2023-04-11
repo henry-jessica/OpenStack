@@ -1,14 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
-import { IEvent } from '../../Interfaces/event-interface';
+import { IEvent, ITicket } from '../../Interfaces/event-interface';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { MessagesComponent } from '../messages/messages.component';
 import { IMessages } from 'app/Interfaces/message-interface';
 import { AuthService as AuthAPIService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
-import { AuthService } from '@auth0/auth0-angular';
+import { catchError, Observable, of, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Auth } from 'aws-amplify';
+// import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-event-details',
@@ -16,64 +20,54 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./event-details.component.scss']
 })
 export class EventDetailsComponent implements OnInit {
-
-  userRole:string="user"; 
-  event:IEvent | undefined; 
+  event?:IEvent; 
   id?:string;
   message?:IMessages; 
   displaySucessMessage: boolean=false;
   isShow:boolean = false; 
-
+  userGroup: string | null = '';
   
   private sub: any;
   private dialogRef?: MatDialogRef<EventFormComponent>
   private dialogRef2?: MatDialogRef<MessagesComponent>
+  handleError: any;
+  isLoading = true;
+
   
-  constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router,
+  constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router, private _http:EventService,
+    public authenticator:AuthenticatorService,
     @Inject(DOCUMENT) public document: Document,
-    public auth: AuthService,
     private router: Router,
     private _httpAuthService: AuthAPIService
     ) {
     this.route.params
     .subscribe(params=>console.log(params)); 
-   }
-
-   isAuthenticated$ = this.auth.isAuthenticated$;
-
+    Auth.currentAuthenticatedUser()
+    .then(user => {
+      this.userGroup = user.signInUserSession.accessToken.payload["cognito:groups"][0];
+      console.log(this.userGroup); 
+  
+    })
+    .catch(err => console.log(err));
+    }
   ngOnInit(): void {   
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
-    this.getUserRole();
-
+    this.loadData().then(() => {
+      // When data is loaded, hide the progress bar
+      this.isLoading = false;
+    });
   }
   getEvent():boolean{
     this._httpEvent.getEventById(this.id).subscribe(
       event => {
         this.event=event; 
         this.event = this.event;   
+        console.log('getting', event); 
       }, 
-      // error=> this.errorMessage = <any>error TODO  error Message
     ); 
     return false; 
     }
-
-
-  getUserRole() {
-    console.log('CALLED  ');
-
-    this.auth.user$.subscribe((user) => {
-      console.log('USER ==> ', user?.sub);
-      console.log('this.userId', user?.sub);
-      const res =
-        user?.sub &&
-        this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
-          console.log('USER ROLE: ', res[0].name);
-          this.userRole = res[0].name; 
-        });
-    });
-  }
-
     cancel(){
       this.isShow = false; 
       this.displaySucessMessage=false; 
@@ -92,6 +86,14 @@ export class EventDetailsComponent implements OnInit {
       dialogConfig.data= this.event,
       this.dialogRef= this.dialog.open(EventFormComponent,dialogConfig);
     }
+    private async loadData(): Promise<void> {
+      return new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
+    }
+
     onDelete(){
       this.message={
         taskName:'Delete',
@@ -115,7 +117,6 @@ export class EventDetailsComponent implements OnInit {
               .subscribe({
                 next: event => {
                   console.log(JSON.stringify(event) + ' has been delettted');
-                  //TODO - Message with timer informing about event deleted 
                   this._router.navigate(['home'])
                 },
                 error: (err) => console.log(err) //TODO ERROR MESSAGE

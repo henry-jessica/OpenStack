@@ -19,12 +19,39 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BeginComponent } from './components/begin/begin.component';
 // Import the module from the SDK
-import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
+// import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { MatMenuModule } from '@angular/material/menu';
 import { environment } from 'environments/environment';
 import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './store/auth.state';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from '../aws-exports';
+import { LoginComponent } from './login/login.component'
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { UserTicketComponent } from './components/user-ticket/user-ticket.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { PaymentManagerComponent } from './components/payment-manager/payment-manager.component';
+import { EurPipe } from './eur.pipe';
+import { FavouritesComponent } from './components/favourites/favourites.component';
+import { UserStore } from './store/user.store';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+// import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
+// >>New - Configuring Auth Module
+Auth.configure(awsconfig);
 
 @NgModule({
   declarations: [
@@ -38,38 +65,48 @@ import { AuthState } from './store/auth.state';
     HeroComponent,
     MessagesComponent,
     BeginComponent,
-
-
+    LoginComponent,
+    BuyTicketComponent,
+    TicketComponent,
+    CheckoutComponent,
+    UserTicketComponent,
+    UserProfileComponent,
+    PaymentManagerComponent,
+    EurPipe,
+    FavouritesComponent,
   ],
   imports: [
+    MatAutocompleteModule,
+    MatSlideToggleModule,
+    // MatDatepickerInput,
     FormsModule,
+    MatProgressBarModule,
+    // MatDatepickerInputEvent,
+    MatCardModule,
+    BrowserAnimationsModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatChipsModule,
     BrowserModule,
+    MatTabsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
     MatDatepickerModule,
+    MatButtonModule,
     MatInputModule,
+    MatStepperModule,
     MatNativeDateModule,
     MatMenuModule,
-
-    AuthModule.forRoot({
-      domain: 'dev-zxkcix0u0cipypz8.eu.auth0.com',
-      clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E',
-      httpInterceptor: {
-        allowedList: [`${environment.apiUri}/api/events`, `${environment.apiUri}/api/events/*`],
-      },
-    }),
-
-    // state management
+    MatRadioModule,
+    AmplifyAuthenticatorModule,
+    MatIconModule,
     NgxsModule.forRoot([AuthState]),
   ],
-  providers: [ {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthHttpInterceptor,
-    multi: true,
-  },],
+  providers: [UserStore],
+
   bootstrap: [AppComponent], 
   entryComponents:[EventFormComponent], 
 
