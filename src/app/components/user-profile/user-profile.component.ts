@@ -85,13 +85,10 @@ updateUser() {
 
     return false;
   }
-  //load pet owner data to local storage
 async getUser(){
   try {
   const user =  await this._httpUser.getUser(this.email).toPromise()
   this.user = user;
-   // Update the pet owner's image URL in the navigation service
-  //  this.navigationService.updateUserImage(this.petOwner?.profilePicUrl);
   localStorage.setItem('user', JSON.stringify(this.user)); 
 
 
