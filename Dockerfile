@@ -1,11 +1,11 @@
-# need to use the specific version of node that is dist is built 
+#Create the node stage
 FROM node:16.16.0 AS builder
 
 WORKDIR /client
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
 
