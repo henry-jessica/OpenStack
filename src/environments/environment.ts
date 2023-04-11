@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUri: 'https://osd-backend-production.up.railway.app/api/events',
+  apiUri: 'https://osd-backend-production.up.railway.app',
   // auth0: {
   //   domain: 'dev-zxkcix0u0cipypz8.eu.auth0.com',
   //   clientId: 'tGDugZvGb9UhwjJIBajPGqhcJEPuh09E',
