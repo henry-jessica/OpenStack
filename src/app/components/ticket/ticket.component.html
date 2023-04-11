@@ -12,8 +12,16 @@
         <span>All Events</span>
       <h5 class="card-title">Price</h5>
       <p class="card-subtitle mb-2 text-muted">This price might change </p>
-      <h4 class="card-text">{{ticket?.title}}</h4>
-      <h4 class="card-text">{{ticket?.price}}</h4>
-      <h4 class="card-text">{{ticket?.availableSeats}}</h4>
+      <div class="row d-flex">
+        <div class="col-8">
+          <h4 class="card-text">{{ticket?.title}}</h4>
+        </div>
+        <div class="col-4">
+          <h4 class="card-text">€ {{ticket?.price}}</h4>
+
+        </div>
+    </div>
+
+      <!-- <h4 class="card-text">Available {{ticket?.availableSeats}}</h4> -->
     </div>
   </div>
