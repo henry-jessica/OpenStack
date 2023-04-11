@@ -25,11 +25,6 @@ export class UserProfileComponent implements OnInit {
     console.log(this.authenticator?.user?.attributes)
     this.email = this.authenticator?.user?.attributes?.email;
     this.getUser(); 
-
-    // this._http.put('https://41z1wg9xa4.execute-api.eu-west-1.amazonaws.com/dev/put-user',this.user).subscribe(data => {
-    //   console.log('my data',data);
-    // });
-
     this.userForm = new FormGroup({
       username: new FormControl(this.authenticator?.user?.attributes?.['name'], [Validators.required]),
       surname: new FormControl(this.authenticator?.user?.attributes?.['family_name'], [Validators.required]),

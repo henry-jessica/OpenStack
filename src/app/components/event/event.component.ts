@@ -65,24 +65,6 @@ export class EventComponent implements OnInit {
        this.deleteFavourite(); 
     }
   }
-  
-  
-  
-    
-    // this._eventService.getFavouriteEvents().subscribe(
-    //   response => {
-    //     const events = response.filter(item => item.event != null).map(item => item.event);
-    //     this.eventsFav = events;
-    //     console.log('fav',this.eventsFav); 
-    //     console.log('event',events); 
-    //     if (this.eventsFav.find(event => event._id === this.event?._id)) {
-    //       this.isStarred = true;
-    //       console.log('is fav')
-    //     }
-    //   },
-    //   error => this.errorMessage = <any>error
-    // );
-
 deleteFavourite(){
         if (this.event) { 
           this._eventService.deleteFavourite(this.event._id) 
@@ -96,49 +78,6 @@ deleteFavourite(){
         } 
   }
 
-  // deleteFavourite(): void {
-  //   if (!this.event) {
-  //     console.log('Event is undefined');
-  //     return;
-  //   }
-    
-  //   const userStr = localStorage.getItem('user');
-  //   if (userStr !== null) {
-  //     const user = JSON.parse(userStr);
-  //     const favouriteEvent = {
-  //       eventData: this.event,
-  //       userId: user._id
-  //     };
-    
-  //     console.log('my object', favouriteEvent);
-    
-  //     const url = 'https://yamura76ja.execute-api.eu-west-1.amazonaws.com/dev/favourites/delete';
-  //     this.http.post(url, favouriteEvent).subscribe(result => {
-  //       console.log(result); // Handle the success response
-        
-  //       // Remove the event from the local storage
-  //       const favouritesStr = localStorage.getItem('favourites');
-  //       if (favouritesStr) {
-  //         const favourites = JSON.parse(favouritesStr);
-  //         const eventIndex = favourites.findIndex((event: any) => event._id === this.event?._id);
-  //         if (eventIndex > -1) {
-  //           favourites.splice(eventIndex, 1);
-  //           localStorage.setItem('favourites', JSON.stringify(favourites));
-  //         }
-  //       }
-        
-  //     }, error => {
-  //       console.error(error); // Handle the error response
-  //     });
-      
-  //     this.isStarred = false;
-  //   }
-
-  //   this.deleteFavourite2(); 
-  // }
-  
-
-
   deleteEvent(){
         if (this.event) { 
           this._eventService.deleteEvent(this.event._id) 
@@ -151,21 +90,8 @@ deleteFavourite(){
             }); 
         } 
   }
-// toggleStar() {
-//   const eventId = this.event?._id;
-//   if (eventId) {
-//     const foundEvent = this.eventsFav?.find((event: any) => event._id === eventId);
-//     this.isStarred = foundEvent !== undefined;
-//   } else {
-//     this.isStarred = false;
-//   }
-//   this.AddEventFavourite(); 
-// }
-
  
   seeEvent(){
-
-    //put event views 
     if(this.event)
     this.addViews(this.event?._id); 
     this.route.navigate(['/events', this.event?._id]);
@@ -180,7 +106,6 @@ deleteFavourite(){
     this._eventService.updateEvent(id, this.event).subscribe({
       next: book => {
         console.log(JSON.stringify(book) + ' has been updated');
-        // this.successMessage('update')
       },
       error: err => console.log(err)
     });

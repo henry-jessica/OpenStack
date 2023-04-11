@@ -1,68 +1,3 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
-  <div class="container">
-    <a class="navbar-brand" routerlink="" href="/home">
-      <img src="/assets/images/easyeventlogo.png" width="160" height="160" alt="CloneBrite" class="img-fluid" /></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent ">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-item d-flex justify-content-end">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/about" routerLinkActive="active">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">Set Offer</a>
-        </li>
-      </ul>
-      <li class="nav-item d-flex justify-content-end">
-        <button
-          *ngIf="userRole === 'admin'"
-          class="btn btn-primary text-center d-flex justify-content-end"
-          (click)="onCreateEvent()">
-          Create Event
-        </button>
-      </li>
-      <li class="nav-item d-flex justify-content-end">
-        <button class="btn btn-primary text-center d-flex justify-content-end" (click)="Logout()">
-          LogOut
-        </button>
-      </li>
-      <li class="nav-item d-flex justify-content-end">
-        <button class="btn btn-primary profileBtn text-center d-flex justify-content-end">
-          <a mat-button data-toggle="dropdown"
-          class="nav-item nav-link dropdown-toggle user-action">
-            <img  src="" class="avatar" alt="Avatar" src="">   <b class="caret"></b></a>
-        </button>
-      </li>
-    </div>
-  </div>
-</nav>
-
-
-
-<nav  class="navbar navbar-expand-lg navbar-light bg-primary p-3">
-  <div class="container">
-    <a class="navbar-brand" routerlink="" href="/home">
-      <img src="/assets/images/easyeventlogo.png" width="160" height="160" alt="CloneBrite" class="img-fluid" /></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse  justify-content-end" id="navbarNavAltMarkup">
-    <div class="navbar-nav" >
-      <a class="nav-item nav-link active" routerLink="initial">Home <span class="sr-only"></span></a>
-      <a class="nav-item nav-link" routerLink="login">Login</a>
-      <a class="nav-item nav-link" routerLink="Register">Register</a>
-      <a class="nav-item nav-link" routerLink="forum">Forum</a>
-    </div>
-  </div>
-</div>
-</nav> -->
-
-
 <nav  *ngIf="!authenticator.user" class="navbar navbar-expand-lg navbar-light bg-primary p-3">
   <div class="container">
     <a class="navbar-brand" routerlink="" href="/home">
@@ -166,7 +101,6 @@
       </a>
       <a class="dropdown-item d-flex align-items-center" href="#">
         <div class="dropdown-list-image mr-3">
-          <!-- <img class="rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="..." /> -->
           <div class="status-indicator bg-success"></div>
         </div>
         <div>

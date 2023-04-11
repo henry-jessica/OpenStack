@@ -20,9 +20,6 @@ import { Auth } from 'aws-amplify';
   styleUrls: ['./event-details.component.scss']
 })
 export class EventDetailsComponent implements OnInit {
-
-  
-  // userRole:string="user"; 
   event?:IEvent; 
   id?:string;
   message?:IMessages; 
@@ -38,7 +35,6 @@ export class EventDetailsComponent implements OnInit {
   constructor(private _httpEvent: EventService, private route:ActivatedRoute, private dialog:MatDialog, private _router: Router, private _http:EventService,
     public authenticator:AuthenticatorService,
     @Inject(DOCUMENT) public document: Document,
-    // public auth: AuthService,
     private router: Router,
     private _httpAuthService: AuthAPIService
     ) {
@@ -52,13 +48,9 @@ export class EventDetailsComponent implements OnInit {
     })
     .catch(err => console.log(err));
     }
-  //  isAuthenticated$ = this.auth.isAuthenticated$;
-
   ngOnInit(): void {   
-    // this.userGroup =  localStorage.getItem('userGroup'); 
     this.id = this.route.snapshot.params['id'];
     this.getEvent(); 
-    // this.getUserRole();
   }
   getEvent():boolean{
     this._httpEvent.getEventById(this.id).subscribe(
@@ -66,44 +58,10 @@ export class EventDetailsComponent implements OnInit {
         this.event=event; 
         this.event = this.event;   
         console.log('getting', event); 
-        // this.seeEvent(); 
-
       }, 
-      // error=> this.errorMessage = <any>error TODO  error Message
     ); 
     return false; 
     }
-
-
-    // seeEvent() {
-    //   if(this.event){
-    //   this.event.views++; // increment view count by 1
-    //   this._http.updateEvent(this.event?._id, this.event).subscribe({
-    //     next: book => {
-    //       console.log(JSON.stringify(book) + ' has been updated');
-    //       // this.successMessage('update')
-    //     },
-    //     error: err => console.log(err)
-    //   });
-    // }
-    // }
-    
-
-  // getUserRole() {
-  //   console.log('CALLED  ');
-
-  //   this.auth.user$.subscribe((user) => {
-  //     console.log('USER ==> ', user?.sub);
-  //     console.log('this.userId', user?.sub);
-  //     const res =
-  //       user?.sub &&
-  //       this._httpAuthService.getUserRole(user?.sub).subscribe((res) => {
-  //         console.log('USER ROLE: ', res[0].name);
-  //         this.userRole = res[0].name; 
-  //       });
-  //   });
-  // }
-
     cancel(){
       this.isShow = false; 
       this.displaySucessMessage=false; 
@@ -146,7 +104,6 @@ export class EventDetailsComponent implements OnInit {
               .subscribe({
                 next: event => {
                   console.log(JSON.stringify(event) + ' has been delettted');
-                  //TODO - Message with timer informing about event deleted 
                   this._router.navigate(['home'])
                 },
                 error: (err) => console.log(err) //TODO ERROR MESSAGE
