@@ -27,7 +27,8 @@ export class HomeComponent implements OnInit {
   userGroup?: string;
   eventsFav?: any[];
   isFav:boolean = false; 
-  
+  isLoading = true;
+
   constructor(private _httpEventService:EventService, public dialog:MatDialog,private eventFilterService: EventFilterService,public authenticator: AuthenticatorService,
     @Inject(DOCUMENT) public document: Document,
     private router: Router,
@@ -48,7 +49,10 @@ export class HomeComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
+    this.loadData().then(() => {
+      // When data is loaded, hide the progress bar
+      this.isLoading = false;
+    });
     console.log(this.userGroup); 
 
     localStorage.setItem('manager', JSON.stringify(this.userGroup)); 
@@ -57,6 +61,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  private async loadData(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+  }
+
+  
   getEventByLocationOrName(event:any):boolean{
     console.log(`value=${event}`);
     this._httpEventService.getEventsDataFiltering(event).subscribe(
