@@ -244,7 +244,7 @@
     </mat-menu>
     <a mat-button [matMenuTriggerFor]="beforeMenu" data-toggle="dropdown"
    class="nav-item nav-link dropdown-toggle user-action pt-4">
-   {{authenticator?.user?.username}}
+   {{authenticator?.user?.attributes?.['name']}} {{authenticator?.user?.attributes?.['family_name']}}
    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded-circle profile profileImg">
    <b class="caret"></b>
 

@@ -11,8 +11,8 @@
           <p class="mt-3 pl-3 pl-md-2">
             <span>Refund Policy : {{event?.refundpolicy | titlecase}} </span>
           </p>
-          <p>Total views: {{event?.views}}</p>
             <div *ngIf="userGroup=='manager'" class="row pt-4">
+              <p>Total views: {{event?.views}}</p>
               <div class="col-6">
                 <button class="btn btn-info w-100" (click)="onEditEvent()">Edit Event</button>
               </div>
