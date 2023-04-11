@@ -1,6 +1,12 @@
 <p>Total: {{totalPrice}}</p>
-<div class="col-4" *ngFor="let ticket of event?.tickets">
+<div class="col-4 mt-4" *ngFor="let ticket of event?.tickets">
     <app-ticket [ticket]="ticket" (totalPriceChange)="onTotalPriceChange($event)"></app-ticket> 
 </div>
 
-<button mat-raised-button color="primary" (click)="onCheckout()">Buy Ticket</button>
+
+<div class="container mt-4">
+    <div class="row">
+        <button mat-raised-button *ngIf="authenticator?.user" color="primary" (click)="onCheckout()">Buy Ticket</button>
+        <button mat-raised-button *ngIf="!authenticator?.user" color="primary" routerLink="/login">Create Account to buy ticket</button>
+    </div>
+</div>

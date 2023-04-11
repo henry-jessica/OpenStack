@@ -1,4 +1,133 @@
-<nav  *ngIf="!authenticator.user" class="navbar navbar-expand-lg navbar-light bg-primary p-3">
+<!-- <nav  *ngIf="!authenticator.user" class="navbar navbar-expand-lg navbar-light bg-primary p-3">
+  <div class="container">
+    <a class="navbar-brand" routerlink="" href="/home">
+      <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <form class="navbar-form form-inline">
+    <div class="input-group search-box">
+      <input
+                type="text"
+                class="form-control"
+                id="location"
+                placeholder="Search for city or event name"
+                #search (keyup)="getEventByLocationOrName(search?.value)"/>
+      <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+    </div>
+  </form>
+  <div class="collapse navbar-collapse  justify-content-end" id="navbarNavAltMarkup">
+    <div class="navbar-nav" >
+      <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" *ngIf="authenticator?.user" routerLink="/login" routerLinkActive="active">Became a Promoter</a>
+      <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active">Login</a>    
+        <a class="nav-item nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+
+    </div>
+  </div>
+</div>
+</nav>
+
+<nav *ngIf="authenticator.user" class="navbar navbar-expand-xl navbar-dark bg-dark">
+<div class="container">
+  <a class="navbar-brand" routerlink="" href="/home">
+    <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid" /></a>
+<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<form class="navbar-form form-inline">
+  <div class="input-group search-box">
+    <input
+    type="text"
+    class="form-control"
+    id="location"
+    placeholder="Search for city or event name"
+    #search (keyup)="getEventByLocationOrName(search?.value)"/>
+    <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+  </div>
+</form>
+<div id="navbarCollapse" class="collapse navbar-collapse justify-content-end">
+  <div class="navbar-nav ml-auto">
+    <a routerLink="/initial" class="nav-item nav-link icons" routerLinkActive="active"><i class="bi bi-house-heart-fill"></i><span>Home</span></a>
+    <a routerLink="/orders" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-item nav-link"><i class="bi bi-receipt"></i><span>Orders</span></a>
+    <a  *ngIf="userGroup == 'manager'"     (click)="onCreateEvent()"   routerLinkActive="active" class="nav-item nav-link" ><i class="bi bi-ticket-perforated"></i><span>Create Event</span></a>
+
+    <mat-menu #messageBox="matMenu" xPosition="before">
+      <h6 class="dropdown-header">Create Event</h6>
+      <a class="dropdown-item d-flex align-items-center" href="#">
+        <div class="dropdown-list-image mr-3">
+          <img class="rounded-circle profile"
+            src=""
+            alt="..." />
+          <div class="status-indicator bg-success"></div>
+        </div>
+        <div class="font-weight-bold">
+          <div class="text-truncate">
+            Hi there! I am wondering if you can help me with a problem I've
+            been having.
+          </div>
+          <div class="small text-gray-500">Fred · 58m</div>
+        </div>
+      </a>
+      <a class="dropdown-item d-flex align-items-center" href="#">
+        <div class="dropdown-list-image mr-3">
+          <div class="status-indicator"></div>
+        </div>
+        <div>
+          <div class="text-truncate">
+            I have the photos that you ordered last month, how would you like
+            them sent to you?
+          </div>
+          <div class="small text-gray-500">Amy · 1d</div>
+        </div>
+      </a>
+      <a class="dropdown-item d-flex align-items-center" href="#">
+        <div class="dropdown-list-image mr-3">
+          <div class="status-indicator bg-warning"></div>
+        </div>
+        <div>
+          <div class="text-truncate">
+            Last month's report looks great, I am very happy with the progress
+            so far, keep up the good work!
+          </div>
+          <div class="small text-gray-500">Michael Jackson · 2d</div>
+        </div>
+      </a>
+      <a class="dropdown-item d-flex align-items-center" href="#">
+        <div class="dropdown-list-image mr-3">
+          <div class="status-indicator bg-success"></div>
+        </div>
+        <div>
+          <div class="text-truncate">
+            Am I a good boy? The reason I ask is because someone told me that
+            people say this to all dogs, even if they aren't good...
+          </div>
+          <div class="small text-gray-500">Chicken the Dog · 2w</div>
+        </div>
+      </a>
+      <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+    </mat-menu>
+    <a mat-button [matMenuTriggerFor]="beforeMenu" data-toggle="dropdown"
+      class="nav-item nav-link dropdown-toggle user-action pt-4">
+      {{user?.name}} {{user?.familyName}}
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded-circle profile profileImg">
+      <b class="caret"></b></a>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <a  routerLink="/user" class="dropdown-item" ><i class="bi bi-person pr-3 pt-2"></i>Profile</a>
+      <a href="#" class="dropdown-item"><i class="bi bi-receipt-cutoff pr-3 pt-2"></i> Billing</a>
+      <a href="#" class="dropdown-item"><i class="bi bi-sliders2 pr-3 pt-2"></i>Settings</a>
+      <div class="divider dropdown-divider"></div>
+      <a class="dropdown-item" (click)="Logout()"><i class="bi bi-box-arrow-left pr-3"></i> Logout</a>
+    </mat-menu>
+
+  </div>
+</div>
+</div>
+</nav>
+
+ -->
+
+ <nav  *ngIf="!authenticator.user" class="navbar navbar-expand-lg navbar-light bg-primary p-3">
   <div class="container">
     <a class="navbar-brand" routerlink="" href="/home">
       <img src="/assets/images/easyeventlogo.png" width="180" height="180" alt="CloneBrite" class="img-fluid" /></a>
@@ -114,17 +243,25 @@
       <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
     </mat-menu>
     <a mat-button [matMenuTriggerFor]="beforeMenu" data-toggle="dropdown"
-      class="nav-item nav-link dropdown-toggle user-action pt-4">
-      {{user?.name}} {{user?.familyName}}
-        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded-circle profile profileImg">
-      <b class="caret"></b></a>
-    <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <a  routerLink="/user" class="dropdown-item" ><i class="bi bi-person pr-3 pt-2"></i>Profile</a>
-      <a href="#" class="dropdown-item"><i class="bi bi-receipt-cutoff pr-3 pt-2"></i> Billing</a>
-      <a href="#" class="dropdown-item"><i class="bi bi-sliders2 pr-3 pt-2"></i>Settings</a>
-      <div class="divider dropdown-divider"></div>
-      <a class="dropdown-item" (click)="Logout()"><i class="bi bi-box-arrow-left pr-3"></i> Logout</a>
-    </mat-menu>
+   class="nav-item nav-link dropdown-toggle user-action pt-4">
+   {{authenticator?.user?.username}}
+   <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded-circle profile profileImg">
+   <b class="caret"></b>
+
+  
+</a>
+<mat-menu #beforeMenu="matMenu" xPosition="before">
+   <div class="user-info">
+    <!-- <h5 class="user-name">{{authenticator?.user?.username}}</h5>
+    <h6 class="user-email">{{authenticator?.user?.attributes?.email}}</h6> -->
+   </div>
+   <a routerLink="/user" class="dropdown-item"><i class="bi bi-person pr-3 pt-2"></i>Profile</a>
+   <a href="#" class="dropdown-item"><i class="bi bi-receipt-cutoff pr-3 pt-2"></i>Billing</a>
+   <a href="#" class="dropdown-item"><i class="bi bi-sliders2 pr-3 pt-2"></i>Settings</a>
+   <div class="divider dropdown-divider"></div>
+   <a class="dropdown-item" (click)="Logout()"><i class="bi bi-box-arrow-left pr-3"></i>Logout</a>
+</mat-menu>
+
 
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { IEvent, ITicket } from 'app/Interfaces/event-interface';
 
 interface SelectedTicket {
@@ -21,7 +22,7 @@ export class BuyTicketComponent implements OnInit {
   totalPrice:number=0;
   selectedTickets: SelectedTicket[] = [];
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public authenticator: AuthenticatorService) { }
 
   ngOnInit(): void {
 
